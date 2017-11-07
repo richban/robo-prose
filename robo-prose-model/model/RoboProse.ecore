@@ -23,4 +23,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="NewEnum1"/>
 </ecore:EPackage>
