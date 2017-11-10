@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/robo-prose-model/src" modelPluginID="robo-prose-model"
+    modelName="RoboProse" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>RoboProse.ecore</foreignModel>
+  <genPackages prefix="Roboprose" basePackage="dk.itu.dsl.roboprose" disposableProviderFactory="true"
+      ecorePackage="RoboProse.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="RoboProse.ecore#//NewEnum1"/>
+    <genClasses image="false" ecoreClass="RoboProse.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RoboProse.ecore#//Root/robots"/>
+    </genClasses>
+    <genClasses ecoreClass="RoboProse.ecore#//RoboProse">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RoboProse.ecore#//RoboProse/main"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RoboProse.ecore#//RoboProse/listeners"/>
+    </genClasses>
+    <genClasses ecoreClass="RoboProse.ecore#//Main">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RoboProse.ecore#//Main/actions"/>
+    </genClasses>
+    <genClasses ecoreClass="RoboProse.ecore#//EventListener">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RoboProse.ecore#//EventListener/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RoboProse.ecore#//EventListener/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RoboProse.ecore#//EventListener/sublisteners"/>
+    </genClasses>
+    <genClasses ecoreClass="RoboProse.ecore#//Event"/>
+    <genClasses image="false" ecoreClass="RoboProse.ecore#//Action"/>
+  </genPackages>
+</genmodel:GenModel>
