@@ -1,5 +1,11 @@
 import Dependencies._
 
+lazy val mdsebook = RootProject(uri("https://bitbucket.org/modelsteam/mdsebook.git"))
+
+lazy val mdsebookLocalBase = SettingKey[File]("mdsebookLocalBase",
+    "local base direcotry for mdsebook")
+mdsebookLocalBase := loadedBuild.value.units(mdsebook.build).localBase
+
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
@@ -9,6 +15,7 @@ lazy val root = (project in file(".")).
     )),
     name := "robo-prose-constraints",
     retrieveManaged := true,
+    logLevel in Compile := Level.Error,
 
     scalacOptions += "-deprecation",
     scalacOptions += "-feature",
@@ -20,5 +27,6 @@ lazy val root = (project in file(".")).
     libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.4" % "test",
 
     unmanagedSourceDirectories in Compile += file(baseDirectory.value.getParent) / "robo-prose-model/src/",
+    unmanagedSourceDirectories in Compile += file(mdsebookLocalBase.value.absolutePath) / "mdsebook.scala/src/main/scala",
   ).
-  dependsOn(RootProject(uri("https://bitbucket.org/modelsteam/mdsebook.git")))
+  dependsOn(mdsebook)
