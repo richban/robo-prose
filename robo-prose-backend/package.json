@@ -1,0 +1,27 @@
+{
+  "name": "robo-prose-backend",
+  "version": "0.1.0",
+  "description": "Backend for RoboProse project - DSL course at ITU Autumn 2017",
+  "main": "robo-prose.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richban/robo-prose.git"
+  },
+  "keywords": [
+    "DSL",
+    "RoboProse"
+  ],
+  "author": "Davide Laezza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richban/robo-prose/issues"
+  },
+  "homepage": "https://github.com/richban/robo-prose#readme",
+  "dependencies": {
+    "ecore": "^0.11.0",
+    "q": "^1.5.1"
+  }
+}
