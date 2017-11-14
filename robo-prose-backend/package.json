@@ -23,6 +23,7 @@
   "dependencies": {
     "dbus-native": "^0.2.3",
     "ecore": "^0.11.0",
+    "lodash": "^4.17.4",
     "q": "^1.5.1",
     "yargs": "^10.0.3"
   }
