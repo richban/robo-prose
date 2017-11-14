@@ -29,7 +29,7 @@ const makeThymio = contents => {
 const model2ThymioAction = action => {
     switch (action.eClass.values.name.toLowerCase()) {
         case 'move':
-            const direction = action.get('isForward')
+            const direction = action.get('forward')
                     ? 'Forward'
                     : 'Backward';
             return Thymio.makeAction(`move${ direction }`);

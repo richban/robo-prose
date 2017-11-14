@@ -36,8 +36,8 @@ class ThymioDBusObject {
 class Thymio extends ThymioDBusObject {
     static makeAction(method, ...args) {
         return {
-            method: method,
-            args: args
+            method,
+            args
         };
     }
 
