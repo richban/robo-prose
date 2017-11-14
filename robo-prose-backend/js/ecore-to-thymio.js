@@ -20,10 +20,21 @@ const resourceSet = Ecore.ResourceSet.create();
 
 const makeThymio = contents => {
     const robot = contents.first().get('robots').first();
+
     const main = robot.get('main').get('actions')
                       .map(model2ThymioAction);
 
-    return new Thymio(main);
+    const listeners = robot.get('listeners')
+        .map(listener => {
+            const eventName = listener.event
+                    .eClass.values.name.toLowerCase();
+            const actions = listener.get('actions');
+            return {
+                [eventName]: actions.map(model2ThymioAction);
+            }
+        });
+
+    return new Thymio(main, listeners);
 };
 
 const model2ThymioAction = action => {
