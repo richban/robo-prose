@@ -6,25 +6,20 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 RoboProse returns RoboProse:
 	{RoboProse}
-	'RoboProse'
-	'{'
-		('main' main=Main)?
-		('listeners' '{' listeners+=EventListener ( "," listeners+=EventListener)* '}' )?
-	'}';
+	('My' 'robot' 'should' main=Main)?
+	
+	(listeners+=EventListener)*
+	;
 
 Main returns Main:
-	'Main'
-	'{'
-		'actions' '{' actions+=Action ( "," actions+=Action)* '}' 
-	'}';
+	actions+=Action ( "and" "then" "it" "should" actions+=Action)*
+	;
 
 EventListener returns EventListener:
-	'EventListener'
-	'{'
-		'event' event=[Event|EString]
-		('actions' '{' actions+=Action ( "," actions+=Action)* '}' )?
-		('sublisteners' '{' sublisteners+=EventListener ( "," sublisteners+=EventListener)* '}' )?
-	'}';
+	'When' 'it' event=Event 'it' 'should' 
+	( actions+=Action ( "and" "then" "it" "should" actions+=Action)* )?
+	;
+	
 	
 Action returns Action:
 	Move | Turn | Stop;
@@ -34,27 +29,18 @@ Event returns Event:
 
 Move returns Move:
 	{Move}
-	'Move'
-	'{'
-		('duration' duration=EFloat)?
-		('forward' forward=EBoolean)?
-	'}';
+	'move' ('forward' forward=EBoolean)? ('for' duration=EFloat 'seconds')?
+	;
 
 Turn returns Turn:
 	{Turn}
-	'Turn'
-	'{'
-		('duration' duration=EFloat)?
-		('degrees' degrees=EFloat)?
-		('left' left=EBoolean)?
-	'}';
+	'turn' ('left' left=EBoolean)? (('for' duration=EFloat 'seconds') | (degrees=EFloat 'degrees'))?
+	;
 
 Stop returns Stop:
 	{Stop}
-	'Stop'
-	'{'
-		('duration' duration=EFloat)?
-	'}';
+	'stop' ('for' duration=EFloat 'seconds')?
+	;
 
 EFloat returns ecore::EFloat:
 	'-'? INT? '.' INT (('E'|'e') '-'? INT)?;
@@ -67,10 +53,10 @@ EString returns ecore::EString:
 
 Obstacle returns Obstacle:
 	{Obstacle}
-	'Obstacle'
+	'meets' 'an' 'obstacle'
 	;
 
 Tapped returns Tapped:
 	{Tapped}
-	'Tapped'
+	'is' 'tapped'
 	;
