@@ -4,9 +4,11 @@
  */
 
 const Ecore = require('ecore/dist/ecore.xmi');
+const fs = require('fs');
+const lodash = require('lodash');
 const path = require('path');
 const q = require('q');
-const fs = require('fs');
+const { Some } = require('option-t');
 
 const Thymio = require('./thymio.js');
 
@@ -24,17 +26,24 @@ const makeThymio = contents => {
     const main = robot.get('main').get('actions')
                       .map(model2ThymioAction);
 
-    const listeners = robot.get('listeners')
-        .map(listener => {
-            const eventName = listener.event
-                    .eClass.values.name.toLowerCase();
-            const actions = listener.get('actions');
-            return {
-                [eventName]: actions.map(model2ThymioAction);
-            }
-        });
+    const maybeListeners = robot.get('listeners');
+    const listeners = new Some(maybeListeners.size() > 0
+            ? maybeListeners
+            : null
+        ).map(listeners => {
+            listeners.map(listener => {
+                const eventName = listener.event
+                                          .eClass.values.name.toLowerCase();
+                const actions = listener.get('actions');
+                return [
+                    eventName,
+                    actions.map(model2ThymioAction)
+                ];
+            })
+        })
+        .map(lodash.fromPairs);
 
-    return new Thymio(main, listeners);
+    return new Thymio(main, listeners.unwrap());
 };
 
 const model2ThymioAction = action => {
