@@ -8,8 +8,8 @@ const fs = require('fs');
 const lodash = require('lodash');
 const path = require('path');
 const q = require('q');
-const { Some } = require('option-t');
 
+const Option = require('./option-wrapper');
 const Thymio = require('./thymio.js');
 
 
@@ -26,11 +26,8 @@ const makeThymio = contents => {
     const main = robot.get('main').get('actions')
                       .map(model2ThymioAction);
 
-    const maybeListeners = robot.get('listeners');
-    const listeners = new Some(maybeListeners.size() > 0
-            ? maybeListeners
-            : null
-        ).map(listeners => {
+    const listeners = Option(robot.get('listeners'), l => l.size() > 0)
+        .map(listeners => {
             listeners.map(listener => {
                 const eventName = listener.event
                                           .eClass.values.name.toLowerCase();
@@ -43,7 +40,7 @@ const makeThymio = contents => {
         })
         .map(lodash.fromPairs);
 
-    return new Thymio(main, listeners.unwrap());
+    return new Thymio(main, listeners.unwrapOr(null));
 };
 
 const model2ThymioAction = action => {

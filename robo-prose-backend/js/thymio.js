@@ -5,6 +5,10 @@
 const dbus = require('dbus-native');
 const q = require('q');
 
+class AsebaScriptEventBroadcaster {
+
+}
+
 class ThymioDBusObject {
     constructor(name) {
         this.name = name;
@@ -44,7 +48,6 @@ class Thymio extends ThymioDBusObject {
     constructor(main, listeners) {
         super('thymio-II');
         this.main = main;
-        console.log(listeners);
         if (listeners) {
             listeners.forEach(this.addListener.bind(this));
         }
