@@ -2,7 +2,11 @@
  *
  */
 
-class Thymio {
+class ThymioDBusObject {
+
+}
+
+class Thymio extends ThymioDBusObject {
     static makeAction(method, ...args) {
         return {
             method: method,
@@ -11,8 +15,11 @@ class Thymio {
     }
 
     constructor(main, listeners) {
+        super();
         this.main = main;
-        listeners.forEach(this.addListener.bind(this));
+        if (listeners) {
+            listeners.forEach(this.addListener.bind(this));
+        }
     }
 
     run() {

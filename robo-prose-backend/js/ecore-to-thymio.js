@@ -11,15 +11,15 @@ const fs = require('fs');
 const Thymio = require('./thymio.js');
 
 
-String.prototype.firstUppercase = function() {
-    return this[0].toUpperCase() + this.slice(1);
-};
+//String.prototype.firstUppercase = function() {
+//    return this[0].toUpperCase() + this.slice(1);
+//};
 
 const resourceSet = Ecore.ResourceSet.create();
 
 
 const makeThymio = contents => {
-    const robot = contents.first();
+    const robot = contents.first().get('robots').first();
     const main = robot.get('main').get('actions')
                       .map(model2ThymioAction);
 
@@ -27,10 +27,15 @@ const makeThymio = contents => {
 };
 
 const model2ThymioAction = action => {
-    switch (action.name) {
+    switch (action.eClass.values.name.toLowerCase()) {
         case 'move':
-            const method = `move${ action.direction.firstUppercase() }`;
-            return Thymio.makeAction(method, ...action.args);
+            const direction = action.get('isForward')
+                    ? 'Forward'
+                    : 'Backward';
+            return Thymio.makeAction(`move${ direction }`);
+
+        case 'stop':
+            return Thymio.makeAction('stop');
     }
 };
 

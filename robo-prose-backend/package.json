@@ -22,6 +22,7 @@
   "homepage": "https://github.com/richban/robo-prose#readme",
   "dependencies": {
     "ecore": "^0.11.0",
-    "q": "^1.5.1"
+    "q": "^1.5.1",
+    "yargs": "^10.0.3"
   }
 }
