@@ -15,7 +15,8 @@
         upperBound="-1" eType="#//Action" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventListener">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sublisteners" upperBound="-1"
@@ -23,15 +24,23 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="NewEnum1"/>
   <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction #//hasDuration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="forward" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+        eType="#//MOVE_DIRECTION" defaultValueLiteral="forwards"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MOVE_DIRECTION">
+    <eLiterals name="FORWARDS" value="1" literal="forwards"/>
+    <eLiterals name="BACKWARDS" literal="backwards"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction #//hasDuration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="degrees" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
         defaultValueLiteral="90.0"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+        eType="#//TURN_DIRECTION" defaultValueLiteral="left"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TURN_DIRECTION">
+    <eLiterals name="LEFT" value="1" literal="left"/>
+    <eLiterals name="RIGHT" literal="right"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="hasDuration" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
