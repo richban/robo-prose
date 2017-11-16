@@ -16,10 +16,9 @@ Main returns Main:
 	;
 
 EventListener returns EventListener:
-	{EventListener}
 	('When' | 'when') 'it' event=Event 'it' 'should' 
 	actions+=Action ( ActionDelimiter actions+=Action)*
-	//( ActionDelimiter 'wait' ('.' | ',' | 'and') sublisteners+=EventListener (SublistenerDelimiter sublisteners+=EventListener)* )?
+	( '(' 'but' sublisteners+=EventListener ( SublistenerDelimiter sublisteners+=EventListener)* ')')?
 	;
 
 SublistenerDelimiter:
@@ -28,7 +27,7 @@ SublistenerDelimiter:
 	
 @Override
 terminal WS: 
-    (' '|'\t')+
+    (' '|'\t')+ NEWLINE?
     ;
 
 
