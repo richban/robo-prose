@@ -4,12 +4,15 @@
 
 const dbus = require('dbus-native');
 const fs = require('fs');
-const lodash = require('lodash');
 const path = require('path');
 const q = require('q');
 
+const broadcastEvents = require('./aseba-broadcaster.js');
 
+
+const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
 class ThymioDBusObject {
+
     constructor(name) {
         this.name = name;
 
@@ -19,18 +22,14 @@ class ThymioDBusObject {
                 'ch.epfl.mobots.Aseba',
                 '/',
                 'ch.epfl.mobots.AsebaNetwork');
-        this.events = this.network
+        this.eventFilter = this.network
             .then(network => q.ninvoke(network, 'CreateEventFilter'))
             .then(eventPath => q.ninvoke(bus, 'getInterface',
                     'ch.epfl.mobots.Aseba',
                     eventPath,
-                    'ch.epfl.mobots.EventFilter'))
-            .then(eventFilter => {
-                return q.ninvoke(eventFilter, 'on', 'Event')
-                    .then(([eventName, args]) => this.dispatchEvent(eventName, args));
-            })
-
+                    'ch.epfl.mobots.EventFilter'));
     }
+
 
     dispatchEvent(eventId, eventName, eventData) {
         throw new Error('Method dispatchEvent() not implemented');
@@ -41,35 +40,28 @@ class ThymioDBusObject {
             q.ninvoke(network, method, this.name, ...args))
     }
 
-    makeAsebaScript(events) {
-        return `
-<!DOCTYPE aesl-source>
-<network>
+    listenTo(eventName) {
+        return this.eventFilter.then(eventFilter => {
+            q.ninvoke(eventFilter, 'ListenEventName', eventName)
+        });
+    }
 
-
-<!--list of global events-->
-<event size="0" name="tapped"/>
-
-<!--list of constants-->
-
-
-<!--show keywords state-->
-<keywords flag="true"/>
-
-
-<!--node thymio-II-->
-<node name="${ this.name }">
-${ events }
-</node>
-
-
-</network>
-        `;
+    startListening() {
+        return this.eventFilter.then(eventFilter => {
+            return q.ninvoke(eventFilter, 'on', 'Event')
+                    .then(([eventName, args]) => {
+                        console.log(arguments);
+                        this.dispatchEvent(eventName, args) });
+        });
     }
 
     loadScript(script) {
-        return q.nfcall(fs.writeFile, 'aseba.aseba', script, 'utf-8')
-            .then(() => q.ninvoke(this.network, 'LoadScripts', path.resolve('aseba.aseba')));
+        return q.nfcall(fs.writeFile,
+                TMP_SCRIPT_NAME, script, 'utf-8')
+            .then(() => q.ninvoke(this.network, 'LoadScripts',
+                    TMP_SCRIPT_NAME))
+//            .then(() => q.nfcall(fs.unlink,
+//                    TMP_SCRIPT_NAME));
     }
 
     get(variable) {
@@ -96,44 +88,21 @@ class Thymio extends ThymioDBusObject {
     constructor(main, listeners) {
         super('thymio-II');
         this.main = main;
-        if (listeners) {
-            lodash.forEach(listeners, this.addEventListener.bind(this));
-            this.events.done();
-        }
-    }
-
-    addEvent(eventName) {
-        var asebaBroadcast;
-        switch (eventName) {
-            case 'obstacle':
-                break;
-            //                    + 'emit tapped\n'
-
-
-            case 'tapped':
-                asebaBroadcast = `
-onevent buttons
-if button.right == 1 or button.left == 1 or button.forward == 1 or button.backward == 1 or button.center == 1 then
-    emit tapped
-end`;
-                break;
-        }
-        this.asebaScript.push(asebaBroadcast);
-    }
-
-    addEventListener(listener, eventName) {
-        if (!this.listeners) {
-            this.listeners = {};
-        }
-        if (!this.asebaScript) {
-            this.asebaScript = [];
-        }
-        this.addEvent(eventName);
-        this.listeners[eventName] = listener;
+        this.listeners = listeners;
     }
 
     dispatchEvent(eventName, eventData) {
-        this.run(this.listeners[eventName]);
+        //console.log(eventName);
+        this.execute(this.listeners[eventName]);
+    }
+
+    execute(actions) {
+        actions.forEach(this.executeAction.bind(this))
+    }
+
+    executeAction(action) {
+        this[action.method].apply(this, action.args)
+                .done();
     }
 
     move(speed) {
@@ -152,15 +121,23 @@ end`;
         return this.move(200);
     }
 
-    run(actions) {
-        actions = actions || this.main;
-        this.loadScript(this.makeAsebaScript(this.asebaScript.join('\n\n')))
-            .then(() => actions.forEach(this.runAction.bind(this)));
-    }
+    run() {
+        const executeMain = this.execute.bind(this, this.main);
 
-    runAction(action) {
-        this[action.method].apply(this, action.args)
-            .done();
+        if (!this.listeners) {
+            executeMain();
+        }
+        else {
+            const eventNames = Object.keys(this.listeners);
+            const asebaScript = broadcastEvents(this.name, eventNames);
+
+//            this.listenTo('tapped').done();
+//                .then(this.listenTo.bind(this, 'obstacle'))
+            this.startListening().done();
+            this.loadScript(asebaScript)
+                .then(executeMain)
+                .done();
+        }
     }
 
     stop() {
