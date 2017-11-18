@@ -28,15 +28,15 @@ const makeThymio = contents => {
 
     const listeners = Option(robot.get('listeners'), l => l.size() > 0)
         .map(listeners => {
-            listeners.map(listener => {
-                const eventName = listener.event
+            return listeners.map(listener => {
+                const eventName = listener.get('event')
                                           .eClass.values.name.toLowerCase();
                 const actions = listener.get('actions');
                 return [
                     eventName,
                     actions.map(model2ThymioAction)
                 ];
-            })
+            });
         })
         .map(lodash.fromPairs);
 
@@ -46,7 +46,7 @@ const makeThymio = contents => {
 const model2ThymioAction = action => {
     switch (action.eClass.values.name.toLowerCase()) {
         case 'move':
-            const direction = action.get('forward')
+            const direction = action.get('forward') === 'true'
                     ? 'Forward'
                     : 'Backward';
             return Thymio.makeAction(`move${ direction }`);

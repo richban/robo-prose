@@ -8,7 +8,8 @@
   <robots>
     <main>
       <actions
-          xsi:type="roboprose:Move"/>
+          xsi:type="roboprose:Move"
+          forward="true"/>
     </main>
   </robots>
 </roboprose:Root>
