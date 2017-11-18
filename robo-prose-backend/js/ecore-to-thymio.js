@@ -4,10 +4,12 @@
  */
 
 const Ecore = require('ecore/dist/ecore.xmi');
+const fs = require('fs');
+const lodash = require('lodash');
 const path = require('path');
 const q = require('q');
-const fs = require('fs');
 
+const Option = require('./option-wrapper');
 const Thymio = require('./thymio.js');
 
 
@@ -20,10 +22,25 @@ const resourceSet = Ecore.ResourceSet.create();
 
 const makeThymio = contents => {
     const robot = contents.first().get('robots').first();
+
     const main = robot.get('main').get('actions')
                       .map(model2ThymioAction);
 
-    return new Thymio(main);
+    const listeners = Option(robot.get('listeners'), l => l.size() > 0)
+        .map(listeners => {
+            listeners.map(listener => {
+                const eventName = listener.event
+                                          .eClass.values.name.toLowerCase();
+                const actions = listener.get('actions');
+                return [
+                    eventName,
+                    actions.map(model2ThymioAction)
+                ];
+            })
+        })
+        .map(lodash.fromPairs);
+
+    return new Thymio(main, listeners.unwrapOr(null));
 };
 
 const model2ThymioAction = action => {

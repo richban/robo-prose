@@ -5,6 +5,10 @@
 const dbus = require('dbus-native');
 const q = require('q');
 
+class AsebaScriptEventBroadcaster {
+
+}
+
 class ThymioDBusObject {
     constructor(name) {
         this.name = name;
