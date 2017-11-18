@@ -19,7 +19,7 @@ class ThymioDBusObject {
                 'ch.epfl.mobots.Aseba',
                 '/',
                 'ch.epfl.mobots.AsebaNetwork');
-        this.eventFilter = this.network
+        this.events = this.network
             .then(network => q.ninvoke(network, 'CreateEventFilter'))
             .then(eventPath => q.ninvoke(bus, 'getInterface',
                     'ch.epfl.mobots.Aseba',
@@ -27,7 +27,7 @@ class ThymioDBusObject {
                     'ch.epfl.mobots.EventFilter'))
             .then(eventFilter => {
                 return q.ninvoke(eventFilter, 'on', 'Event')
-                    .then(this.dispatchEvent.bind(this));
+                    .then(([eventName, args]) => this.dispatchEvent(eventName, args));
             })
 
     }
@@ -48,7 +48,7 @@ class ThymioDBusObject {
 
 
 <!--list of global events-->
-
+<event size="0" name="tapped"/>
 
 <!--list of constants-->
 
@@ -98,6 +98,7 @@ class Thymio extends ThymioDBusObject {
         this.main = main;
         if (listeners) {
             lodash.forEach(listeners, this.addEventListener.bind(this));
+            this.events.done();
         }
     }
 
@@ -113,8 +114,7 @@ class Thymio extends ThymioDBusObject {
                 asebaBroadcast = `
 onevent buttons
 if button.right == 1 or button.left == 1 or button.forward == 1 or button.backward == 1 or button.center == 1 then
-    motor.left.target = 0
-    motor.right.target = 0
+    emit tapped
 end`;
                 break;
         }
@@ -129,10 +129,10 @@ end`;
             this.asebaScript = [];
         }
         this.addEvent(eventName);
-        this.listeners[eventName] = listener.actions;
+        this.listeners[eventName] = listener;
     }
 
-    dispatchEvent(eventId, eventName, eventData) {
+    dispatchEvent(eventName, eventData) {
         this.run(this.listeners[eventName]);
     }
 
