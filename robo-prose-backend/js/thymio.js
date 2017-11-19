@@ -4,8 +4,8 @@
 
 const dbus = require('dbus-native');
 const fs = require('fs');
+const { Observable } = require('rxjs');
 const path = require('path');
-const q = require('q');
 
 const broadcastEvents = require('./aseba-broadcaster.js');
 
@@ -18,13 +18,16 @@ class ThymioDBusObject {
 
         const bus = dbus.sessionBus();
 
-        this.network = q.ninvoke(bus, 'getInterface',
+        const getInterfaceObs = Observable.bindNodeCallback(
+            bus.getInterface.bind(bus));
+
+        this.network = getInterfaceObs(
                 'ch.epfl.mobots.Aseba',
                 '/',
                 'ch.epfl.mobots.AsebaNetwork');
         this.eventFilter = this.network
-            .then(network => q.ninvoke(network, 'CreateEventFilter'))
-            .then(eventPath => q.ninvoke(bus, 'getInterface',
+            .mergeMap(network => Observable.bindCallback(network.CreateEventFilter.bind(network)))
+            .mergeMap(eventPath => getInterfaceObs(
                     'ch.epfl.mobots.Aseba',
                     eventPath,
                     'ch.epfl.mobots.EventFilter'));
@@ -36,29 +39,29 @@ class ThymioDBusObject {
     }
 
     networkCall(method, ...args) {
-        return this.network.then(network =>
-            q.ninvoke(network, method, this.name, ...args))
+        return this.network.mergeMap(network =>
+            Observable.bindCallback(network[method].bind(network))(this.name, ...args))
     }
 
     listenTo(eventName) {
-        return this.eventFilter.then(eventFilter => {
-            q.ninvoke(eventFilter, 'ListenEventName', eventName)
-        });
+        return this.eventFilter.mergeMap(eventFilter =>
+            Observable.bindCallback(eventFilter.ListenEventName.bind(eventFilter))(eventName)
+        );
     }
 
     startListening() {
-        return this.eventFilter.then(eventFilter => {
-            return q.ninvoke(eventFilter, 'on', 'Event')
-                    .then(([eventName, args]) => {
+        return this.eventFilter.mergeMap(eventFilter =>
+            Observable.fromEvent(eventFilter, 'Event')
+                    .do(([eventName, args]) => {
                         console.log(arguments);
-                        this.dispatchEvent(eventName, args) });
-        });
+                        this.dispatchEvent(eventName, args) })
+        );
     }
 
     loadScript(script) {
-        return q.nfcall(fs.writeFile,
+        return Observable.bindNodeCallback(fs.writeFile)(
                 TMP_SCRIPT_NAME, script, 'utf-8')
-            .then(() => q.ninvoke(this.network, 'LoadScripts',
+            .mergeMap(() => Observable.bindCallback(this.network.LoadScripts.bind(this.network))(
                     TMP_SCRIPT_NAME))
 //            .then(() => q.nfcall(fs.unlink,
 //                    TMP_SCRIPT_NAME));
@@ -66,7 +69,7 @@ class ThymioDBusObject {
 
     get(variable) {
         return this.networkCall('GetVariable', variable)
-            .then(value => Array.isArray(value)
+            .map(value => Array.isArray(value)
                 ? value.map(parseInt)
                 : parseInt(value));
     }
@@ -102,15 +105,13 @@ class Thymio extends ThymioDBusObject {
 
     executeAction(action) {
         this[action.method].apply(this, action.args)
-                .done();
+                .subscribe();
     }
 
     move(speed) {
         const arg = [speed];
-        return q.all([
-            this.set('motor.left.target', arg),
-            this.set('motor.right.target', arg)
-        ]);
+        this.set('motor.left.target', arg)
+            .concat(this.set('motor.right.target', arg));
     }
 
     moveBackward() {
@@ -133,10 +134,10 @@ class Thymio extends ThymioDBusObject {
 
 //            this.listenTo('tapped').done();
 //                .then(this.listenTo.bind(this, 'obstacle'))
-            this.startListening().done();
-            this.loadScript(asebaScript)
+            this.startListening()
+                .mergeMap(this.loadScript.bind(this, asebaScript))
                 .then(executeMain)
-                .done();
+                .subscribe();
         }
     }
 

@@ -6,8 +6,8 @@
 const Ecore = require('ecore/dist/ecore.xmi');
 const fs = require('fs');
 const lodash = require('lodash');
+const { Observable } = require('rxjs');
 const path = require('path');
-const q = require('q');
 
 const Option = require('./option-wrapper');
 const Thymio = require('./thymio.js');
@@ -62,8 +62,8 @@ const readEcoreFile = (filePath) => {
         uri: filePath
     });
 
-    return q.nfcall(fs.readFile, filePath, 'utf-8')
-        .then(fileContents => {
+    return Observable.bindNodeCallback(fs.readFile)(filePath, 'utf-8')
+        .map(fileContents => {
             try {
                 resource.parse(fileContents, Ecore.XMI);
                 return resource.get('contents');
@@ -88,7 +88,7 @@ const registerEcoreModel = contents => {
 
 module.exports = (ecoreModelPath, instancePath) => {
     return readEcoreFile(ecoreModelPath)
-        .then(registerEcoreModel)
-        .then(readEcoreFile.bind(null, instancePath))
-        .then(makeThymio);
+        .map(registerEcoreModel)
+        .map(readEcoreFile.bind(null, instancePath))
+        .map(makeThymio);
 };
