@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://www.itu.dk/dsl/roboprose" nsPrefix="roboprose">
-  <eClassifiers xsi:type="ecore:EClass" name="Root" abstract="true" interface="true">
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
     <eStructuralFeatures xsi:type="ecore:EReference" name="robots" lowerBound="1"
         upperBound="-1" eType="#//RoboProse" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoboProse">
     <eStructuralFeatures xsi:type="ecore:EReference" name="main" eType="#//Main" containment="true"/>
@@ -15,7 +17,8 @@
         upperBound="-1" eType="#//Action" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventListener">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sublisteners" upperBound="-1"
@@ -23,15 +26,23 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="NewEnum1"/>
   <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction #//hasDuration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="forward" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+        eType="#//MOVE_DIRECTION" defaultValueLiteral="forwards"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MOVE_DIRECTION">
+    <eLiterals name="FORWARDS" value="1" literal="forwards"/>
+    <eLiterals name="BACKWARDS" literal="backwards"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction #//hasDuration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="degrees" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
         defaultValueLiteral="90.0"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+        eType="#//TURN_DIRECTION" defaultValueLiteral="left"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TURN_DIRECTION">
+    <eLiterals name="LEFT" value="1" literal="left"/>
+    <eLiterals name="RIGHT" literal="right"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="hasDuration" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"

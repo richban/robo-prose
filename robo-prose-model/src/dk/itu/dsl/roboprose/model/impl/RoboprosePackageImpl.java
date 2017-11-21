@@ -6,12 +6,19 @@ import dk.itu.dsl.roboprose.model.Action;
 import dk.itu.dsl.roboprose.model.Event;
 import dk.itu.dsl.roboprose.model.EventListener;
 import dk.itu.dsl.roboprose.model.Main;
-import dk.itu.dsl.roboprose.model.NewEnum1;
+import dk.itu.dsl.roboprose.model.Move;
+import dk.itu.dsl.roboprose.model.Obstacle;
 import dk.itu.dsl.roboprose.model.RoboProse;
 import dk.itu.dsl.roboprose.model.RoboproseFactory;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
 import dk.itu.dsl.roboprose.model.Root;
 
+import dk.itu.dsl.roboprose.model.RotorAction;
+import dk.itu.dsl.roboprose.model.Stop;
+import dk.itu.dsl.roboprose.model.Tapped;
+import dk.itu.dsl.roboprose.model.Turn;
+import dk.itu.dsl.roboprose.model.hasDuration;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
@@ -73,7 +80,63 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum newEnum1EEnum = null;
+	private EClass moveEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass turnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass hasDurationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stopEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rotorActionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass obstacleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tappedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum movE_DIRECTIONEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum turN_DIRECTIONEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -152,6 +215,15 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 */
 	public EReference getRoot_Robots() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_Events() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -258,8 +330,116 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getNewEnum1() {
-		return newEnum1EEnum;
+	public EClass getMove() {
+		return moveEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMove_Direction() {
+		return (EAttribute)moveEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTurn() {
+		return turnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTurn_Degrees() {
+		return (EAttribute)turnEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTurn_Direction() {
+		return (EAttribute)turnEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass gethasDuration() {
+		return hasDurationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute gethasDuration_Duration() {
+		return (EAttribute)hasDurationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStop() {
+		return stopEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRotorAction() {
+		return rotorActionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getObstacle() {
+		return obstacleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTapped() {
+		return tappedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getMOVE_DIRECTION() {
+		return movE_DIRECTIONEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getTURN_DIRECTION() {
+		return turN_DIRECTIONEEnum;
 	}
 
 	/**
@@ -292,6 +472,7 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		// Create classes and their features
 		rootEClass = createEClass(ROOT);
 		createEReference(rootEClass, ROOT__ROBOTS);
+		createEReference(rootEClass, ROOT__EVENTS);
 
 		roboProseEClass = createEClass(ROBO_PROSE);
 		createEReference(roboProseEClass, ROBO_PROSE__MAIN);
@@ -309,8 +490,27 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 
 		actionEClass = createEClass(ACTION);
 
+		moveEClass = createEClass(MOVE);
+		createEAttribute(moveEClass, MOVE__DIRECTION);
+
+		turnEClass = createEClass(TURN);
+		createEAttribute(turnEClass, TURN__DEGREES);
+		createEAttribute(turnEClass, TURN__DIRECTION);
+
+		hasDurationEClass = createEClass(HAS_DURATION);
+		createEAttribute(hasDurationEClass, HAS_DURATION__DURATION);
+
+		stopEClass = createEClass(STOP);
+
+		rotorActionEClass = createEClass(ROTOR_ACTION);
+
+		obstacleEClass = createEClass(OBSTACLE);
+
+		tappedEClass = createEClass(TAPPED);
+
 		// Create enums
-		newEnum1EEnum = createEEnum(NEW_ENUM1);
+		movE_DIRECTIONEEnum = createEEnum(MOVE_DIRECTION);
+		turN_DIRECTIONEEnum = createEEnum(TURN_DIRECTION);
 	}
 
 	/**
@@ -341,10 +541,20 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		moveEClass.getESuperTypes().add(this.getRotorAction());
+		moveEClass.getESuperTypes().add(this.gethasDuration());
+		turnEClass.getESuperTypes().add(this.getRotorAction());
+		turnEClass.getESuperTypes().add(this.gethasDuration());
+		stopEClass.getESuperTypes().add(this.getAction());
+		stopEClass.getESuperTypes().add(this.gethasDuration());
+		rotorActionEClass.getESuperTypes().add(this.getAction());
+		obstacleEClass.getESuperTypes().add(this.getEvent());
+		tappedEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(rootEClass, Root.class, "Root", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoot_Robots(), this.getRoboProse(), null, "robots", null, 1, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_Events(), this.getEvent(), null, "events", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roboProseEClass, RoboProse.class, "RoboProse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoboProse_Main(), this.getMain(), null, "main", null, 0, 1, RoboProse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -354,16 +564,40 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		initEReference(getMain_Actions(), this.getAction(), null, "actions", null, 1, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventListenerEClass, EventListener.class, "EventListener", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventListener_Event(), this.getEvent(), null, "event", null, 1, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEventListener_Event(), this.getEvent(), null, "event", null, 1, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEventListener_Actions(), this.getAction(), null, "actions", null, 0, -1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEventListener_Sublisteners(), this.getEventListener(), null, "sublisteners", null, 0, -1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(actionEClass, Action.class, "Action", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(moveEClass, Move.class, "Move", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMove_Direction(), this.getMOVE_DIRECTION(), "direction", "forwards", 1, 1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(turnEClass, Turn.class, "Turn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTurn_Degrees(), ecorePackage.getEFloat(), "degrees", "90.0", 0, 1, Turn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTurn_Direction(), this.getTURN_DIRECTION(), "direction", "left", 1, 1, Turn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(hasDurationEClass, hasDuration.class, "hasDuration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(gethasDuration_Duration(), ecorePackage.getEFloat(), "duration", "1.0", 0, 1, hasDuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stopEClass, Stop.class, "Stop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(rotorActionEClass, RotorAction.class, "RotorAction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(obstacleEClass, Obstacle.class, "Obstacle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(tappedEClass, Tapped.class, "Tapped", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Initialize enums and add enum literals
-		initEEnum(newEnum1EEnum, NewEnum1.class, "NewEnum1");
+		initEEnum(movE_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.MOVE_DIRECTION.class, "MOVE_DIRECTION");
+		addEEnumLiteral(movE_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.MOVE_DIRECTION.FORWARDS);
+		addEEnumLiteral(movE_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.MOVE_DIRECTION.BACKWARDS);
+
+		initEEnum(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.class, "TURN_DIRECTION");
+		addEEnumLiteral(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.LEFT);
+		addEEnumLiteral(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.RIGHT);
 
 		// Create resource
 		createResource(eNS_URI);

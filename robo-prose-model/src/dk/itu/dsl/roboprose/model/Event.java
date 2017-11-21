@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see dk.itu.dsl.roboprose.model.RoboprosePackage#getEvent()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Event extends EObject {

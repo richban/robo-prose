@@ -2,9 +2,15 @@
  * @fileoverview
  */
 
+const argv = require('yargs').argv;
 const parser = require('./js/ecore-to-thymio.js');
 
-parser(process.argv[2])
-    .then(() => parser(process.argv[3]))
-    .then(instance => console.log(instance))
-    .done();
+const MODEL_FILE = argv.model
+        || argv._[0]
+        || '../robo-prose-model/model/RoboProse.ecore';
+const INSTANCE_FILE = argv.instance
+        || argv._[1];
+
+parser(MODEL_FILE, INSTANCE_FILE)
+    .do(thymio => thymio.run())
+    .subscribe();

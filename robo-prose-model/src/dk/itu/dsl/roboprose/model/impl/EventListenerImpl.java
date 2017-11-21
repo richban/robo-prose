@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class EventListenerImpl extends MinimalEObjectImpl.Container implements EventListener {
 	/**
-	 * The cached value of the '{@link #getEvent() <em>Event</em>}' reference.
+	 * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEvent()
@@ -94,14 +94,6 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 	 * @generated
 	 */
 	public Event getEvent() {
-		if (event != null && event.eIsProxy()) {
-			InternalEObject oldEvent = (InternalEObject)event;
-			event = (Event)eResolveProxy(oldEvent);
-			if (event != oldEvent) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoboprosePackage.EVENT_LISTENER__EVENT, oldEvent, event));
-			}
-		}
 		return event;
 	}
 
@@ -110,8 +102,14 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Event basicGetEvent() {
-		return event;
+	public NotificationChain basicSetEvent(Event newEvent, NotificationChain msgs) {
+		Event oldEvent = event;
+		event = newEvent;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoboprosePackage.EVENT_LISTENER__EVENT, oldEvent, newEvent);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -120,10 +118,17 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 	 * @generated
 	 */
 	public void setEvent(Event newEvent) {
-		Event oldEvent = event;
-		event = newEvent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoboprosePackage.EVENT_LISTENER__EVENT, oldEvent, event));
+		if (newEvent != event) {
+			NotificationChain msgs = null;
+			if (event != null)
+				msgs = ((InternalEObject)event).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoboprosePackage.EVENT_LISTENER__EVENT, null, msgs);
+			if (newEvent != null)
+				msgs = ((InternalEObject)newEvent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoboprosePackage.EVENT_LISTENER__EVENT, null, msgs);
+			msgs = basicSetEvent(newEvent, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoboprosePackage.EVENT_LISTENER__EVENT, newEvent, newEvent));
 	}
 
 	/**
@@ -158,6 +163,8 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case RoboprosePackage.EVENT_LISTENER__EVENT:
+				return basicSetEvent(null, msgs);
 			case RoboprosePackage.EVENT_LISTENER__ACTIONS:
 				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case RoboprosePackage.EVENT_LISTENER__SUBLISTENERS:
@@ -175,8 +182,7 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RoboprosePackage.EVENT_LISTENER__EVENT:
-				if (resolve) return getEvent();
-				return basicGetEvent();
+				return getEvent();
 			case RoboprosePackage.EVENT_LISTENER__ACTIONS:
 				return getActions();
 			case RoboprosePackage.EVENT_LISTENER__SUBLISTENERS:

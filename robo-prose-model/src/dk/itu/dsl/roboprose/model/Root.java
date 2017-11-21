@@ -16,10 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link dk.itu.dsl.roboprose.model.Root#getRobots <em>Robots</em>}</li>
+ *   <li>{@link dk.itu.dsl.roboprose.model.Root#getEvents <em>Events</em>}</li>
  * </ul>
  *
  * @see dk.itu.dsl.roboprose.model.RoboprosePackage#getRoot()
- * @model interface="true" abstract="true"
+ * @model
  * @generated
  */
 public interface Root extends EObject {
@@ -38,5 +39,21 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	EList<RoboProse> getRobots();
+
+	/**
+	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
+	 * The list contents are of type {@link dk.itu.dsl.roboprose.model.Event}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Events</em>' containment reference list.
+	 * @see dk.itu.dsl.roboprose.model.RoboprosePackage#getRoot_Events()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Event> getEvents();
 
 } // Root

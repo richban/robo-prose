@@ -26,26 +26,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface EventListener extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Event</b></em>' reference.
+	 * Returns the value of the '<em><b>Event</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Event</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Event</em>' reference.
+	 * @return the value of the '<em>Event</em>' containment reference.
 	 * @see #setEvent(Event)
 	 * @see dk.itu.dsl.roboprose.model.RoboprosePackage#getEventListener_Event()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Event getEvent();
 
 	/**
-	 * Sets the value of the '{@link dk.itu.dsl.roboprose.model.EventListener#getEvent <em>Event</em>}' reference.
+	 * Sets the value of the '{@link dk.itu.dsl.roboprose.model.EventListener#getEvent <em>Event</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Event</em>' reference.
+	 * @param value the new value of the '<em>Event</em>' containment reference.
 	 * @see #getEvent()
 	 * @generated
 	 */

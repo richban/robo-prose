@@ -92,6 +92,34 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 				return createActionAdapter();
 			}
 			@Override
+			public Adapter caseMove(Move object) {
+				return createMoveAdapter();
+			}
+			@Override
+			public Adapter caseTurn(Turn object) {
+				return createTurnAdapter();
+			}
+			@Override
+			public Adapter casehasDuration(hasDuration object) {
+				return createhasDurationAdapter();
+			}
+			@Override
+			public Adapter caseStop(Stop object) {
+				return createStopAdapter();
+			}
+			@Override
+			public Adapter caseRotorAction(RotorAction object) {
+				return createRotorActionAdapter();
+			}
+			@Override
+			public Adapter caseObstacle(Obstacle object) {
+				return createObstacleAdapter();
+			}
+			@Override
+			public Adapter caseTapped(Tapped object) {
+				return createTappedAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -192,6 +220,104 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createActionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.Move <em>Move</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.Move
+	 * @generated
+	 */
+	public Adapter createMoveAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.Turn <em>Turn</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.Turn
+	 * @generated
+	 */
+	public Adapter createTurnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.hasDuration <em>has Duration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.hasDuration
+	 * @generated
+	 */
+	public Adapter createhasDurationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.Stop <em>Stop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.Stop
+	 * @generated
+	 */
+	public Adapter createStopAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.RotorAction <em>Rotor Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.RotorAction
+	 * @generated
+	 */
+	public Adapter createRotorActionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.Obstacle <em>Obstacle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.Obstacle
+	 * @generated
+	 */
+	public Adapter createObstacleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.Tapped <em>Tapped</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.Tapped
+	 * @generated
+	 */
+	public Adapter createTappedAdapter() {
 		return null;
 	}
 
