@@ -102,6 +102,59 @@ public class RoboproseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case RoboprosePackage.MOVE: {
+				Move move = (Move)theEObject;
+				T result = caseMove(move);
+				if (result == null) result = caseRotorAction(move);
+				if (result == null) result = casehasDuration(move);
+				if (result == null) result = caseAction(move);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.TURN: {
+				Turn turn = (Turn)theEObject;
+				T result = caseTurn(turn);
+				if (result == null) result = caseRotorAction(turn);
+				if (result == null) result = casehasDuration(turn);
+				if (result == null) result = caseAction(turn);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.HAS_DURATION: {
+				hasDuration hasDuration = (hasDuration)theEObject;
+				T result = casehasDuration(hasDuration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.STOP: {
+				Stop stop = (Stop)theEObject;
+				T result = caseStop(stop);
+				if (result == null) result = caseAction(stop);
+				if (result == null) result = casehasDuration(stop);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.ROTOR_ACTION: {
+				RotorAction rotorAction = (RotorAction)theEObject;
+				T result = caseRotorAction(rotorAction);
+				if (result == null) result = caseAction(rotorAction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.OBSTACLE: {
+				Obstacle obstacle = (Obstacle)theEObject;
+				T result = caseObstacle(obstacle);
+				if (result == null) result = caseEvent(obstacle);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.TAPPED: {
+				Tapped tapped = (Tapped)theEObject;
+				T result = caseTapped(tapped);
+				if (result == null) result = caseEvent(tapped);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -193,6 +246,111 @@ public class RoboproseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAction(Action object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Move</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Move</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMove(Move object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Turn</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Turn</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTurn(Turn object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>has Duration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>has Duration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casehasDuration(hasDuration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stop</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stop</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStop(Stop object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rotor Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rotor Action</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRotorAction(RotorAction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Obstacle</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Obstacle</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseObstacle(Obstacle object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tapped</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tapped</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTapped(Tapped object) {
 		return null;
 	}
 

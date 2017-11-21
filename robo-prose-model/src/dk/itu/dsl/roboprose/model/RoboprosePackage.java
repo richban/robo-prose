@@ -2,6 +2,7 @@
  */
 package dk.itu.dsl.roboprose.model;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
@@ -57,10 +58,10 @@ public interface RoboprosePackage extends EPackage {
 	RoboprosePackage eINSTANCE = dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.Root <em>Root</em>}' class.
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.RootImpl <em>Root</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see dk.itu.dsl.roboprose.model.Root
+	 * @see dk.itu.dsl.roboprose.model.impl.RootImpl
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRoot()
 	 * @generated
 	 */
@@ -76,13 +77,22 @@ public interface RoboprosePackage extends EPackage {
 	int ROOT__ROBOTS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__EVENTS = 1;
+
+	/**
 	 * The number of structural features of the '<em>Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 1;
+	int ROOT_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Root</em>' class.
@@ -187,7 +197,7 @@ public interface RoboprosePackage extends EPackage {
 	int EVENT_LISTENER = 3;
 
 	/**
-	 * The feature id for the '<em><b>Event</b></em>' reference.
+	 * The feature id for the '<em><b>Event</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -288,15 +298,283 @@ public interface RoboprosePackage extends EPackage {
 	int ACTION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.NewEnum1 <em>New Enum1</em>}' enum.
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.RotorActionImpl <em>Rotor Action</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see dk.itu.dsl.roboprose.model.NewEnum1
-	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getNewEnum1()
+	 * @see dk.itu.dsl.roboprose.model.impl.RotorActionImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRotorAction()
 	 * @generated
 	 */
-	int NEW_ENUM1 = 6;
+	int ROTOR_ACTION = 10;
 
+	/**
+	 * The number of structural features of the '<em>Rotor Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROTOR_ACTION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Rotor Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROTOR_ACTION_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.MoveImpl <em>Move</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.impl.MoveImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getMove()
+	 * @generated
+	 */
+	int MOVE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVE__DURATION = ROTOR_ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Direction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVE__DIRECTION = ROTOR_ACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Move</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVE_FEATURE_COUNT = ROTOR_ACTION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Move</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVE_OPERATION_COUNT = ROTOR_ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.TurnImpl <em>Turn</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.impl.TurnImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTurn()
+	 * @generated
+	 */
+	int TURN = 7;
+
+	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TURN__DURATION = ROTOR_ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Degrees</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TURN__DEGREES = ROTOR_ACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Direction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TURN__DIRECTION = ROTOR_ACTION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Turn</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TURN_FEATURE_COUNT = ROTOR_ACTION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Turn</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TURN_OPERATION_COUNT = ROTOR_ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.hasDurationImpl <em>has Duration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.impl.hasDurationImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#gethasDuration()
+	 * @generated
+	 */
+	int HAS_DURATION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_DURATION__DURATION = 0;
+
+	/**
+	 * The number of structural features of the '<em>has Duration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_DURATION_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>has Duration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_DURATION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.StopImpl <em>Stop</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.impl.StopImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getStop()
+	 * @generated
+	 */
+	int STOP = 9;
+
+	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STOP__DURATION = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Stop</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STOP_FEATURE_COUNT = ACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Stop</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STOP_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.ObstacleImpl <em>Obstacle</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.impl.ObstacleImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getObstacle()
+	 * @generated
+	 */
+	int OBSTACLE = 11;
+
+	/**
+	 * The number of structural features of the '<em>Obstacle</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSTACLE_FEATURE_COUNT = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Obstacle</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSTACLE_OPERATION_COUNT = EVENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.TappedImpl <em>Tapped</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.impl.TappedImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTapped()
+	 * @generated
+	 */
+	int TAPPED = 12;
+
+	/**
+	 * The number of structural features of the '<em>Tapped</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAPPED_FEATURE_COUNT = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Tapped</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAPPED_OPERATION_COUNT = EVENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.MOVE_DIRECTION <em>MOVE DIRECTION</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.MOVE_DIRECTION
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getMOVE_DIRECTION()
+	 * @generated
+	 */
+	int MOVE_DIRECTION = 13;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.TURN_DIRECTION <em>TURN DIRECTION</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.TURN_DIRECTION
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTURN_DIRECTION()
+	 * @generated
+	 */
+	int TURN_DIRECTION = 14;
 
 	/**
 	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Root <em>Root</em>}'.
@@ -318,6 +596,17 @@ public interface RoboprosePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoot_Robots();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link dk.itu.dsl.roboprose.model.Root#getEvents <em>Events</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Events</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Root#getEvents()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_Events();
 
 	/**
 	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.RoboProse <em>Robo Prose</em>}'.
@@ -383,10 +672,10 @@ public interface RoboprosePackage extends EPackage {
 	EClass getEventListener();
 
 	/**
-	 * Returns the meta object for the reference '{@link dk.itu.dsl.roboprose.model.EventListener#getEvent <em>Event</em>}'.
+	 * Returns the meta object for the containment reference '{@link dk.itu.dsl.roboprose.model.EventListener#getEvent <em>Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Event</em>'.
+	 * @return the meta object for the containment reference '<em>Event</em>'.
 	 * @see dk.itu.dsl.roboprose.model.EventListener#getEvent()
 	 * @see #getEventListener()
 	 * @generated
@@ -436,14 +725,138 @@ public interface RoboprosePackage extends EPackage {
 	EClass getAction();
 
 	/**
-	 * Returns the meta object for enum '{@link dk.itu.dsl.roboprose.model.NewEnum1 <em>New Enum1</em>}'.
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Move <em>Move</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>New Enum1</em>'.
-	 * @see dk.itu.dsl.roboprose.model.NewEnum1
+	 * @return the meta object for class '<em>Move</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Move
 	 * @generated
 	 */
-	EEnum getNewEnum1();
+	EClass getMove();
+
+	/**
+	 * Returns the meta object for the attribute '{@link dk.itu.dsl.roboprose.model.Move#getDirection <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Direction</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Move#getDirection()
+	 * @see #getMove()
+	 * @generated
+	 */
+	EAttribute getMove_Direction();
+
+	/**
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Turn <em>Turn</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Turn</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Turn
+	 * @generated
+	 */
+	EClass getTurn();
+
+	/**
+	 * Returns the meta object for the attribute '{@link dk.itu.dsl.roboprose.model.Turn#getDegrees <em>Degrees</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Degrees</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Turn#getDegrees()
+	 * @see #getTurn()
+	 * @generated
+	 */
+	EAttribute getTurn_Degrees();
+
+	/**
+	 * Returns the meta object for the attribute '{@link dk.itu.dsl.roboprose.model.Turn#getDirection <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Direction</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Turn#getDirection()
+	 * @see #getTurn()
+	 * @generated
+	 */
+	EAttribute getTurn_Direction();
+
+	/**
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.hasDuration <em>has Duration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>has Duration</em>'.
+	 * @see dk.itu.dsl.roboprose.model.hasDuration
+	 * @generated
+	 */
+	EClass gethasDuration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link dk.itu.dsl.roboprose.model.hasDuration#getDuration <em>Duration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Duration</em>'.
+	 * @see dk.itu.dsl.roboprose.model.hasDuration#getDuration()
+	 * @see #gethasDuration()
+	 * @generated
+	 */
+	EAttribute gethasDuration_Duration();
+
+	/**
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Stop <em>Stop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Stop</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Stop
+	 * @generated
+	 */
+	EClass getStop();
+
+	/**
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.RotorAction <em>Rotor Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rotor Action</em>'.
+	 * @see dk.itu.dsl.roboprose.model.RotorAction
+	 * @generated
+	 */
+	EClass getRotorAction();
+
+	/**
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Obstacle <em>Obstacle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Obstacle</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Obstacle
+	 * @generated
+	 */
+	EClass getObstacle();
+
+	/**
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Tapped <em>Tapped</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tapped</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Tapped
+	 * @generated
+	 */
+	EClass getTapped();
+
+	/**
+	 * Returns the meta object for enum '{@link dk.itu.dsl.roboprose.model.MOVE_DIRECTION <em>MOVE DIRECTION</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>MOVE DIRECTION</em>'.
+	 * @see dk.itu.dsl.roboprose.model.MOVE_DIRECTION
+	 * @generated
+	 */
+	EEnum getMOVE_DIRECTION();
+
+	/**
+	 * Returns the meta object for enum '{@link dk.itu.dsl.roboprose.model.TURN_DIRECTION <em>TURN DIRECTION</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>TURN DIRECTION</em>'.
+	 * @see dk.itu.dsl.roboprose.model.TURN_DIRECTION
+	 * @generated
+	 */
+	EEnum getTURN_DIRECTION();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -469,10 +882,10 @@ public interface RoboprosePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.Root <em>Root</em>}' class.
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.RootImpl <em>Root</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see dk.itu.dsl.roboprose.model.Root
+		 * @see dk.itu.dsl.roboprose.model.impl.RootImpl
 		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRoot()
 		 * @generated
 		 */
@@ -485,6 +898,14 @@ public interface RoboprosePackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__ROBOTS = eINSTANCE.getRoot_Robots();
+
+		/**
+		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__EVENTS = eINSTANCE.getRoot_Events();
 
 		/**
 		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.RoboProseImpl <em>Robo Prose</em>}' class.
@@ -541,7 +962,7 @@ public interface RoboprosePackage extends EPackage {
 		EClass EVENT_LISTENER = eINSTANCE.getEventListener();
 
 		/**
-		 * The meta object literal for the '<em><b>Event</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Event</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -585,14 +1006,126 @@ public interface RoboprosePackage extends EPackage {
 		EClass ACTION = eINSTANCE.getAction();
 
 		/**
-		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.NewEnum1 <em>New Enum1</em>}' enum.
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.MoveImpl <em>Move</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see dk.itu.dsl.roboprose.model.NewEnum1
-		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getNewEnum1()
+		 * @see dk.itu.dsl.roboprose.model.impl.MoveImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getMove()
 		 * @generated
 		 */
-		EEnum NEW_ENUM1 = eINSTANCE.getNewEnum1();
+		EClass MOVE = eINSTANCE.getMove();
+
+		/**
+		 * The meta object literal for the '<em><b>Direction</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MOVE__DIRECTION = eINSTANCE.getMove_Direction();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.TurnImpl <em>Turn</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.impl.TurnImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTurn()
+		 * @generated
+		 */
+		EClass TURN = eINSTANCE.getTurn();
+
+		/**
+		 * The meta object literal for the '<em><b>Degrees</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TURN__DEGREES = eINSTANCE.getTurn_Degrees();
+
+		/**
+		 * The meta object literal for the '<em><b>Direction</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TURN__DIRECTION = eINSTANCE.getTurn_Direction();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.hasDurationImpl <em>has Duration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.impl.hasDurationImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#gethasDuration()
+		 * @generated
+		 */
+		EClass HAS_DURATION = eINSTANCE.gethasDuration();
+
+		/**
+		 * The meta object literal for the '<em><b>Duration</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HAS_DURATION__DURATION = eINSTANCE.gethasDuration_Duration();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.StopImpl <em>Stop</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.impl.StopImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getStop()
+		 * @generated
+		 */
+		EClass STOP = eINSTANCE.getStop();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.RotorActionImpl <em>Rotor Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.impl.RotorActionImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRotorAction()
+		 * @generated
+		 */
+		EClass ROTOR_ACTION = eINSTANCE.getRotorAction();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.ObstacleImpl <em>Obstacle</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.impl.ObstacleImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getObstacle()
+		 * @generated
+		 */
+		EClass OBSTACLE = eINSTANCE.getObstacle();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.TappedImpl <em>Tapped</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.impl.TappedImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTapped()
+		 * @generated
+		 */
+		EClass TAPPED = eINSTANCE.getTapped();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.MOVE_DIRECTION <em>MOVE DIRECTION</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.MOVE_DIRECTION
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getMOVE_DIRECTION()
+		 * @generated
+		 */
+		EEnum MOVE_DIRECTION = eINSTANCE.getMOVE_DIRECTION();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.TURN_DIRECTION <em>TURN DIRECTION</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.TURN_DIRECTION
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTURN_DIRECTION()
+		 * @generated
+		 */
+		EEnum TURN_DIRECTION = eINSTANCE.getTURN_DIRECTION();
 
 	}
 

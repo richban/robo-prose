@@ -146,7 +146,7 @@ class Thymio extends ThymioDBus {
             const eventNames = Object.keys(this.listeners);
             const asebaScript = broadcastEvents(this.name, eventNames);
 
-            this.loadScript(asebaScript, false)
+            this.loadScript(asebaScript)
                 .concat(this.main)
                 .concat(this.listenTo(eventNames))
                 .subscribe();

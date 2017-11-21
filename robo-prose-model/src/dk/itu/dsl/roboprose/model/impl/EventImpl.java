@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class EventImpl extends MinimalEObjectImpl.Container implements Event {
+public abstract class EventImpl extends MinimalEObjectImpl.Container implements Event {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -57,10 +57,15 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case RoboprosePackage.ROOT: return createRoot();
 			case RoboprosePackage.ROBO_PROSE: return createRoboProse();
 			case RoboprosePackage.MAIN: return createMain();
 			case RoboprosePackage.EVENT_LISTENER: return createEventListener();
-			case RoboprosePackage.EVENT: return createEvent();
+			case RoboprosePackage.MOVE: return createMove();
+			case RoboprosePackage.TURN: return createTurn();
+			case RoboprosePackage.STOP: return createStop();
+			case RoboprosePackage.OBSTACLE: return createObstacle();
+			case RoboprosePackage.TAPPED: return createTapped();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -74,8 +79,10 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case RoboprosePackage.NEW_ENUM1:
-				return createNewEnum1FromString(eDataType, initialValue);
+			case RoboprosePackage.MOVE_DIRECTION:
+				return createMOVE_DIRECTIONFromString(eDataType, initialValue);
+			case RoboprosePackage.TURN_DIRECTION:
+				return createTURN_DIRECTIONFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -89,11 +96,23 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case RoboprosePackage.NEW_ENUM1:
-				return convertNewEnum1ToString(eDataType, instanceValue);
+			case RoboprosePackage.MOVE_DIRECTION:
+				return convertMOVE_DIRECTIONToString(eDataType, instanceValue);
+			case RoboprosePackage.TURN_DIRECTION:
+				return convertTURN_DIRECTIONToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Root createRoot() {
+		RootImpl root = new RootImpl();
+		return root;
 	}
 
 	/**
@@ -131,9 +150,9 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Event createEvent() {
-		EventImpl event = new EventImpl();
-		return event;
+	public Move createMove() {
+		MoveImpl move = new MoveImpl();
+		return move;
 	}
 
 	/**
@@ -141,8 +160,48 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NewEnum1 createNewEnum1FromString(EDataType eDataType, String initialValue) {
-		NewEnum1 result = NewEnum1.get(initialValue);
+	public Turn createTurn() {
+		TurnImpl turn = new TurnImpl();
+		return turn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Stop createStop() {
+		StopImpl stop = new StopImpl();
+		return stop;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Obstacle createObstacle() {
+		ObstacleImpl obstacle = new ObstacleImpl();
+		return obstacle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Tapped createTapped() {
+		TappedImpl tapped = new TappedImpl();
+		return tapped;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MOVE_DIRECTION createMOVE_DIRECTIONFromString(EDataType eDataType, String initialValue) {
+		MOVE_DIRECTION result = MOVE_DIRECTION.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -152,7 +211,27 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertNewEnum1ToString(EDataType eDataType, Object instanceValue) {
+	public String convertMOVE_DIRECTIONToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TURN_DIRECTION createTURN_DIRECTIONFromString(EDataType eDataType, String initialValue) {
+		TURN_DIRECTION result = TURN_DIRECTION.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTURN_DIRECTIONToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

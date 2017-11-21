@@ -9,20 +9,19 @@
     <main>
       <actions
           xsi:type="roboprose:Move"
-          forward="true"/>
+          direction="backwards"/>
     </main>
-    <listeners
-        event="//@events.0">
+    <listeners>
+      <event
+          xsi:type="roboprose:Tapped"/>
+      <actions
+          xsi:type="roboprose:Move"/>
+    </listeners>
+    <listeners>
+      <event
+          xsi:type="roboprose:Obstacle"/>
       <actions
           xsi:type="roboprose:Stop"/>
     </listeners>
-    <listeners
-        event="//@events.1">
-      <actions
-          xsi:type="roboprose:Move"
-          forward="false"/>
-    </listeners>
   </robots>
-  <events xsi:type="roboprose:Tapped"/>
-  <events xsi:type="roboprose:Obstacle"/>
 </roboprose:Root>

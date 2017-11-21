@@ -22,6 +22,15 @@ public interface RoboproseFactory extends EFactory {
 	RoboproseFactory eINSTANCE = dk.itu.dsl.roboprose.model.impl.RoboproseFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Root</em>'.
+	 * @generated
+	 */
+	Root createRoot();
+
+	/**
 	 * Returns a new object of class '<em>Robo Prose</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,13 +58,49 @@ public interface RoboproseFactory extends EFactory {
 	EventListener createEventListener();
 
 	/**
-	 * Returns a new object of class '<em>Event</em>'.
+	 * Returns a new object of class '<em>Move</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event</em>'.
+	 * @return a new object of class '<em>Move</em>'.
 	 * @generated
 	 */
-	Event createEvent();
+	Move createMove();
+
+	/**
+	 * Returns a new object of class '<em>Turn</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Turn</em>'.
+	 * @generated
+	 */
+	Turn createTurn();
+
+	/**
+	 * Returns a new object of class '<em>Stop</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stop</em>'.
+	 * @generated
+	 */
+	Stop createStop();
+
+	/**
+	 * Returns a new object of class '<em>Obstacle</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Obstacle</em>'.
+	 * @generated
+	 */
+	Obstacle createObstacle();
+
+	/**
+	 * Returns a new object of class '<em>Tapped</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tapped</em>'.
+	 * @generated
+	 */
+	Tapped createTapped();
 
 	/**
 	 * Returns the package supported by this factory.
