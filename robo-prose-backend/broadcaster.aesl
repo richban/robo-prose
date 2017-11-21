@@ -4,8 +4,8 @@
 
 
 <!--list of global events-->
-<event size="0" name="tapped"/>
-<event size="0" name="obstacle"/>
+<event size="0" id="0" name="tapped"/>
+<event size="0" id="1" name="obstacle"/>
 
 <!--list of constants-->
 
@@ -17,8 +17,10 @@
 <!--node thymio-II-->
 <node name="thymio-II">
 
-onevent tap
-emit tapped
+onevent buttons
+if button.backward == 1 or button.center == 1 or button.forward == 1 or button.left == 1 or button.right == 1 then
+    emit tapped
+end
 
 
 

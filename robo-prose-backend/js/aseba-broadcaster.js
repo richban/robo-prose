@@ -7,8 +7,10 @@ if prox.horizontal[0] > 1000 or prox.horizontal[1] > 1000 or prox.horizontal[2] 
 end
 `,
     tapped: `
-onevent tap
-emit tapped
+onevent buttons
+if button.backward == 1 or button.center == 1 or button.forward == 1 or button.left == 1 or button.right == 1 then
+    emit tapped
+end
 `
 };
 
@@ -20,7 +22,7 @@ module.exports = (name, events) => {
 
 <!--list of global events-->
 ${
-    events.map(event => `<event size="0" name="${ event }"/>`)
+    events.map((event, id) => `<event size="0" id="${ id }" name="${ event }"/>`)
         .join('\n')
 }
 

@@ -89,6 +89,6 @@ const registerEcoreModel = contents => {
 module.exports = (ecoreModelPath, instancePath) => {
     return readEcoreFile(ecoreModelPath)
         .map(registerEcoreModel)
-        .map(readEcoreFile.bind(null, instancePath))
+        .concatMap(readEcoreFile.bind(null, instancePath))
         .map(makeThymio);
 };

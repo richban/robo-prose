@@ -8,10 +8,14 @@ const { Observable } = require('rxjs');
 const path = require('path');
 
 const broadcastEvents = require('./aseba-broadcaster.js');
+const lodash = require('lodash');
 
 
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
-class ThymioDBusObject {
+class ThymioDBus {
+    static bindMethod(obj, method, ...args) {
+        return Observable.bindNodeCallback(obj[method].bind(obj))(...args);
+    }
 
     constructor(name) {
         this.name = name;
@@ -24,63 +28,71 @@ class ThymioDBusObject {
         this.network = getInterfaceObs(
                 'ch.epfl.mobots.Aseba',
                 '/',
-                'ch.epfl.mobots.AsebaNetwork');
+                'ch.epfl.mobots.AsebaNetwork')
+            .share();
         this.eventFilter = this.network
-            .mergeMap(network => Observable.bindCallback(network.CreateEventFilter.bind(network)))
-            .mergeMap(eventPath => getInterfaceObs(
+            .concatMap(network =>
+                ThymioDBus.bindMethod(network, 'CreateEventFilter'))
+            .concatMap(eventPath => getInterfaceObs(
                     'ch.epfl.mobots.Aseba',
                     eventPath,
-                    'ch.epfl.mobots.EventFilter'));
+                    'ch.epfl.mobots.EventFilter')
+            )
     }
-
 
     dispatchEvent(eventId, eventName, eventData) {
         throw new Error('Method dispatchEvent() not implemented');
     }
 
-    networkCall(method, ...args) {
-        return this.network.mergeMap(network =>
-            Observable.bindCallback(network[method].bind(network))(this.name, ...args))
+    get(variable) {
+        return this.networkCall('GetVariable', variable)
+                   .map(value => Array.isArray(value)
+                       ? value.map(parseInt)
+                       : parseInt(value))
+//            .take(1);
     }
 
-    listenTo(eventName) {
-        return this.eventFilter.mergeMap(eventFilter =>
-            Observable.bindCallback(eventFilter.ListenEventName.bind(eventFilter))(eventName)
-        );
-    }
-
-    startListening() {
-        return this.eventFilter.mergeMap(eventFilter =>
-            Observable.fromEvent(eventFilter, 'Event')
-                    .do(([eventName, args]) => {
-                        console.log(arguments);
-                        this.dispatchEvent(eventName, args) })
-        );
+    listenTo(events) {
+        return this.eventFilter
+               .concatMap(eventFilter =>
+                   Observable.from(events)
+                         .concatMap(eventName =>
+                             ThymioDBus.bindMethod(eventFilter, 'ListenEventName', eventName))
+                         .concat(this.startListening(eventFilter))
+               );
     }
 
     loadScript(script) {
         return Observable.bindNodeCallback(fs.writeFile)(
                 TMP_SCRIPT_NAME, script, 'utf-8')
-            .mergeMap(() => Observable.bindCallback(this.network.LoadScripts.bind(this.network))(
-                    TMP_SCRIPT_NAME))
+            .concatMapTo(this.network)
+            .concatMap(network =>
+                ThymioDBus.bindMethod(network, 'LoadScripts', TMP_SCRIPT_NAME));
 //            .then(() => q.nfcall(fs.unlink,
 //                    TMP_SCRIPT_NAME));
     }
 
-    get(variable) {
-        return this.networkCall('GetVariable', variable)
-            .map(value => Array.isArray(value)
-                ? value.map(parseInt)
-                : parseInt(value));
+    networkCall(method, ...args) {
+        return this.network.concatMap(network =>
+            ThymioDBus.bindMethod(network, method, this.name, ...args));
     }
 
     set(variable, value) {
-        return this.networkCall('SetVariable', variable, value);
+        return this.networkCall('SetVariable', variable, value)
+//            .take(1);
+    }
+
+    startListening(eventFilter) {
+        return Observable.fromEvent(eventFilter, 'Event',
+                    (eventId, eventName, eventData) => [eventName, eventData])
+             .do(([eventName, eventData]) => {
+                 console.log(`Event: ${ eventName }`);
+                 this.dispatchEvent(eventName, eventData) });
     }
 }
 
 
-class Thymio extends ThymioDBusObject {
+class Thymio extends ThymioDBus {
     static makeAction(method, ...args) {
         return {
             method,
@@ -88,30 +100,32 @@ class Thymio extends ThymioDBusObject {
         };
     }
 
+    actionsToObs(actions) {
+        return Observable.from(actions)
+            .concatMap(this.executeAction.bind(this));
+    }
+
     constructor(main, listeners) {
         super('thymio-II');
-        this.main = main;
-        this.listeners = listeners;
+        this.main = this.actionsToObs(main);
+        this.listeners = lodash.mapValues(listeners,
+            this.actionsToObs.bind(this));
     }
 
     dispatchEvent(eventName, eventData) {
-        //console.log(eventName);
-        this.execute(this.listeners[eventName]);
-    }
-
-    execute(actions) {
-        actions.forEach(this.executeAction.bind(this))
+        console.log(`Dispatched: ${ eventName }`);
+        this.listeners[eventName].subscribe();
     }
 
     executeAction(action) {
-        this[action.method].apply(this, action.args)
-                .subscribe();
+        console.log(`Executed: ${ action.method }`);
+        return this[action.method].apply(this, action.args);
     }
 
     move(speed) {
         const arg = [speed];
-        this.set('motor.left.target', arg)
-            .concat(this.set('motor.right.target', arg));
+        return this.set('motor.left.target', arg)
+            .concat(this.set('motor.right.target', arg))
     }
 
     moveBackward() {
@@ -123,20 +137,16 @@ class Thymio extends ThymioDBusObject {
     }
 
     run() {
-        const executeMain = this.execute.bind(this, this.main);
-
         if (!this.listeners) {
-            executeMain();
+            this.main.subscribe();
         }
         else {
             const eventNames = Object.keys(this.listeners);
             const asebaScript = broadcastEvents(this.name, eventNames);
 
-//            this.listenTo('tapped').done();
-//                .then(this.listenTo.bind(this, 'obstacle'))
-            this.startListening()
-                .mergeMap(this.loadScript.bind(this, asebaScript))
-                .then(executeMain)
+            this.loadScript(asebaScript)
+                .concat(this.main)
+                .concat(this.listenTo(eventNames))
                 .subscribe();
         }
     }
