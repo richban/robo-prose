@@ -37,7 +37,7 @@ class ThymioDBus {
                     'ch.epfl.mobots.Aseba',
                     eventPath,
                     'ch.epfl.mobots.EventFilter')
-            )
+            );
     }
 
     dispatchEvent(eventId, eventName, eventData) {
@@ -49,7 +49,6 @@ class ThymioDBus {
                    .map(value => Array.isArray(value)
                        ? value.map(parseInt)
                        : parseInt(value))
-//            .take(1);
     }
 
     listenTo(events) {
@@ -57,19 +56,26 @@ class ThymioDBus {
                .concatMap(eventFilter =>
                    Observable.from(events)
                          .concatMap(eventName =>
-                             ThymioDBus.bindMethod(eventFilter, 'ListenEventName', eventName))
+                             ThymioDBus.bindMethod(eventFilter,
+                                    'ListenEventName', eventName))
                          .concat(this.startListening(eventFilter))
                );
     }
 
-    loadScript(script) {
-        return Observable.bindNodeCallback(fs.writeFile)(
+    loadScript(script, deleteScript) {
+        deleteScript = deleteScript ? true : deleteScript;
+
+        const res = Observable.bindNodeCallback(fs.writeFile)(
                 TMP_SCRIPT_NAME, script, 'utf-8')
             .concatMapTo(this.network)
             .concatMap(network =>
                 ThymioDBus.bindMethod(network, 'LoadScripts', TMP_SCRIPT_NAME));
-//            .then(() => q.nfcall(fs.unlink,
-//                    TMP_SCRIPT_NAME));
+
+        if (deleteScript) {
+            return res.concatMapTo(Observable.bindNodeCallback(fs.unlink)(
+                TMP_SCRIPT_NAME));
+        }
+        return res;
     }
 
     networkCall(method, ...args) {
@@ -79,15 +85,13 @@ class ThymioDBus {
 
     set(variable, value) {
         return this.networkCall('SetVariable', variable, value)
-//            .take(1);
     }
 
     startListening(eventFilter) {
         return Observable.fromEvent(eventFilter, 'Event',
                     (eventId, eventName, eventData) => [eventName, eventData])
-             .do(([eventName, eventData]) => {
-                 console.log(`Event: ${ eventName }`);
-                 this.dispatchEvent(eventName, eventData) });
+             .do(([eventName, eventData]) =>
+                 this.dispatchEvent(eventName, eventData));
     }
 }
 
@@ -113,12 +117,10 @@ class Thymio extends ThymioDBus {
     }
 
     dispatchEvent(eventName, eventData) {
-        console.log(`Dispatched: ${ eventName }`);
         this.listeners[eventName].subscribe();
     }
 
     executeAction(action) {
-        console.log(`Executed: ${ action.method }`);
         return this[action.method].apply(this, action.args);
     }
 
@@ -144,7 +146,7 @@ class Thymio extends ThymioDBus {
             const eventNames = Object.keys(this.listeners);
             const asebaScript = broadcastEvents(this.name, eventNames);
 
-            this.loadScript(asebaScript)
+            this.loadScript(asebaScript, false)
                 .concat(this.main)
                 .concat(this.listenTo(eventNames))
                 .subscribe();
