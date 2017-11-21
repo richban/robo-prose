@@ -12,7 +12,16 @@ object Constraints {
   
   val invariants: Map[String, Constraint] = Map (
       
-      "Example constraint" -> inv[Main] (
-          self => self.getActions.length > 1)
+      "Root must have at least one robot." -> inv[Root] {
+          self => self.getRobots != null },
+
+      "RoboProse requires a main" -> inv[RoboProse] {
+        self => self.getMain != null },
+
+      "Main requires actions" -> inv[RoboProse] {
+        self => !self.getMain.getActions.isEmpty },
+
+      "RoboProse may have eventListener" -> inv[RoboProse] {
+        self => self.getListeners == null }
   )
-}
+}   

@@ -38,21 +38,10 @@ object Main extends App {
 
     // register the package magic (impure)
     RoboprosePackage.eINSTANCE.eClass
-
+  
     // Model instances
     val instances = Stream(
-        "../dk.itu.smdp.ex4.models/instances/PeopleSelfParent.xmi",
-        "../dk.itu.smdp.ex4.models/instances/ValidPeople.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT1Valid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT1Invalid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT2Valid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT2Invalid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT3Valid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT3Invalid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT4Valid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT4Invalid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT5Valid.xmi",
-        "../dk.itu.smdp.ex4.models/instances/PrinterPoolT5Invalid.xmi")
+        "../robo-prose-model/model/RoboProseInstance1.xmi")
         .map(fileName => (fileName.split("/").last, URI.createURI(fileName)))
         .map(map2nd((new ResourceSetImpl).getResource(_, true)))
         // http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/util/EcoreUtil.html#getAllProperContents%28org.eclipse.emf.ecore.resource.Resource,%20boolean%29
