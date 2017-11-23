@@ -83,6 +83,8 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 				return createMOVE_DIRECTIONFromString(eDataType, initialValue);
 			case RoboprosePackage.TURN_DIRECTION:
 				return createTURN_DIRECTIONFromString(eDataType, initialValue);
+			case RoboprosePackage.RANDOM:
+				return createRANDOMFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -100,6 +102,8 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 				return convertMOVE_DIRECTIONToString(eDataType, instanceValue);
 			case RoboprosePackage.TURN_DIRECTION:
 				return convertTURN_DIRECTIONToString(eDataType, instanceValue);
+			case RoboprosePackage.RANDOM:
+				return convertRANDOMToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -232,6 +236,26 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	 * @generated
 	 */
 	public String convertTURN_DIRECTIONToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RANDOM createRANDOMFromString(EDataType eDataType, String initialValue) {
+		RANDOM result = RANDOM.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertRANDOMToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

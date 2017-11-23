@@ -4,10 +4,14 @@
 package dk.itu.dsl.roboprose.tests;
 
 import com.google.inject.Inject;
+import dk.itu.dsl.roboprose.model.Action;
 import dk.itu.dsl.roboprose.tests.RoboProseInjectorProvider;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -16,14 +20,19 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class RoboProseParsingTest {
   @Inject
-  private /* ParseHelper<Action> */Object parseHelper;
+  private ParseHelper<Action> parseHelper;
   
   @Test
   public void loadModel() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field RoboProseParsingTest.parseHelper refers to the missing type Action"
-      + "\neResource cannot be resolved"
-      + "\nerrors cannot be resolved"
-      + "\nisEmpty cannot be resolved");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Hello Xtext!");
+      _builder.newLine();
+      final Action result = this.parseHelper.parse(_builder);
+      Assert.assertNotNull(result);
+      Assert.assertTrue(result.eResource().getErrors().isEmpty());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

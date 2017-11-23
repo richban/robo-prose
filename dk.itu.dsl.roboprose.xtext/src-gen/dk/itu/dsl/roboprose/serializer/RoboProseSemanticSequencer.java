@@ -96,7 +96,7 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     Move returns Move
 	 *
 	 * Constraint:
-	 *     (direction=MOVE_DIRECTION? duration=EFloat?)
+	 *     (direction=MOVE_DIRECTION? (duration=EFloat | isRandom=RANDOM)?)
 	 */
 	protected void sequence_Move(ISerializationContext context, Move semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -160,7 +160,7 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     Turn returns Turn
 	 *
 	 * Constraint:
-	 *     (direction=TURN_DIRECTION? (duration=EFloat | degrees=EFloat)?)
+	 *     (direction=TURN_DIRECTION? (duration=EFloat | degrees=EFloat | isRandom=RANDOM)?)
 	 */
 	protected void sequence_Turn(ISerializationContext context, Turn semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

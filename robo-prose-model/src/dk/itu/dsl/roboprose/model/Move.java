@@ -19,7 +19,7 @@ package dk.itu.dsl.roboprose.model;
  * @model
  * @generated
  */
-public interface Move extends RotorAction, hasDuration {
+public interface Move extends RotorAction, hasDuration, randomizable {
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' attribute.
 	 * The default value is <code>"forwards"</code>.
