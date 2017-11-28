@@ -18,6 +18,7 @@ import dk.itu.dsl.roboprose.model.Stop;
 import dk.itu.dsl.roboprose.model.Tapped;
 import dk.itu.dsl.roboprose.model.Turn;
 import dk.itu.dsl.roboprose.model.hasDuration;
+import dk.itu.dsl.roboprose.model.randomizable;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -101,6 +102,13 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass randomizableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass stopEClass = null;
 
 	/**
@@ -137,6 +145,13 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * @generated
 	 */
 	private EEnum turN_DIRECTIONEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum randomEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -393,6 +408,24 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getrandomizable() {
+		return randomizableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getrandomizable_IsRandom() {
+		return (EAttribute)randomizableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStop() {
 		return stopEClass;
 	}
@@ -440,6 +473,15 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 */
 	public EEnum getTURN_DIRECTION() {
 		return turN_DIRECTIONEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getRANDOM() {
+		return randomEEnum;
 	}
 
 	/**
@@ -497,9 +539,6 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		createEAttribute(turnEClass, TURN__DEGREES);
 		createEAttribute(turnEClass, TURN__DIRECTION);
 
-		hasDurationEClass = createEClass(HAS_DURATION);
-		createEAttribute(hasDurationEClass, HAS_DURATION__DURATION);
-
 		stopEClass = createEClass(STOP);
 
 		rotorActionEClass = createEClass(ROTOR_ACTION);
@@ -508,9 +547,16 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 
 		tappedEClass = createEClass(TAPPED);
 
+		hasDurationEClass = createEClass(HAS_DURATION);
+		createEAttribute(hasDurationEClass, HAS_DURATION__DURATION);
+
+		randomizableEClass = createEClass(RANDOMIZABLE);
+		createEAttribute(randomizableEClass, RANDOMIZABLE__IS_RANDOM);
+
 		// Create enums
 		movE_DIRECTIONEEnum = createEEnum(MOVE_DIRECTION);
 		turN_DIRECTIONEEnum = createEEnum(TURN_DIRECTION);
+		randomEEnum = createEEnum(RANDOM);
 	}
 
 	/**
@@ -543,8 +589,10 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		// Add supertypes to classes
 		moveEClass.getESuperTypes().add(this.getRotorAction());
 		moveEClass.getESuperTypes().add(this.gethasDuration());
+		moveEClass.getESuperTypes().add(this.getrandomizable());
 		turnEClass.getESuperTypes().add(this.getRotorAction());
 		turnEClass.getESuperTypes().add(this.gethasDuration());
+		turnEClass.getESuperTypes().add(this.getrandomizable());
 		stopEClass.getESuperTypes().add(this.getAction());
 		stopEClass.getESuperTypes().add(this.gethasDuration());
 		rotorActionEClass.getESuperTypes().add(this.getAction());
@@ -579,9 +627,6 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		initEAttribute(getTurn_Degrees(), ecorePackage.getEFloat(), "degrees", "90.0", 0, 1, Turn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTurn_Direction(), this.getTURN_DIRECTION(), "direction", "left", 1, 1, Turn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(hasDurationEClass, hasDuration.class, "hasDuration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(gethasDuration_Duration(), ecorePackage.getEFloat(), "duration", "1.0", 0, 1, hasDuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(stopEClass, Stop.class, "Stop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(rotorActionEClass, RotorAction.class, "RotorAction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -589,6 +634,12 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		initEClass(obstacleEClass, Obstacle.class, "Obstacle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(tappedEClass, Tapped.class, "Tapped", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(hasDurationEClass, hasDuration.class, "hasDuration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(gethasDuration_Duration(), ecorePackage.getEFloat(), "duration", "1.0", 0, 1, hasDuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(randomizableEClass, randomizable.class, "randomizable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getrandomizable_IsRandom(), this.getRANDOM(), "isRandom", "notRandom", 0, 1, randomizable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(movE_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.MOVE_DIRECTION.class, "MOVE_DIRECTION");
@@ -598,6 +649,10 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		initEEnum(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.class, "TURN_DIRECTION");
 		addEEnumLiteral(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.LEFT);
 		addEEnumLiteral(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.RIGHT);
+
+		initEEnum(randomEEnum, dk.itu.dsl.roboprose.model.RANDOM.class, "RANDOM");
+		addEEnumLiteral(randomEEnum, dk.itu.dsl.roboprose.model.RANDOM.RANDOM);
+		addEEnumLiteral(randomEEnum, dk.itu.dsl.roboprose.model.RANDOM.NOT_RANDOM);
 
 		// Create resource
 		createResource(eNS_URI);

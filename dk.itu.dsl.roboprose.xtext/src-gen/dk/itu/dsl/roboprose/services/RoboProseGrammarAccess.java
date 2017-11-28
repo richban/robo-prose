@@ -394,18 +394,21 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMoveKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cDirectionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cDirectionMOVE_DIRECTIONEnumRuleCall_2_0 = (RuleCall)cDirectionAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cForKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cDurationAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cDurationEFloatParserRuleCall_3_1_0 = (RuleCall)cDurationAssignment_3_1.eContents().get(0);
-		private final Keyword cSecondsKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cForKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Assignment cDurationAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
+		private final RuleCall cDurationEFloatParserRuleCall_3_0_1_0 = (RuleCall)cDurationAssignment_3_0_1.eContents().get(0);
+		private final Keyword cSecondsKeyword_3_0_2 = (Keyword)cGroup_3_0.eContents().get(2);
+		private final Assignment cIsRandomAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cIsRandomRANDOMEnumRuleCall_3_1_0 = (RuleCall)cIsRandomAssignment_3_1.eContents().get(0);
 		
 		//Move:
 		//	{Move}
-		//	'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds')?;
+		//	'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds' | isRandom=RANDOM)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Move} 'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds')?
+		//{Move} 'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds' | isRandom=RANDOM)?
 		public Group getGroup() { return cGroup; }
 		
 		//{Move}
@@ -420,20 +423,29 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//MOVE_DIRECTION
 		public RuleCall getDirectionMOVE_DIRECTIONEnumRuleCall_2_0() { return cDirectionMOVE_DIRECTIONEnumRuleCall_2_0; }
 		
-		//('for' duration=EFloat 'seconds')?
-		public Group getGroup_3() { return cGroup_3; }
+		//('for' duration=EFloat 'seconds' | isRandom=RANDOM)?
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//'for' duration=EFloat 'seconds'
+		public Group getGroup_3_0() { return cGroup_3_0; }
 		
 		//'for'
-		public Keyword getForKeyword_3_0() { return cForKeyword_3_0; }
+		public Keyword getForKeyword_3_0_0() { return cForKeyword_3_0_0; }
 		
 		//duration=EFloat
-		public Assignment getDurationAssignment_3_1() { return cDurationAssignment_3_1; }
+		public Assignment getDurationAssignment_3_0_1() { return cDurationAssignment_3_0_1; }
 		
 		//EFloat
-		public RuleCall getDurationEFloatParserRuleCall_3_1_0() { return cDurationEFloatParserRuleCall_3_1_0; }
+		public RuleCall getDurationEFloatParserRuleCall_3_0_1_0() { return cDurationEFloatParserRuleCall_3_0_1_0; }
 		
 		//'seconds'
-		public Keyword getSecondsKeyword_3_2() { return cSecondsKeyword_3_2; }
+		public Keyword getSecondsKeyword_3_0_2() { return cSecondsKeyword_3_0_2; }
+		
+		//isRandom=RANDOM
+		public Assignment getIsRandomAssignment_3_1() { return cIsRandomAssignment_3_1; }
+		
+		//RANDOM
+		public RuleCall getIsRandomRANDOMEnumRuleCall_3_1_0() { return cIsRandomRANDOMEnumRuleCall_3_1_0; }
 	}
 	public class TurnElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Turn");
@@ -452,13 +464,15 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDegreesAssignment_3_1_0 = (Assignment)cGroup_3_1.eContents().get(0);
 		private final RuleCall cDegreesEFloatParserRuleCall_3_1_0_0 = (RuleCall)cDegreesAssignment_3_1_0.eContents().get(0);
 		private final Keyword cDegreesKeyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
+		private final Assignment cIsRandomAssignment_3_2 = (Assignment)cAlternatives_3.eContents().get(2);
+		private final RuleCall cIsRandomRANDOMEnumRuleCall_3_2_0 = (RuleCall)cIsRandomAssignment_3_2.eContents().get(0);
 		
 		//Turn:
 		//	{Turn}
-		//	'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees')?;
+		//	'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees' | isRandom=RANDOM)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Turn} 'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees')?
+		//{Turn} 'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees' | isRandom=RANDOM)?
 		public Group getGroup() { return cGroup; }
 		
 		//{Turn}
@@ -473,7 +487,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//TURN_DIRECTION
 		public RuleCall getDirectionTURN_DIRECTIONEnumRuleCall_2_0() { return cDirectionTURN_DIRECTIONEnumRuleCall_2_0; }
 		
-		//('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees')?
+		//('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees' | isRandom=RANDOM)?
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
 		//'for' duration=EFloat 'seconds'
@@ -502,6 +516,12 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'degrees'
 		public Keyword getDegreesKeyword_3_1_1() { return cDegreesKeyword_3_1_1; }
+		
+		//isRandom=RANDOM
+		public Assignment getIsRandomAssignment_3_2() { return cIsRandomAssignment_3_2; }
+		
+		//RANDOM
+		public RuleCall getIsRandomRANDOMEnumRuleCall_3_2_0() { return cIsRandomRANDOMEnumRuleCall_3_2_0; }
 	}
 	public class StopElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Stop");
@@ -755,6 +775,33 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//'right'
 		public Keyword getRIGHTRightKeyword_1_0() { return cRIGHTRightKeyword_1_0; }
 	}
+	public class RANDOMElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.RANDOM");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cRANDOMEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cRANDOMRandomlyKeyword_0_0 = (Keyword)cRANDOMEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cRANDOMEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cRANDOMRandomKeyword_1_0 = (Keyword)cRANDOMEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum RANDOM:
+		//	RANDOM='randomly' | RANDOM='random';
+		public EnumRule getRule() { return rule; }
+		
+		//RANDOM='randomly' | RANDOM='random'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//RANDOM='randomly'
+		public EnumLiteralDeclaration getRANDOMEnumLiteralDeclaration_0() { return cRANDOMEnumLiteralDeclaration_0; }
+		
+		//'randomly'
+		public Keyword getRANDOMRandomlyKeyword_0_0() { return cRANDOMRandomlyKeyword_0_0; }
+		
+		//RANDOM='random'
+		public EnumLiteralDeclaration getRANDOMEnumLiteralDeclaration_1() { return cRANDOMEnumLiteralDeclaration_1; }
+		
+		//'random'
+		public Keyword getRANDOMRandomKeyword_1_0() { return cRANDOMRandomKeyword_1_0; }
+	}
 	
 	private final RoboProseElements pRoboProse;
 	private final MainElements pMain;
@@ -776,6 +823,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	private final TappedElements pTapped;
 	private final MOVE_DIRECTIONElements eMOVE_DIRECTION;
 	private final TURN_DIRECTIONElements eTURN_DIRECTION;
+	private final RANDOMElements eRANDOM;
 	
 	private final Grammar grammar;
 	
@@ -806,6 +854,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		this.pTapped = new TappedElements();
 		this.eMOVE_DIRECTION = new MOVE_DIRECTIONElements();
 		this.eTURN_DIRECTION = new TURN_DIRECTIONElements();
+		this.eRANDOM = new RANDOMElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -932,7 +981,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Move:
 	//	{Move}
-	//	'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds')?;
+	//	'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds' | isRandom=RANDOM)?;
 	public MoveElements getMoveAccess() {
 		return pMove;
 	}
@@ -943,7 +992,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Turn:
 	//	{Turn}
-	//	'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees')?;
+	//	'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees' | isRandom=RANDOM)?;
 	public TurnElements getTurnAccess() {
 		return pTurn;
 	}
@@ -1033,6 +1082,16 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public EnumRule getTURN_DIRECTIONRule() {
 		return getTURN_DIRECTIONAccess().getRule();
+	}
+	
+	//enum RANDOM:
+	//	RANDOM='randomly' | RANDOM='random';
+	public RANDOMElements getRANDOMAccess() {
+		return eRANDOM;
+	}
+	
+	public EnumRule getRANDOMRule() {
+		return getRANDOMAccess().getRule();
 	}
 	
 	//terminal ID:

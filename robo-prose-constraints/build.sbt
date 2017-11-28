@@ -28,5 +28,6 @@ lazy val root = (project in file(".")).
 
     unmanagedSourceDirectories in Compile += file(baseDirectory.value.getParent) / "robo-prose-model/src/",
     unmanagedSourceDirectories in Compile += file(mdsebookLocalBase.value.absolutePath) / "mdsebook.scala/src/main/scala",
+
   ).
   dependsOn(mdsebook)

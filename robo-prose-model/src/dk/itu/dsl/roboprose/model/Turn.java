@@ -20,7 +20,7 @@ package dk.itu.dsl.roboprose.model;
  * @model
  * @generated
  */
-public interface Turn extends RotorAction, hasDuration {
+public interface Turn extends RotorAction, hasDuration, randomizable {
 	/**
 	 * Returns the value of the '<em><b>Degrees</b></em>' attribute.
 	 * The default value is <code>"90.0"</code>.

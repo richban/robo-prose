@@ -35,11 +35,13 @@ public class RoboProseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActionDelimiterAccess().getAlternatives_0(), "rule__ActionDelimiter__Alternatives_0");
 					put(grammarAccess.getActionAccess().getAlternatives(), "rule__Action__Alternatives");
 					put(grammarAccess.getEventAccess().getAlternatives(), "rule__Event__Alternatives");
+					put(grammarAccess.getMoveAccess().getAlternatives_3(), "rule__Move__Alternatives_3");
 					put(grammarAccess.getTurnAccess().getAlternatives_3(), "rule__Turn__Alternatives_3");
 					put(grammarAccess.getEFloatAccess().getAlternatives_4_0(), "rule__EFloat__Alternatives_4_0");
 					put(grammarAccess.getEBooleanAccess().getAlternatives(), "rule__EBoolean__Alternatives");
 					put(grammarAccess.getMOVE_DIRECTIONAccess().getAlternatives(), "rule__MOVE_DIRECTION__Alternatives");
 					put(grammarAccess.getTURN_DIRECTIONAccess().getAlternatives(), "rule__TURN_DIRECTION__Alternatives");
+					put(grammarAccess.getRANDOMAccess().getAlternatives(), "rule__RANDOM__Alternatives");
 					put(grammarAccess.getRoboProseAccess().getGroup(), "rule__RoboProse__Group__0");
 					put(grammarAccess.getRoboProseAccess().getGroup_1(), "rule__RoboProse__Group_1__0");
 					put(grammarAccess.getRoboProseAccess().getGroup_2(), "rule__RoboProse__Group_2__0");
@@ -57,7 +59,7 @@ public class RoboProseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActionDelimiterAccess().getGroup_1(), "rule__ActionDelimiter__Group_1__0");
 					put(grammarAccess.getParagraphDelimiterAccess().getGroup(), "rule__ParagraphDelimiter__Group__0");
 					put(grammarAccess.getMoveAccess().getGroup(), "rule__Move__Group__0");
-					put(grammarAccess.getMoveAccess().getGroup_3(), "rule__Move__Group_3__0");
+					put(grammarAccess.getMoveAccess().getGroup_3_0(), "rule__Move__Group_3_0__0");
 					put(grammarAccess.getTurnAccess().getGroup(), "rule__Turn__Group__0");
 					put(grammarAccess.getTurnAccess().getGroup_3_0(), "rule__Turn__Group_3_0__0");
 					put(grammarAccess.getTurnAccess().getGroup_3_1(), "rule__Turn__Group_3_1__0");
@@ -78,10 +80,12 @@ public class RoboProseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEventListenerAccess().getSublistenersAssignment_7_2(), "rule__EventListener__SublistenersAssignment_7_2");
 					put(grammarAccess.getEventListenerAccess().getSublistenersAssignment_7_3_1(), "rule__EventListener__SublistenersAssignment_7_3_1");
 					put(grammarAccess.getMoveAccess().getDirectionAssignment_2(), "rule__Move__DirectionAssignment_2");
-					put(grammarAccess.getMoveAccess().getDurationAssignment_3_1(), "rule__Move__DurationAssignment_3_1");
+					put(grammarAccess.getMoveAccess().getDurationAssignment_3_0_1(), "rule__Move__DurationAssignment_3_0_1");
+					put(grammarAccess.getMoveAccess().getIsRandomAssignment_3_1(), "rule__Move__IsRandomAssignment_3_1");
 					put(grammarAccess.getTurnAccess().getDirectionAssignment_2(), "rule__Turn__DirectionAssignment_2");
 					put(grammarAccess.getTurnAccess().getDurationAssignment_3_0_1(), "rule__Turn__DurationAssignment_3_0_1");
 					put(grammarAccess.getTurnAccess().getDegreesAssignment_3_1_0(), "rule__Turn__DegreesAssignment_3_1_0");
+					put(grammarAccess.getTurnAccess().getIsRandomAssignment_3_2(), "rule__Turn__IsRandomAssignment_3_2");
 					put(grammarAccess.getStopAccess().getDurationAssignment_2_1(), "rule__Stop__DurationAssignment_2_1");
 				}
 			};

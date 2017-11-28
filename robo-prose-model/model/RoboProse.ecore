@@ -26,30 +26,38 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction #//hasDuration">
+  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction #//hasDuration #//randomizable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
         eType="#//MOVE_DIRECTION" defaultValueLiteral="forwards"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="MOVE_DIRECTION">
-    <eLiterals name="FORWARDS" value="1" literal="forwards"/>
-    <eLiterals name="BACKWARDS" literal="backwards"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction #//hasDuration">
+  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction #//hasDuration #//randomizable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="degrees" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
         defaultValueLiteral="90.0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
         eType="#//TURN_DIRECTION" defaultValueLiteral="left"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="TURN_DIRECTION">
-    <eLiterals name="LEFT" value="1" literal="left"/>
-    <eLiterals name="RIGHT" literal="right"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="hasDuration" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
-        defaultValueLiteral="1.0"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Stop" eSuperTypes="#//Action #//hasDuration"/>
   <eClassifiers xsi:type="ecore:EClass" name="RotorAction" abstract="true" eSuperTypes="#//Action"/>
   <eClassifiers xsi:type="ecore:EClass" name="Obstacle" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Tapped" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="hasDuration" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        defaultValueLiteral="1.0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="randomizable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRandom" eType="#//RANDOM"
+        defaultValueLiteral="notRandom"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MOVE_DIRECTION">
+    <eLiterals name="FORWARDS" value="1" literal="forwards"/>
+    <eLiterals name="BACKWARDS" literal="backwards"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TURN_DIRECTION">
+    <eLiterals name="LEFT" value="1" literal="left"/>
+    <eLiterals name="RIGHT" literal="right"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RANDOM">
+    <eLiterals name="RANDOM" value="1" literal="random"/>
+    <eLiterals name="NOT_RANDOM" literal="notRandom"/>
+  </eClassifiers>
 </ecore:EPackage>

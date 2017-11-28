@@ -2,11 +2,13 @@
  */
 package dk.itu.dsl.roboprose.model.impl;
 
+import dk.itu.dsl.roboprose.model.RANDOM;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
 import dk.itu.dsl.roboprose.model.TURN_DIRECTION;
 import dk.itu.dsl.roboprose.model.Turn;
 import dk.itu.dsl.roboprose.model.hasDuration;
 
+import dk.itu.dsl.roboprose.model.randomizable;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -22,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#getDuration <em>Duration</em>}</li>
+ *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#getIsRandom <em>Is Random</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#getDegrees <em>Degrees</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#getDirection <em>Direction</em>}</li>
  * </ul>
@@ -48,6 +51,26 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 	 * @ordered
 	 */
 	protected float duration = DURATION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsRandom() <em>Is Random</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsRandom()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final RANDOM IS_RANDOM_EDEFAULT = RANDOM.NOT_RANDOM;
+
+	/**
+	 * The cached value of the '{@link #getIsRandom() <em>Is Random</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsRandom()
+	 * @generated
+	 * @ordered
+	 */
+	protected RANDOM isRandom = IS_RANDOM_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDegrees() <em>Degrees</em>}' attribute.
@@ -134,6 +157,27 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public RANDOM getIsRandom() {
+		return isRandom;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsRandom(RANDOM newIsRandom) {
+		RANDOM oldIsRandom = isRandom;
+		isRandom = newIsRandom == null ? IS_RANDOM_EDEFAULT : newIsRandom;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoboprosePackage.TURN__IS_RANDOM, oldIsRandom, isRandom));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public float getDegrees() {
 		return degrees;
 	}
@@ -181,6 +225,8 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 		switch (featureID) {
 			case RoboprosePackage.TURN__DURATION:
 				return getDuration();
+			case RoboprosePackage.TURN__IS_RANDOM:
+				return getIsRandom();
 			case RoboprosePackage.TURN__DEGREES:
 				return getDegrees();
 			case RoboprosePackage.TURN__DIRECTION:
@@ -199,6 +245,9 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 		switch (featureID) {
 			case RoboprosePackage.TURN__DURATION:
 				setDuration((Float)newValue);
+				return;
+			case RoboprosePackage.TURN__IS_RANDOM:
+				setIsRandom((RANDOM)newValue);
 				return;
 			case RoboprosePackage.TURN__DEGREES:
 				setDegrees((Float)newValue);
@@ -221,6 +270,9 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 			case RoboprosePackage.TURN__DURATION:
 				setDuration(DURATION_EDEFAULT);
 				return;
+			case RoboprosePackage.TURN__IS_RANDOM:
+				setIsRandom(IS_RANDOM_EDEFAULT);
+				return;
 			case RoboprosePackage.TURN__DEGREES:
 				setDegrees(DEGREES_EDEFAULT);
 				return;
@@ -241,6 +293,8 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 		switch (featureID) {
 			case RoboprosePackage.TURN__DURATION:
 				return duration != DURATION_EDEFAULT;
+			case RoboprosePackage.TURN__IS_RANDOM:
+				return isRandom != IS_RANDOM_EDEFAULT;
 			case RoboprosePackage.TURN__DEGREES:
 				return degrees != DEGREES_EDEFAULT;
 			case RoboprosePackage.TURN__DIRECTION:
@@ -262,6 +316,12 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 				default: return -1;
 			}
 		}
+		if (baseClass == randomizable.class) {
+			switch (derivedFeatureID) {
+				case RoboprosePackage.TURN__IS_RANDOM: return RoboprosePackage.RANDOMIZABLE__IS_RANDOM;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -275,6 +335,12 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 		if (baseClass == hasDuration.class) {
 			switch (baseFeatureID) {
 				case RoboprosePackage.HAS_DURATION__DURATION: return RoboprosePackage.TURN__DURATION;
+				default: return -1;
+			}
+		}
+		if (baseClass == randomizable.class) {
+			switch (baseFeatureID) {
+				case RoboprosePackage.RANDOMIZABLE__IS_RANDOM: return RoboprosePackage.TURN__IS_RANDOM;
 				default: return -1;
 			}
 		}
@@ -293,6 +359,8 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (duration: ");
 		result.append(duration);
+		result.append(", isRandom: ");
+		result.append(isRandom);
 		result.append(", degrees: ");
 		result.append(degrees);
 		result.append(", direction: ");

@@ -1,0 +1,9 @@
+Introduction, use stuff from first week.
+Probnlem analysis/Problem Statement.
+	Value Proposal
+Presentaion of language, by example
+	Also with graphs for report, video for presentation
+Discuss implementaion. Details.
+	Grammatic choices.
+Architecture of the entire tool chain.
+Qualitity Assurance.

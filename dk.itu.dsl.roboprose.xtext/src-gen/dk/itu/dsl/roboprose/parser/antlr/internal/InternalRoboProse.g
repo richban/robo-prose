@@ -676,33 +676,55 @@ ruleMove returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_3='for'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getMoveAccess().getForKeyword_3_0());
-			}
+			(
+				otherlv_3='for'
+				{
+					newLeafNode(otherlv_3, grammarAccess.getMoveAccess().getForKeyword_3_0_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getMoveAccess().getDurationEFloatParserRuleCall_3_0_1_0());
+						}
+						lv_duration_4_0=ruleEFloat
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getMoveRule());
+							}
+							set(
+								$current,
+								"duration",
+								lv_duration_4_0,
+								"dk.itu.dsl.roboprose.RoboProse.EFloat");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+				otherlv_5='seconds'
+				{
+					newLeafNode(otherlv_5, grammarAccess.getMoveAccess().getSecondsKeyword_3_0_2());
+				}
+			)
+			    |
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getMoveAccess().getDurationEFloatParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getMoveAccess().getIsRandomRANDOMEnumRuleCall_3_1_0());
 					}
-					lv_duration_4_0=ruleEFloat
+					lv_isRandom_6_0=ruleRANDOM
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getMoveRule());
 						}
 						set(
 							$current,
-							"duration",
-							lv_duration_4_0,
-							"dk.itu.dsl.roboprose.RoboProse.EFloat");
+							"isRandom",
+							lv_isRandom_6_0,
+							"dk.itu.dsl.roboprose.RoboProse.RANDOM");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_5='seconds'
-			{
-				newLeafNode(otherlv_5, grammarAccess.getMoveAccess().getSecondsKeyword_3_2());
-			}
 		)?
 	)
 ;
@@ -808,6 +830,26 @@ ruleTurn returns [EObject current=null]
 				{
 					newLeafNode(otherlv_7, grammarAccess.getTurnAccess().getDegreesKeyword_3_1_1());
 				}
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getTurnAccess().getIsRandomRANDOMEnumRuleCall_3_2_0());
+					}
+					lv_isRandom_8_0=ruleRANDOM
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getTurnRule());
+						}
+						set(
+							$current,
+							"isRandom",
+							lv_isRandom_8_0,
+							"dk.itu.dsl.roboprose.RoboProse.RANDOM");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
 		)?
 	)
@@ -1095,6 +1137,33 @@ ruleTURN_DIRECTION returns [Enumerator current=null]
 			{
 				$current = grammarAccess.getTURN_DIRECTIONAccess().getRIGHTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_1, grammarAccess.getTURN_DIRECTIONAccess().getRIGHTEnumLiteralDeclaration_1());
+			}
+		)
+	)
+;
+
+// Rule RANDOM
+ruleRANDOM returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='randomly'
+			{
+				$current = grammarAccess.getRANDOMAccess().getRANDOMEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getRANDOMAccess().getRANDOMEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='random'
+			{
+				$current = grammarAccess.getRANDOMAccess().getRANDOMEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getRANDOMAccess().getRANDOMEnumLiteralDeclaration_1());
 			}
 		)
 	)
