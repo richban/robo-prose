@@ -24,6 +24,8 @@
 'meets'=35
 'move'=26
 'obstacle'=37
+'random'=48
+'randomly'=47
 'right'=46
 'robot'=13
 'seconds'=28
@@ -76,3 +78,5 @@ T__43=43
 T__44=44
 T__45=45
 T__46=46
+T__47=47
+T__48=48

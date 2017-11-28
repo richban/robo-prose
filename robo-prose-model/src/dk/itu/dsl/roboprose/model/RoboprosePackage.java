@@ -305,7 +305,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRotorAction()
 	 * @generated
 	 */
-	int ROTOR_ACTION = 10;
+	int ROTOR_ACTION = 9;
 
 	/**
 	 * The number of structural features of the '<em>Rotor Action</em>' class.
@@ -345,13 +345,22 @@ public interface RoboprosePackage extends EPackage {
 	int MOVE__DURATION = ROTOR_ACTION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Random</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVE__IS_RANDOM = ROTOR_ACTION_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MOVE__DIRECTION = ROTOR_ACTION_FEATURE_COUNT + 1;
+	int MOVE__DIRECTION = ROTOR_ACTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Move</em>' class.
@@ -360,7 +369,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MOVE_FEATURE_COUNT = ROTOR_ACTION_FEATURE_COUNT + 2;
+	int MOVE_FEATURE_COUNT = ROTOR_ACTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Move</em>' class.
@@ -391,13 +400,22 @@ public interface RoboprosePackage extends EPackage {
 	int TURN__DURATION = ROTOR_ACTION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Random</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TURN__IS_RANDOM = ROTOR_ACTION_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Degrees</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TURN__DEGREES = ROTOR_ACTION_FEATURE_COUNT + 1;
+	int TURN__DEGREES = ROTOR_ACTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
@@ -406,7 +424,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TURN__DIRECTION = ROTOR_ACTION_FEATURE_COUNT + 2;
+	int TURN__DIRECTION = ROTOR_ACTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Turn</em>' class.
@@ -415,7 +433,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TURN_FEATURE_COUNT = ROTOR_ACTION_FEATURE_COUNT + 3;
+	int TURN_FEATURE_COUNT = ROTOR_ACTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Turn</em>' class.
@@ -434,34 +452,17 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#gethasDuration()
 	 * @generated
 	 */
-	int HAS_DURATION = 8;
+	int HAS_DURATION = 12;
 
 	/**
-	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.randomizableImpl <em>randomizable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.impl.randomizableImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getrandomizable()
 	 * @generated
-	 * @ordered
 	 */
-	int HAS_DURATION__DURATION = 0;
-
-	/**
-	 * The number of structural features of the '<em>has Duration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_DURATION_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>has Duration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_DURATION_OPERATION_COUNT = 0;
+	int RANDOMIZABLE = 13;
 
 	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.StopImpl <em>Stop</em>}' class.
@@ -471,7 +472,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getStop()
 	 * @generated
 	 */
-	int STOP = 9;
+	int STOP = 8;
 
 	/**
 	 * The feature id for the '<em><b>Duration</b></em>' attribute.
@@ -508,7 +509,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getObstacle()
 	 * @generated
 	 */
-	int OBSTACLE = 11;
+	int OBSTACLE = 10;
 
 	/**
 	 * The number of structural features of the '<em>Obstacle</em>' class.
@@ -536,7 +537,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTapped()
 	 * @generated
 	 */
-	int TAPPED = 12;
+	int TAPPED = 11;
 
 	/**
 	 * The number of structural features of the '<em>Tapped</em>' class.
@@ -557,6 +558,60 @@ public interface RoboprosePackage extends EPackage {
 	int TAPPED_OPERATION_COUNT = EVENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_DURATION__DURATION = 0;
+
+	/**
+	 * The number of structural features of the '<em>has Duration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_DURATION_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>has Duration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_DURATION_OPERATION_COUNT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Is Random</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOMIZABLE__IS_RANDOM = 0;
+
+	/**
+	 * The number of structural features of the '<em>randomizable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOMIZABLE_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>randomizable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOMIZABLE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.MOVE_DIRECTION <em>MOVE DIRECTION</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -564,7 +619,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getMOVE_DIRECTION()
 	 * @generated
 	 */
-	int MOVE_DIRECTION = 13;
+	int MOVE_DIRECTION = 14;
 
 	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.TURN_DIRECTION <em>TURN DIRECTION</em>}' enum.
@@ -574,7 +629,17 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTURN_DIRECTION()
 	 * @generated
 	 */
-	int TURN_DIRECTION = 14;
+	int TURN_DIRECTION = 15;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.RANDOM <em>RANDOM</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.RANDOM
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRANDOM()
+	 * @generated
+	 */
+	int RANDOM = 16;
 
 	/**
 	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Root <em>Root</em>}'.
@@ -799,6 +864,27 @@ public interface RoboprosePackage extends EPackage {
 	EAttribute gethasDuration_Duration();
 
 	/**
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.randomizable <em>randomizable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>randomizable</em>'.
+	 * @see dk.itu.dsl.roboprose.model.randomizable
+	 * @generated
+	 */
+	EClass getrandomizable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link dk.itu.dsl.roboprose.model.randomizable#getIsRandom <em>Is Random</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Random</em>'.
+	 * @see dk.itu.dsl.roboprose.model.randomizable#getIsRandom()
+	 * @see #getrandomizable()
+	 * @generated
+	 */
+	EAttribute getrandomizable_IsRandom();
+
+	/**
 	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Stop <em>Stop</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -857,6 +943,16 @@ public interface RoboprosePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getTURN_DIRECTION();
+
+	/**
+	 * Returns the meta object for enum '{@link dk.itu.dsl.roboprose.model.RANDOM <em>RANDOM</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>RANDOM</em>'.
+	 * @see dk.itu.dsl.roboprose.model.RANDOM
+	 * @generated
+	 */
+	EEnum getRANDOM();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1068,6 +1164,24 @@ public interface RoboprosePackage extends EPackage {
 		EAttribute HAS_DURATION__DURATION = eINSTANCE.gethasDuration_Duration();
 
 		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.randomizableImpl <em>randomizable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.impl.randomizableImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getrandomizable()
+		 * @generated
+		 */
+		EClass RANDOMIZABLE = eINSTANCE.getrandomizable();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Random</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RANDOMIZABLE__IS_RANDOM = eINSTANCE.getrandomizable_IsRandom();
+
+		/**
 		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.StopImpl <em>Stop</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1126,6 +1240,16 @@ public interface RoboprosePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TURN_DIRECTION = eINSTANCE.getTURN_DIRECTION();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.RANDOM <em>RANDOM</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.RANDOM
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRANDOM()
+		 * @generated
+		 */
+		EEnum RANDOM = eINSTANCE.getRANDOM();
 
 	}
 

@@ -107,6 +107,7 @@ public class RoboproseSwitch<T> extends Switch<T> {
 				T result = caseMove(move);
 				if (result == null) result = caseRotorAction(move);
 				if (result == null) result = casehasDuration(move);
+				if (result == null) result = caserandomizable(move);
 				if (result == null) result = caseAction(move);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -116,13 +117,8 @@ public class RoboproseSwitch<T> extends Switch<T> {
 				T result = caseTurn(turn);
 				if (result == null) result = caseRotorAction(turn);
 				if (result == null) result = casehasDuration(turn);
+				if (result == null) result = caserandomizable(turn);
 				if (result == null) result = caseAction(turn);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case RoboprosePackage.HAS_DURATION: {
-				hasDuration hasDuration = (hasDuration)theEObject;
-				T result = casehasDuration(hasDuration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -152,6 +148,18 @@ public class RoboproseSwitch<T> extends Switch<T> {
 				Tapped tapped = (Tapped)theEObject;
 				T result = caseTapped(tapped);
 				if (result == null) result = caseEvent(tapped);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.HAS_DURATION: {
+				hasDuration hasDuration = (hasDuration)theEObject;
+				T result = casehasDuration(hasDuration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.RANDOMIZABLE: {
+				randomizable randomizable = (randomizable)theEObject;
+				T result = caserandomizable(randomizable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -291,6 +299,21 @@ public class RoboproseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casehasDuration(hasDuration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>randomizable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>randomizable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caserandomizable(randomizable object) {
 		return null;
 	}
 
