@@ -33,8 +33,6 @@ public class RoboProseSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (ruleCall.getRule() == grammarAccess.getActionDelimiterRule())
 			return getActionDelimiterToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getParagraphDelimiterRule())
-			return getParagraphDelimiterToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getSublistenerDelimiterRule())
 			return getSublistenerDelimiterToken(semanticObject, ruleCall, node);
 		return "";
@@ -52,25 +50,14 @@ public class RoboProseSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 	
 	/**
-	 * ParagraphDelimiter:
-	 * 	'.' NEWLINE NEWLINE+
-	 * ;
-	 */
-	protected String getParagraphDelimiterToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return ".\n";
-	}
-	
-	/**
 	 * SublistenerDelimiter:
-	 * 	'.'
+	 * 	'.' 'And' 	
 	 * ;
 	 */
 	protected String getSublistenerDelimiterToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return ".";
+		return ".And";
 	}
 	
 	@Override

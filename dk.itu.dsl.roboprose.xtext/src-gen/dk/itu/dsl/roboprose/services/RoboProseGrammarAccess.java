@@ -30,78 +30,57 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.RoboProse");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRoboProseAction_0 = (Action)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cMyKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Keyword cRobotKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Keyword cShouldKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
-		private final Assignment cMainAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
-		private final RuleCall cMainMainParserRuleCall_1_3_0 = (RuleCall)cMainAssignment_1_3.eContents().get(0);
-		private final RuleCall cParagraphDelimiterParserRuleCall_1_4 = (RuleCall)cGroup_1.eContents().get(4);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Assignment cListenersAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cListenersEventListenerParserRuleCall_2_0_0 = (RuleCall)cListenersAssignment_2_0.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
-		private final RuleCall cParagraphDelimiterParserRuleCall_2_1_0 = (RuleCall)cGroup_2_1.eContents().get(0);
-		private final Assignment cListenersAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cListenersEventListenerParserRuleCall_2_1_1_0 = (RuleCall)cListenersAssignment_2_1_1.eContents().get(0);
-		private final Keyword cFullStopKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Keyword cMyKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cRobotKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cShouldKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cMainAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cMainMainParserRuleCall_4_0 = (RuleCall)cMainAssignment_4.eContents().get(0);
+		private final Keyword cFullStopKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Assignment cListenersAssignment_6_0 = (Assignment)cGroup_6.eContents().get(0);
+		private final RuleCall cListenersEventListenerParserRuleCall_6_0_0 = (RuleCall)cListenersAssignment_6_0.eContents().get(0);
+		private final Keyword cFullStopKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
 		
 		//RoboProse:
-		//	{RoboProse} ('My' 'robot' 'should' main=Main ParagraphDelimiter)? (listeners+=EventListener (ParagraphDelimiter
-		//	listeners+=EventListener)* '.')?;
+		//	{RoboProse}
+		//	'My' 'robot' 'should' main=Main '.' (listeners+=EventListener '.')*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{RoboProse} ('My' 'robot' 'should' main=Main ParagraphDelimiter)? (listeners+=EventListener (ParagraphDelimiter
-		//listeners+=EventListener)* '.')?
+		//{RoboProse} 'My' 'robot' 'should' main=Main '.' (listeners+=EventListener '.')*
 		public Group getGroup() { return cGroup; }
 		
 		//{RoboProse}
 		public Action getRoboProseAction_0() { return cRoboProseAction_0; }
 		
-		//('My' 'robot' 'should' main=Main ParagraphDelimiter)?
-		public Group getGroup_1() { return cGroup_1; }
-		
 		//'My'
-		public Keyword getMyKeyword_1_0() { return cMyKeyword_1_0; }
+		public Keyword getMyKeyword_1() { return cMyKeyword_1; }
 		
 		//'robot'
-		public Keyword getRobotKeyword_1_1() { return cRobotKeyword_1_1; }
+		public Keyword getRobotKeyword_2() { return cRobotKeyword_2; }
 		
 		//'should'
-		public Keyword getShouldKeyword_1_2() { return cShouldKeyword_1_2; }
+		public Keyword getShouldKeyword_3() { return cShouldKeyword_3; }
 		
 		//main=Main
-		public Assignment getMainAssignment_1_3() { return cMainAssignment_1_3; }
+		public Assignment getMainAssignment_4() { return cMainAssignment_4; }
 		
 		//Main
-		public RuleCall getMainMainParserRuleCall_1_3_0() { return cMainMainParserRuleCall_1_3_0; }
-		
-		//ParagraphDelimiter
-		public RuleCall getParagraphDelimiterParserRuleCall_1_4() { return cParagraphDelimiterParserRuleCall_1_4; }
-		
-		//(listeners+=EventListener (ParagraphDelimiter listeners+=EventListener)* '.')?
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//listeners+=EventListener
-		public Assignment getListenersAssignment_2_0() { return cListenersAssignment_2_0; }
-		
-		//EventListener
-		public RuleCall getListenersEventListenerParserRuleCall_2_0_0() { return cListenersEventListenerParserRuleCall_2_0_0; }
-		
-		//(ParagraphDelimiter listeners+=EventListener)*
-		public Group getGroup_2_1() { return cGroup_2_1; }
-		
-		//ParagraphDelimiter
-		public RuleCall getParagraphDelimiterParserRuleCall_2_1_0() { return cParagraphDelimiterParserRuleCall_2_1_0; }
-		
-		//listeners+=EventListener
-		public Assignment getListenersAssignment_2_1_1() { return cListenersAssignment_2_1_1; }
-		
-		//EventListener
-		public RuleCall getListenersEventListenerParserRuleCall_2_1_1_0() { return cListenersEventListenerParserRuleCall_2_1_1_0; }
+		public RuleCall getMainMainParserRuleCall_4_0() { return cMainMainParserRuleCall_4_0; }
 		
 		//'.'
-		public Keyword getFullStopKeyword_2_2() { return cFullStopKeyword_2_2; }
+		public Keyword getFullStopKeyword_5() { return cFullStopKeyword_5; }
+		
+		//(listeners+=EventListener '.')*
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//listeners+=EventListener
+		public Assignment getListenersAssignment_6_0() { return cListenersAssignment_6_0; }
+		
+		//EventListener
+		public RuleCall getListenersEventListenerParserRuleCall_6_0_0() { return cListenersEventListenerParserRuleCall_6_0_0; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_6_1() { return cFullStopKeyword_6_1; }
 	}
 	public class MainElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Main");
@@ -250,14 +229,22 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class SublistenerDelimiterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.SublistenerDelimiter");
-		private final Keyword cFullStopKeyword = (Keyword)rule.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cFullStopKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cAndKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//SublistenerDelimiter:
-		//	'.';
+		//	'.' 'And';
 		@Override public ParserRule getRule() { return rule; }
 		
+		//'.' 'And'
+		public Group getGroup() { return cGroup; }
+		
 		//'.'
-		public Keyword getFullStopKeyword() { return cFullStopKeyword; }
+		public Keyword getFullStopKeyword_0() { return cFullStopKeyword_0; }
+		
+		//'And'
+		public Keyword getAndKeyword_1() { return cAndKeyword_1; }
 	}
 	public class ActionDelimiterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.ActionDelimiter");
@@ -322,41 +309,19 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//"should"
 		public Keyword getShouldKeyword_1_1() { return cShouldKeyword_1_1; }
 	}
-	public class ParagraphDelimiterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.ParagraphDelimiter");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cFullStopKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cNEWLINETerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final RuleCall cNEWLINETerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
-		
-		//ParagraphDelimiter:
-		//	'.' NEWLINE NEWLINE+;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'.' NEWLINE NEWLINE+
-		public Group getGroup() { return cGroup; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_0() { return cFullStopKeyword_0; }
-		
-		//NEWLINE
-		public RuleCall getNEWLINETerminalRuleCall_1() { return cNEWLINETerminalRuleCall_1; }
-		
-		//NEWLINE+
-		public RuleCall getNEWLINETerminalRuleCall_2() { return cNEWLINETerminalRuleCall_2; }
-	}
 	public class ActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Action");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cMoveParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTurnParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cStopParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cRepeatParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//Action:
-		//	Move | Turn | Stop;
+		//	Move | Turn | Stop | Repeat;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Move | Turn | Stop
+		//Move | Turn | Stop | Repeat
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Move
@@ -367,6 +332,9 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Stop
 		public RuleCall getStopParserRuleCall_2() { return cStopParserRuleCall_2; }
+		
+		//Repeat
+		public RuleCall getRepeatParserRuleCall_3() { return cRepeatParserRuleCall_3; }
 	}
 	public class EventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Event");
@@ -562,6 +530,29 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'seconds'
 		public Keyword getSecondsKeyword_2_2() { return cSecondsKeyword_2_2; }
+	}
+	public class RepeatElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Repeat");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cRepeatAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cShouldRepeatAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cShouldRepeatSHOULD_REPEATEnumRuleCall_1_0 = (RuleCall)cShouldRepeatAssignment_1.eContents().get(0);
+		
+		//Repeat:
+		//	{Repeat} shouldRepeat=SHOULD_REPEAT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Repeat} shouldRepeat=SHOULD_REPEAT
+		public Group getGroup() { return cGroup; }
+		
+		//{Repeat}
+		public Action getRepeatAction_0() { return cRepeatAction_0; }
+		
+		//shouldRepeat=SHOULD_REPEAT
+		public Assignment getShouldRepeatAssignment_1() { return cShouldRepeatAssignment_1; }
+		
+		//SHOULD_REPEAT
+		public RuleCall getShouldRepeatSHOULD_REPEATEnumRuleCall_1_0() { return cShouldRepeatSHOULD_REPEATEnumRuleCall_1_0; }
 	}
 	public class EFloatElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.EFloat");
@@ -802,20 +793,33 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//'random'
 		public Keyword getRANDOMRandomKeyword_1_0() { return cRANDOMRandomKeyword_1_0; }
 	}
+	public class SHOULD_REPEATElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.SHOULD_REPEAT");
+		private final EnumLiteralDeclaration cDO_REPEATEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cDO_REPEATRepeatKeyword_0 = (Keyword)cDO_REPEATEnumLiteralDeclaration.eContents().get(0);
+		
+		//enum SHOULD_REPEAT:
+		//	DO_REPEAT='repeat';
+		public EnumRule getRule() { return rule; }
+		
+		//DO_REPEAT='repeat'
+		public EnumLiteralDeclaration getDO_REPEATEnumLiteralDeclaration() { return cDO_REPEATEnumLiteralDeclaration; }
+		
+		//'repeat'
+		public Keyword getDO_REPEATRepeatKeyword_0() { return cDO_REPEATRepeatKeyword_0; }
+	}
 	
 	private final RoboProseElements pRoboProse;
 	private final MainElements pMain;
 	private final EventListenerElements pEventListener;
 	private final SublistenerDelimiterElements pSublistenerDelimiter;
-	private final TerminalRule tWS;
-	private final TerminalRule tNEWLINE;
 	private final ActionDelimiterElements pActionDelimiter;
-	private final ParagraphDelimiterElements pParagraphDelimiter;
 	private final ActionElements pAction;
 	private final EventElements pEvent;
 	private final MoveElements pMove;
 	private final TurnElements pTurn;
 	private final StopElements pStop;
+	private final RepeatElements pRepeat;
 	private final EFloatElements pEFloat;
 	private final EBooleanElements pEBoolean;
 	private final EStringElements pEString;
@@ -824,6 +828,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	private final MOVE_DIRECTIONElements eMOVE_DIRECTION;
 	private final TURN_DIRECTIONElements eTURN_DIRECTION;
 	private final RANDOMElements eRANDOM;
+	private final SHOULD_REPEATElements eSHOULD_REPEAT;
 	
 	private final Grammar grammar;
 	
@@ -838,15 +843,13 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		this.pMain = new MainElements();
 		this.pEventListener = new EventListenerElements();
 		this.pSublistenerDelimiter = new SublistenerDelimiterElements();
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.WS");
-		this.tNEWLINE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.NEWLINE");
 		this.pActionDelimiter = new ActionDelimiterElements();
-		this.pParagraphDelimiter = new ParagraphDelimiterElements();
 		this.pAction = new ActionElements();
 		this.pEvent = new EventElements();
 		this.pMove = new MoveElements();
 		this.pTurn = new TurnElements();
 		this.pStop = new StopElements();
+		this.pRepeat = new RepeatElements();
 		this.pEFloat = new EFloatElements();
 		this.pEBoolean = new EBooleanElements();
 		this.pEString = new EStringElements();
@@ -855,6 +858,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		this.eMOVE_DIRECTION = new MOVE_DIRECTIONElements();
 		this.eTURN_DIRECTION = new TURN_DIRECTIONElements();
 		this.eRANDOM = new RANDOMElements();
+		this.eSHOULD_REPEAT = new SHOULD_REPEATElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -885,8 +889,8 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//RoboProse:
-	//	{RoboProse} ('My' 'robot' 'should' main=Main ParagraphDelimiter)? (listeners+=EventListener (ParagraphDelimiter
-	//	listeners+=EventListener)* '.')?;
+	//	{RoboProse}
+	//	'My' 'robot' 'should' main=Main '.' (listeners+=EventListener '.')*;
 	public RoboProseElements getRoboProseAccess() {
 		return pRoboProse;
 	}
@@ -918,25 +922,13 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SublistenerDelimiter:
-	//	'.';
+	//	'.' 'And';
 	public SublistenerDelimiterElements getSublistenerDelimiterAccess() {
 		return pSublistenerDelimiter;
 	}
 	
 	public ParserRule getSublistenerDelimiterRule() {
 		return getSublistenerDelimiterAccess().getRule();
-	}
-	
-	//@ Override terminal WS:
-	//	(' ' | '\t')+ NEWLINE?;
-	public TerminalRule getWSRule() {
-		return tWS;
-	}
-	
-	//terminal NEWLINE:
-	//	'\r'? '\n';
-	public TerminalRule getNEWLINERule() {
-		return tNEWLINE;
 	}
 	
 	//ActionDelimiter:
@@ -949,18 +941,8 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		return getActionDelimiterAccess().getRule();
 	}
 	
-	//ParagraphDelimiter:
-	//	'.' NEWLINE NEWLINE+;
-	public ParagraphDelimiterElements getParagraphDelimiterAccess() {
-		return pParagraphDelimiter;
-	}
-	
-	public ParserRule getParagraphDelimiterRule() {
-		return getParagraphDelimiterAccess().getRule();
-	}
-	
 	//Action:
-	//	Move | Turn | Stop;
+	//	Move | Turn | Stop | Repeat;
 	public ActionElements getActionAccess() {
 		return pAction;
 	}
@@ -1010,6 +992,16 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getStopRule() {
 		return getStopAccess().getRule();
+	}
+	
+	//Repeat:
+	//	{Repeat} shouldRepeat=SHOULD_REPEAT;
+	public RepeatElements getRepeatAccess() {
+		return pRepeat;
+	}
+	
+	public ParserRule getRepeatRule() {
+		return getRepeatAccess().getRule();
 	}
 	
 	//EFloat ecore::EFloat:
@@ -1094,6 +1086,16 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		return getRANDOMAccess().getRule();
 	}
 	
+	//enum SHOULD_REPEAT:
+	//	DO_REPEAT='repeat';
+	public SHOULD_REPEATElements getSHOULD_REPEATAccess() {
+		return eSHOULD_REPEAT;
+	}
+	
+	public EnumRule getSHOULD_REPEATRule() {
+		return getSHOULD_REPEATAccess().getRule();
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
@@ -1122,6 +1124,12 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
+	}
+	
+	//terminal WS:
+	//	' ' | '\t' | '\r' | '\n'+;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	}
 	
 	//terminal ANY_OTHER:

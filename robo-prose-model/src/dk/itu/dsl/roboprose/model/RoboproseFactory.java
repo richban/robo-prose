@@ -76,6 +76,15 @@ public interface RoboproseFactory extends EFactory {
 	Turn createTurn();
 
 	/**
+	 * Returns a new object of class '<em>Repeat</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Repeat</em>'.
+	 * @generated
+	 */
+	Repeat createRepeat();
+
+	/**
 	 * Returns a new object of class '<em>Stop</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

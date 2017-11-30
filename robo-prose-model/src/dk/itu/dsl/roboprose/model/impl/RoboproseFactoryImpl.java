@@ -60,10 +60,11 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 			case RoboprosePackage.ROOT: return createRoot();
 			case RoboprosePackage.ROBO_PROSE: return createRoboProse();
 			case RoboprosePackage.MAIN: return createMain();
-			case RoboprosePackage.EVENT_LISTENER: return createEventListener();
 			case RoboprosePackage.MOVE: return createMove();
 			case RoboprosePackage.TURN: return createTurn();
 			case RoboprosePackage.STOP: return createStop();
+			case RoboprosePackage.REPEAT: return createRepeat();
+			case RoboprosePackage.EVENT_LISTENER: return createEventListener();
 			case RoboprosePackage.OBSTACLE: return createObstacle();
 			case RoboprosePackage.TAPPED: return createTapped();
 			default:
@@ -83,6 +84,8 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 				return createMOVE_DIRECTIONFromString(eDataType, initialValue);
 			case RoboprosePackage.TURN_DIRECTION:
 				return createTURN_DIRECTIONFromString(eDataType, initialValue);
+			case RoboprosePackage.SHOULD_REPEAT:
+				return createSHOULD_REPEATFromString(eDataType, initialValue);
 			case RoboprosePackage.RANDOM:
 				return createRANDOMFromString(eDataType, initialValue);
 			default:
@@ -102,6 +105,8 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 				return convertMOVE_DIRECTIONToString(eDataType, instanceValue);
 			case RoboprosePackage.TURN_DIRECTION:
 				return convertTURN_DIRECTIONToString(eDataType, instanceValue);
+			case RoboprosePackage.SHOULD_REPEAT:
+				return convertSHOULD_REPEATToString(eDataType, instanceValue);
 			case RoboprosePackage.RANDOM:
 				return convertRANDOMToString(eDataType, instanceValue);
 			default:
@@ -174,6 +179,16 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Repeat createRepeat() {
+		RepeatImpl repeat = new RepeatImpl();
+		return repeat;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Stop createStop() {
 		StopImpl stop = new StopImpl();
 		return stop;
@@ -236,6 +251,26 @@ public class RoboproseFactoryImpl extends EFactoryImpl implements RoboproseFacto
 	 * @generated
 	 */
 	public String convertTURN_DIRECTIONToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SHOULD_REPEAT createSHOULD_REPEATFromString(EDataType eDataType, String initialValue) {
+		SHOULD_REPEAT result = SHOULD_REPEAT.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSHOULD_REPEATToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

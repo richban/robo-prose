@@ -8,6 +8,7 @@ import dk.itu.dsl.roboprose.model.EventListener;
 import dk.itu.dsl.roboprose.model.Main;
 import dk.itu.dsl.roboprose.model.Move;
 import dk.itu.dsl.roboprose.model.Obstacle;
+import dk.itu.dsl.roboprose.model.Repeat;
 import dk.itu.dsl.roboprose.model.RoboProse;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
 import dk.itu.dsl.roboprose.model.Stop;
@@ -21,7 +22,9 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -48,6 +51,9 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 				return; 
 			case RoboprosePackage.OBSTACLE:
 				sequence_Obstacle(context, (Obstacle) semanticObject); 
+				return; 
+			case RoboprosePackage.REPEAT:
+				sequence_Repeat(context, (Repeat) semanticObject); 
 				return; 
 			case RoboprosePackage.ROBO_PROSE:
 				sequence_RoboProse(context, (RoboProse) semanticObject); 
@@ -118,10 +124,29 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
+	 *     Action returns Repeat
+	 *     Repeat returns Repeat
+	 *
+	 * Constraint:
+	 *     shouldRepeat=SHOULD_REPEAT
+	 */
+	protected void sequence_Repeat(ISerializationContext context, Repeat semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RoboprosePackage.Literals.REPEAT__SHOULD_REPEAT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoboprosePackage.Literals.REPEAT__SHOULD_REPEAT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRepeatAccess().getShouldRepeatSHOULD_REPEATEnumRuleCall_1_0(), semanticObject.getShouldRepeat());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     RoboProse returns RoboProse
 	 *
 	 * Constraint:
-	 *     (main=Main? (listeners+=EventListener listeners+=EventListener*)?)
+	 *     (main=Main listeners+=EventListener*)
 	 */
 	protected void sequence_RoboProse(ISerializationContext context, RoboProse semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

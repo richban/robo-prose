@@ -1,0 +1,1 @@
+My robot should move forward. When it meets an obstacle it should move backwards for 10 seconds and then turn randomly.

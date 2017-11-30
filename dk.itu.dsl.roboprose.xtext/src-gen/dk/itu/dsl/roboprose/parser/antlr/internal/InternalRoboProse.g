@@ -84,51 +84,46 @@ ruleRoboProse returns [EObject current=null]
 					$current);
 			}
 		)
+		otherlv_1='My'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getRoboProseAccess().getMyKeyword_1());
+		}
+		otherlv_2='robot'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getRoboProseAccess().getRobotKeyword_2());
+		}
+		otherlv_3='should'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getRoboProseAccess().getShouldKeyword_3());
+		}
 		(
-			otherlv_1='My'
-			{
-				newLeafNode(otherlv_1, grammarAccess.getRoboProseAccess().getMyKeyword_1_0());
-			}
-			otherlv_2='robot'
-			{
-				newLeafNode(otherlv_2, grammarAccess.getRoboProseAccess().getRobotKeyword_1_1());
-			}
-			otherlv_3='should'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getRoboProseAccess().getShouldKeyword_1_2());
-			}
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getRoboProseAccess().getMainMainParserRuleCall_1_3_0());
+				{
+					newCompositeNode(grammarAccess.getRoboProseAccess().getMainMainParserRuleCall_4_0());
+				}
+				lv_main_4_0=ruleMain
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getRoboProseRule());
 					}
-					lv_main_4_0=ruleMain
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getRoboProseRule());
-						}
-						set(
-							$current,
-							"main",
-							lv_main_4_0,
-							"dk.itu.dsl.roboprose.RoboProse.Main");
-						afterParserOrEnumRuleCall();
-					}
-				)
+					set(
+						$current,
+						"main",
+						lv_main_4_0,
+						"dk.itu.dsl.roboprose.RoboProse.Main");
+					afterParserOrEnumRuleCall();
+				}
 			)
-			{
-				newCompositeNode(grammarAccess.getRoboProseAccess().getParagraphDelimiterParserRuleCall_1_4());
-			}
-			ruleParagraphDelimiter
-			{
-				afterParserOrEnumRuleCall();
-			}
-		)?
+		)
+		otherlv_5='.'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getRoboProseAccess().getFullStopKeyword_5());
+		}
 		(
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getRoboProseAccess().getListenersEventListenerParserRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getRoboProseAccess().getListenersEventListenerParserRuleCall_6_0_0());
 					}
 					lv_listeners_6_0=ruleEventListener
 					{
@@ -144,39 +139,11 @@ ruleRoboProse returns [EObject current=null]
 					}
 				)
 			)
-			(
-				{
-					newCompositeNode(grammarAccess.getRoboProseAccess().getParagraphDelimiterParserRuleCall_2_1_0());
-				}
-				ruleParagraphDelimiter
-				{
-					afterParserOrEnumRuleCall();
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getRoboProseAccess().getListenersEventListenerParserRuleCall_2_1_1_0());
-						}
-						lv_listeners_8_0=ruleEventListener
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getRoboProseRule());
-							}
-							add(
-								$current,
-								"listeners",
-								lv_listeners_8_0,
-								"dk.itu.dsl.roboprose.RoboProse.EventListener");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)*
-			otherlv_9='.'
+			otherlv_7='.'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getRoboProseAccess().getFullStopKeyword_2_2());
+				newLeafNode(otherlv_7, grammarAccess.getRoboProseAccess().getFullStopKeyword_6_1());
 			}
-		)?
+		)*
 	)
 ;
 
@@ -430,11 +397,18 @@ ruleSublistenerDelimiter returns [AntlrDatatypeRuleToken current=new AntlrDataty
 @after {
 	leaveRule();
 }:
-	kw='.'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getSublistenerDelimiterAccess().getFullStopKeyword());
-	}
+	(
+		kw='.'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getSublistenerDelimiterAccess().getFullStopKeyword_0());
+		}
+		kw='And'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getSublistenerDelimiterAccess().getAndKeyword_1());
+		}
+	)
 ;
 
 // Entry rule entryRuleActionDelimiter
@@ -508,46 +482,6 @@ ruleActionDelimiter returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRul
 	)
 ;
 
-// Entry rule entryRuleParagraphDelimiter
-entryRuleParagraphDelimiter returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getParagraphDelimiterRule()); }
-	iv_ruleParagraphDelimiter=ruleParagraphDelimiter
-	{ $current=$iv_ruleParagraphDelimiter.current.getText(); }
-	EOF;
-
-// Rule ParagraphDelimiter
-ruleParagraphDelimiter returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		kw='.'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getParagraphDelimiterAccess().getFullStopKeyword_0());
-		}
-		this_NEWLINE_1=RULE_NEWLINE
-		{
-			$current.merge(this_NEWLINE_1);
-		}
-		{
-			newLeafNode(this_NEWLINE_1, grammarAccess.getParagraphDelimiterAccess().getNEWLINETerminalRuleCall_1());
-		}
-		(
-			this_NEWLINE_2=RULE_NEWLINE
-			{
-				$current.merge(this_NEWLINE_2);
-			}
-			{
-				newLeafNode(this_NEWLINE_2, grammarAccess.getParagraphDelimiterAccess().getNEWLINETerminalRuleCall_2());
-			}
-		)+
-	)
-;
-
 // Entry rule entryRuleAction
 entryRuleAction returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getActionRule()); }
@@ -588,6 +522,15 @@ ruleAction returns [EObject current=null]
 		this_Stop_2=ruleStop
 		{
 			$current = $this_Stop_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getActionAccess().getRepeatParserRuleCall_3());
+		}
+		this_Repeat_3=ruleRepeat
+		{
+			$current = $this_Repeat_3.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -914,6 +857,51 @@ ruleStop returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleRepeat
+entryRuleRepeat returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRepeatRule()); }
+	iv_ruleRepeat=ruleRepeat
+	{ $current=$iv_ruleRepeat.current; }
+	EOF;
+
+// Rule Repeat
+ruleRepeat returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getRepeatAccess().getRepeatAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getRepeatAccess().getShouldRepeatSHOULD_REPEATEnumRuleCall_1_0());
+				}
+				lv_shouldRepeat_1_0=ruleSHOULD_REPEAT
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getRepeatRule());
+					}
+					set(
+						$current,
+						"shouldRepeat",
+						lv_shouldRepeat_1_0,
+						"dk.itu.dsl.roboprose.RoboProse.SHOULD_REPEAT");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
 // Entry rule entryRuleEFloat
 entryRuleEFloat returns [String current=null]:
 	{ newCompositeNode(grammarAccess.getEFloatRule()); }
@@ -1169,9 +1157,22 @@ ruleRANDOM returns [Enumerator current=null]
 	)
 ;
 
-RULE_WS : (' '|'\t')+ RULE_NEWLINE?;
-
-RULE_NEWLINE : '\r'? '\n';
+// Rule SHOULD_REPEAT
+ruleSHOULD_REPEAT returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		enumLiteral_0='repeat'
+		{
+			$current = grammarAccess.getSHOULD_REPEATAccess().getDO_REPEATEnumLiteralDeclaration().getEnumLiteral().getInstance();
+			newLeafNode(enumLiteral_0, grammarAccess.getSHOULD_REPEATAccess().getDO_REPEATEnumLiteralDeclaration());
+		}
+	)
+;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -1182,5 +1183,7 @@ RULE_STRING : ('"' ('\\' .|~(('\\'|'"')))* '"'|'\'' ('\\' .|~(('\\'|'\'')))* '\'
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;

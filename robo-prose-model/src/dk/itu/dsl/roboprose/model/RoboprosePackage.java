@@ -194,52 +194,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getEventListener()
 	 * @generated
 	 */
-	int EVENT_LISTENER = 3;
-
-	/**
-	 * The feature id for the '<em><b>Event</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_LISTENER__EVENT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_LISTENER__ACTIONS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Sublisteners</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_LISTENER__SUBLISTENERS = 2;
-
-	/**
-	 * The number of structural features of the '<em>Event Listener</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_LISTENER_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Event Listener</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_LISTENER_OPERATION_COUNT = 0;
+	int EVENT_LISTENER = 9;
 
 	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.EventImpl <em>Event</em>}' class.
@@ -249,25 +204,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getEvent()
 	 * @generated
 	 */
-	int EVENT = 4;
-
-	/**
-	 * The number of structural features of the '<em>Event</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_FEATURE_COUNT = 0;
-
-	/**
-	 * The number of operations of the '<em>Event</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_OPERATION_COUNT = 0;
+	int EVENT = 10;
 
 	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.ActionImpl <em>Action</em>}' class.
@@ -277,7 +214,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getAction()
 	 * @generated
 	 */
-	int ACTION = 5;
+	int ACTION = 3;
 
 	/**
 	 * The number of structural features of the '<em>Action</em>' class.
@@ -305,7 +242,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRotorAction()
 	 * @generated
 	 */
-	int ROTOR_ACTION = 9;
+	int ROTOR_ACTION = 4;
 
 	/**
 	 * The number of structural features of the '<em>Rotor Action</em>' class.
@@ -333,7 +270,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getMove()
 	 * @generated
 	 */
-	int MOVE = 6;
+	int MOVE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Duration</b></em>' attribute.
@@ -388,7 +325,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTurn()
 	 * @generated
 	 */
-	int TURN = 7;
+	int TURN = 6;
 
 	/**
 	 * The feature id for the '<em><b>Duration</b></em>' attribute.
@@ -445,6 +382,16 @@ public interface RoboprosePackage extends EPackage {
 	int TURN_OPERATION_COUNT = ROTOR_ACTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.RepeatImpl <em>Repeat</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.impl.RepeatImpl
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRepeat()
+	 * @generated
+	 */
+	int REPEAT = 8;
+
+	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.hasDurationImpl <em>has Duration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -452,7 +399,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#gethasDuration()
 	 * @generated
 	 */
-	int HAS_DURATION = 12;
+	int HAS_DURATION = 13;
 
 	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.randomizableImpl <em>randomizable</em>}' class.
@@ -462,7 +409,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getrandomizable()
 	 * @generated
 	 */
-	int RANDOMIZABLE = 13;
+	int RANDOMIZABLE = 14;
 
 	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.StopImpl <em>Stop</em>}' class.
@@ -472,7 +419,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getStop()
 	 * @generated
 	 */
-	int STOP = 8;
+	int STOP = 7;
 
 	/**
 	 * The feature id for the '<em><b>Duration</b></em>' attribute.
@@ -502,6 +449,96 @@ public interface RoboprosePackage extends EPackage {
 	int STOP_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Should Repeat</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPEAT__SHOULD_REPEAT = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Repeat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPEAT_FEATURE_COUNT = ACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Repeat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPEAT_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Event</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER__EVENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER__ACTIONS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Sublisteners</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER__SUBLISTENERS = 2;
+
+	/**
+	 * The number of structural features of the '<em>Event Listener</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Event Listener</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER_OPERATION_COUNT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.impl.ObstacleImpl <em>Obstacle</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -509,7 +546,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getObstacle()
 	 * @generated
 	 */
-	int OBSTACLE = 10;
+	int OBSTACLE = 11;
 
 	/**
 	 * The number of structural features of the '<em>Obstacle</em>' class.
@@ -537,7 +574,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTapped()
 	 * @generated
 	 */
-	int TAPPED = 11;
+	int TAPPED = 12;
 
 	/**
 	 * The number of structural features of the '<em>Tapped</em>' class.
@@ -619,7 +656,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getMOVE_DIRECTION()
 	 * @generated
 	 */
-	int MOVE_DIRECTION = 14;
+	int MOVE_DIRECTION = 15;
 
 	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.TURN_DIRECTION <em>TURN DIRECTION</em>}' enum.
@@ -629,7 +666,17 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getTURN_DIRECTION()
 	 * @generated
 	 */
-	int TURN_DIRECTION = 15;
+	int TURN_DIRECTION = 16;
+
+	/**
+	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.SHOULD_REPEAT <em>SHOULD REPEAT</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see dk.itu.dsl.roboprose.model.SHOULD_REPEAT
+	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getSHOULD_REPEAT()
+	 * @generated
+	 */
+	int SHOULD_REPEAT = 17;
 
 	/**
 	 * The meta object id for the '{@link dk.itu.dsl.roboprose.model.RANDOM <em>RANDOM</em>}' enum.
@@ -639,7 +686,7 @@ public interface RoboprosePackage extends EPackage {
 	 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRANDOM()
 	 * @generated
 	 */
-	int RANDOM = 16;
+	int RANDOM = 18;
 
 	/**
 	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Root <em>Root</em>}'.
@@ -843,6 +890,27 @@ public interface RoboprosePackage extends EPackage {
 	EAttribute getTurn_Direction();
 
 	/**
+	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.Repeat <em>Repeat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Repeat</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Repeat
+	 * @generated
+	 */
+	EClass getRepeat();
+
+	/**
+	 * Returns the meta object for the attribute '{@link dk.itu.dsl.roboprose.model.Repeat#getShouldRepeat <em>Should Repeat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Should Repeat</em>'.
+	 * @see dk.itu.dsl.roboprose.model.Repeat#getShouldRepeat()
+	 * @see #getRepeat()
+	 * @generated
+	 */
+	EAttribute getRepeat_ShouldRepeat();
+
+	/**
 	 * Returns the meta object for class '{@link dk.itu.dsl.roboprose.model.hasDuration <em>has Duration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -943,6 +1011,16 @@ public interface RoboprosePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getTURN_DIRECTION();
+
+	/**
+	 * Returns the meta object for enum '{@link dk.itu.dsl.roboprose.model.SHOULD_REPEAT <em>SHOULD REPEAT</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>SHOULD REPEAT</em>'.
+	 * @see dk.itu.dsl.roboprose.model.SHOULD_REPEAT
+	 * @generated
+	 */
+	EEnum getSHOULD_REPEAT();
 
 	/**
 	 * Returns the meta object for enum '{@link dk.itu.dsl.roboprose.model.RANDOM <em>RANDOM</em>}'.
@@ -1146,6 +1224,24 @@ public interface RoboprosePackage extends EPackage {
 		EAttribute TURN__DIRECTION = eINSTANCE.getTurn_Direction();
 
 		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.RepeatImpl <em>Repeat</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.impl.RepeatImpl
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getRepeat()
+		 * @generated
+		 */
+		EClass REPEAT = eINSTANCE.getRepeat();
+
+		/**
+		 * The meta object literal for the '<em><b>Should Repeat</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REPEAT__SHOULD_REPEAT = eINSTANCE.getRepeat_ShouldRepeat();
+
+		/**
 		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.impl.hasDurationImpl <em>has Duration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1240,6 +1336,16 @@ public interface RoboprosePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TURN_DIRECTION = eINSTANCE.getTURN_DIRECTION();
+
+		/**
+		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.SHOULD_REPEAT <em>SHOULD REPEAT</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see dk.itu.dsl.roboprose.model.SHOULD_REPEAT
+		 * @see dk.itu.dsl.roboprose.model.impl.RoboprosePackageImpl#getSHOULD_REPEAT()
+		 * @generated
+		 */
+		EEnum SHOULD_REPEAT = eINSTANCE.getSHOULD_REPEAT();
 
 		/**
 		 * The meta object literal for the '{@link dk.itu.dsl.roboprose.model.RANDOM <em>RANDOM</em>}' enum.

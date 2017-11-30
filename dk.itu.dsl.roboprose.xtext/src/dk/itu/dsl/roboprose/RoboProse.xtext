@@ -6,9 +6,9 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 RoboProse returns RoboProse:
 	{RoboProse}
-	('My' 'robot' 'should' main=Main ParagraphDelimiter)?
+	'My' 'robot' 'should' main=Main '.'
 	
-	(listeners+=EventListener (ParagraphDelimiter listeners+=EventListener)* '.')?
+	(listeners+=EventListener '.')*
 	;
 
 Main returns Main:
@@ -22,29 +22,16 @@ EventListener returns EventListener:
 	;
 
 SublistenerDelimiter:
-	'.'
+	'.' 'And' 	
 ;
 	
-@Override
-terminal WS: 
-    (' '|'\t')+ NEWLINE?
-    ;
-
-
-// New line on DOS or Unix 
-terminal NEWLINE:
-    '\r'? '\n';
-    
 ActionDelimiter:
-	(("and" "then") | ("," "then") | ("." "Then")) ("it" "should")?
+	(("and" "then") | ("," "and"? "then") | ("." "Then")) ("it" "should")?
 ;
 
-ParagraphDelimiter:
-	'.' NEWLINE NEWLINE+
-;
 	
 Action returns Action:
-	Move | Turn | Stop;
+	Move | Turn | Stop | Repeat;
 
 Event returns Event:
 	Obstacle | Tapped;
@@ -63,6 +50,12 @@ Stop returns Stop:
 	{Stop}
 	'stop' ('for' duration=EFloat 'seconds')?
 	;
+	
+Repeat returns Repeat:
+	{Repeat}
+	shouldRepeat=SHOULD_REPEAT
+	;
+
 
 EFloat returns ecore::EFloat:
 	'-'? INT? '.'? INT (('E'|'e') '-'? INT)?;
@@ -93,4 +86,8 @@ enum TURN_DIRECTION:
 
 enum RANDOM:
 	RANDOM='randomly' | RANDOM='random'
+;
+
+enum SHOULD_REPEAT:
+	DO_REPEAT='repeat'
 ;
