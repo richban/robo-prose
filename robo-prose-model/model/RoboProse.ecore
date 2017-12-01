@@ -15,6 +15,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Main">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
         upperBound="-1" eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ending" eType="#//Ending"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="RotorAction" abstract="true" eSuperTypes="#//Action"/>
@@ -29,15 +31,17 @@
         eType="#//TURN_DIRECTION" defaultValueLiteral="left"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Stop" eSuperTypes="#//Action #//hasDuration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="#//Action">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shouldRepeat" lowerBound="1"
-        eType="#//SHOULD_REPEAT" defaultValueLiteral="dontRepeat"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ending"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="#//Ending"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StartOver" eSuperTypes="#//Ending"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Wait" eSuperTypes="#//Ending"/>
   <eClassifiers xsi:type="ecore:EClass" name="EventListener">
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ending" eType="#//Ending"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sublisteners" upperBound="-1"
         eType="#//EventListener" containment="true"/>
   </eClassifiers>
@@ -49,8 +53,8 @@
         defaultValueLiteral="1.0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="randomizable" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRandom" eType="#//RANDOM"
-        defaultValueLiteral="notRandom"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRandom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MOVE_DIRECTION">
     <eLiterals name="FORWARDS" value="1" literal="forwards"/>
@@ -59,13 +63,5 @@
   <eClassifiers xsi:type="ecore:EEnum" name="TURN_DIRECTION">
     <eLiterals name="LEFT" value="1" literal="left"/>
     <eLiterals name="RIGHT" literal="right"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="SHOULD_REPEAT">
-    <eLiterals name="DONT_REPEAT" literal="dontRepeat"/>
-    <eLiterals name="DO_REPEAT" value="1" literal="doRepeat"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="RANDOM">
-    <eLiterals name="NOT_RANDOM" literal="notRandom"/>
-    <eLiterals name="RANDOM" value="1" literal="random"/>
   </eClassifiers>
 </ecore:EPackage>

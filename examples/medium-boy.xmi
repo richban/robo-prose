@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<roboprose:RoboProse xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roboprose="http://www.itu.dk/dsl/roboprose">
+  <main>
+    <actions xsi:type="roboprose:Move" duration="3.0"/>
+  </main>
+  <listeners>
+    <event xsi:type="roboprose:Obstacle"/>
+    <actions xsi:type="roboprose:Move" direction="backwards"/>
+    <actions xsi:type="roboprose:Turn" isRandom="true"/>
+  </listeners>
+  <listeners>
+    <event xsi:type="roboprose:Tapped"/>
+    <actions xsi:type="roboprose:Stop" duration="5.0"/>
+    <ending xsi:type="roboprose:StartOver"/>
+    <sublisteners>
+      <event xsi:type="roboprose:Tapped"/>
+      <actions xsi:type="roboprose:Turn" degrees="360.0"/>
+      <ending xsi:type="roboprose:StartOver"/>
+    </sublisteners>
+  </listeners>
+</roboprose:RoboProse>

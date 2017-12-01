@@ -22,17 +22,23 @@ public class RoboProseSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RoboProseGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_EventListener_WhenKeyword_0_0_or_WhenKeyword_0_1;
+	protected AbstractElementAlias match_Move_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1;
+	protected AbstractElementAlias match_Turn_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RoboProseGrammarAccess) access;
 		match_EventListener_WhenKeyword_0_0_or_WhenKeyword_0_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getEventListenerAccess().getWhenKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getEventListenerAccess().getWhenKeyword_0_1()));
+		match_Move_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getMoveAccess().getSecondKeyword_3_0_2_0()), new TokenAlias(false, false, grammarAccess.getMoveAccess().getSecondsKeyword_3_0_2_1()));
+		match_Turn_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getTurnAccess().getSecondKeyword_3_0_2_0()), new TokenAlias(false, false, grammarAccess.getTurnAccess().getSecondsKeyword_3_0_2_1()));
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (ruleCall.getRule() == grammarAccess.getActionDelimiterRule())
 			return getActionDelimiterToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getRANDOMRule())
+			return getRANDOMToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getSublistenerDelimiterRule())
 			return getSublistenerDelimiterToken(semanticObject, ruleCall, node);
 		return "";
@@ -40,13 +46,24 @@ public class RoboProseSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * ActionDelimiter:
-	 * 	(("and" "then") | ("," "then") | ("." "Then")) ("it" "should")?
+	 * 	(('and' 'then'?) | (',' 'and'? 'then'?) | ('.' 'Then')) ('it' 'should')?
 	 * ;
 	 */
 	protected String getActionDelimiterToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "andthen";
+		return "and";
+	}
+	
+	/**
+	 * RANDOM:
+	 * 	'randomly' | 'random'
+	 * 	;
+	 */
+	protected String getRANDOMToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "randomly";
 	}
 	
 	/**
@@ -68,6 +85,10 @@ public class RoboProseSyntacticSequencer extends AbstractSyntacticSequencer {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if (match_EventListener_WhenKeyword_0_0_or_WhenKeyword_0_1.equals(syntax))
 				emit_EventListener_WhenKeyword_0_0_or_WhenKeyword_0_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Move_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1.equals(syntax))
+				emit_Move_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Turn_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1.equals(syntax))
+				emit_Turn_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -80,6 +101,28 @@ public class RoboProseSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) 'it' event=Event
 	 */
 	protected void emit_EventListener_WhenKeyword_0_0_or_WhenKeyword_0_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'seconds' | 'second'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     duration=EFloat (ambiguity) (rule end)
+	 */
+	protected void emit_Move_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'second' | 'seconds'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     duration=EFloat (ambiguity) (rule end)
+	 */
+	protected void emit_Turn_SecondKeyword_3_0_2_0_or_SecondsKeyword_3_0_2_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

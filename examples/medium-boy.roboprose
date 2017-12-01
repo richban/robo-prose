@@ -1,0 +1,6 @@
+My robot should move forward for 3 seconds then turn 180 degrees and then repeat.
+
+When it meets an obstacle it should move backwards for 1 second and then turn randomly.
+
+When it is tapped it should stop for 5 seconds and then start over 
+(but when it is tapped it should turn 360 degrees and then start over) 

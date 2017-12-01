@@ -1,2 +1,2 @@
 My robot should move forward. 
-When it is tapped it should stop (but when it is tapped it should turn right 90 degrees).
+When it is tapped it should stop and wait (but when it is tapped it should turn right 90 degrees and then start over).
