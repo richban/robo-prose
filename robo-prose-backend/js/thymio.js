@@ -102,7 +102,6 @@ class ThymioDBus {
 
         return this.setLeftWheel(valueLeft)
             .concat(this.setRightWheel(valueRight));
-
     }
 
     startListening(eventFilter) {
@@ -136,7 +135,11 @@ class Thymio extends ThymioDBus {
     }
 
     dispatchEvent(eventName, eventData) {
-        this.listeners[eventName].subscribe();
+        this.mainSubscription.unsubscribe();
+        this.mainSubscription = this.listeners[eventName]
+            .concat(this.main)
+//            .do(res => console.log(`${ res } from ${ eventName }`))
+            .subscribe();
     }
 
     executeAction(action) {
@@ -168,9 +171,15 @@ class Thymio extends ThymioDBus {
             const asebaScript = broadcastEvents(this.name, eventNames);
 
             this.loadScript(asebaScript)
-                .concat(this.main)
                 .merge(this.listenTo(eventNames))
                 .subscribe();
+
+            this.mainSubscription = Observable.timer(50)
+                .concat(this.main)
+//                .do(res => console.log(`${ res } from main`))
+                .subscribe({
+                    complete: () => {this.main = Observable.empty()}
+                });
         }
     }
 
