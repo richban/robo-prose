@@ -32,6 +32,20 @@ object Main extends App {
             isSatisfied
         })
 
+    def checkInstances (instances: List[(String, Iterator[EObject])]) = {
+      val isValidInstanceLambda = isValidInstance _
+      val checker = isValidInstanceLambda(Constraints.invariants)
+
+      instances.forall(pair => {
+          val (fileName, entities) = pair
+          val isValidInstance = entities.forall(checker(fileName))
+
+          println(if (isValidInstance)
+              s"All constraints in ${fileName} are satisfied!"
+          else s"Some constraint in ${fileName} is violated!")
+          isValidInstance
+      })
+    }
     // register a resource factory for XMI files
     Resource.Factory.Registry.INSTANCE.
         getExtensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl)
@@ -64,16 +78,5 @@ object Main extends App {
         // http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/util/EcoreUtil.html#getAllProperContents%28org.eclipse.emf.ecore.resource.Resource,%20boolean%29
         .map(map2nd[String, Resource, Iterator[EObject]](EcoreUtil.getAllProperContents[EObject](_, false)))
 
-    val isValidInstanceLambda = isValidInstance _
-    val checker = isValidInstanceLambda(Constraints.invariants)
-
-    instances.forall(pair => {
-        val (fileName, entities) = pair
-        val isValidInstance = entities.forall(checker(fileName))
-
-        println(if (isValidInstance)
-            s"All constraints in ${fileName} are satisfied!"
-        else s"Some constraint in ${fileName} is violated!")
-        isValidInstance
-    })
+    checkInstances(instances)
 }
