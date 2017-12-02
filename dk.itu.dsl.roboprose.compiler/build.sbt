@@ -1,4 +1,6 @@
 // (c) mddbook, wasowski, tberger
+//import sbt._
+//import Dependencies._
 
 lazy val mdsebook = RootProject(uri("https://bitbucket.org/modelsteam/mdsebook.git"))
 
@@ -6,13 +8,16 @@ lazy val mdsebookLocalBase = SettingKey[File]("mdsebookLocalBase",
     "local base direcotry for mdsebook")
 mdsebookLocalBase := loadedBuild.value.units(mdsebook.build).localBase
 
-lazy val root = (project in file(".")).settings (
-
-  organization := "roboprose",
+lazy val root = (project in file("."))
+.settings (
+  inThisBuild(List(
+    organization := "dk.itu.dsl.roboprose",
+    scalaVersion := "2.12.3",
+    version      := "0.1.0-SNAPSHOT"
+  )),
   name := "dk.itu.dsl.roboprose.xtext.scala",
-  version := "0.03",
+  // version := "0.03",
   // stick to Scala version supported by Scala IDE
-  scalaVersion := "2.11.11",
   retrieveManaged := true,
   //EclipseKeys.relativizeLibs := true,
 
@@ -32,7 +37,7 @@ lazy val root = (project in file(".")).settings (
   unmanagedClasspath in Runtime += file(baseDirectory.value.getParent) / "dk.itu.dsl.roboprose.xtext/src-gen/",
 
   libraryDependencies += "org.eclipse.xtext" % "org.eclipse.xtext" % "2.12.0",
-  libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+  libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.4" % "test",
   // libraryDependencies += "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.0.0"
 ).
 dependsOn(mdsebook)
