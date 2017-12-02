@@ -13,9 +13,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-
 import dk.itu.dsl.roboprose.model.RoboprosePackage
-// import dk.itu.dsl.roboprose.xtext.FsmStandaloneSetup
 
 object Main extends App {
 

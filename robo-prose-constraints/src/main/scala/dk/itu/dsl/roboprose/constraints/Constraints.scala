@@ -10,6 +10,11 @@ object Constraints {
 
   def has[A] (a : => A) = Option(a).nonEmpty
 
+  def uniqueEvent (listeners: List[EventListener]): Boolean = {
+    listeners.map(l => l.getEvent.getClass.getSimpleName)
+      .groupBy(identity).forall( pair => pair._2.length == 1)
+  }
+
   val invariants: Map[String, Constraint] = Map (
 
       "Root must have at least one robot." -> inv[Root] {
@@ -30,22 +35,30 @@ object Constraints {
         },
 
       "Event can be type of Obstacle or Tapped"
-        -> inv[RoboProse] { self =>
-          self.getListeners.forall { l =>
-            l.getEvent.isInstanceOf[Obstacle] ||
-              l.getEvent.isInstanceOf[Tapped]
-          }
+        -> inv[Event] { self =>
+            self.isInstanceOf[Obstacle] ||
+              self.isInstanceOf[Tapped]
         },
 
-      "Acttion can be type of Move, Turn or Stop" -> inv[Main] {
-        self => self.getActions.forall { a =>
-          a.isInstanceOf[Move] || a.isInstanceOf[Turn] ||
-          a.isInstanceOf[Stop]
-        }
+      "Acttion can be type of Move, Turn or Stop" -> inv[Action] {
+        self => self.isInstanceOf[Move] || self.isInstanceOf[Turn] ||
+          self.isInstanceOf[Stop]
       },
 
-      "Acttion can be type of Move, Turn or Stop" -> inv[Move] {
-        self => self.getDirection.getValue
+      "Move action requires a duration" -> inv[Move] {
+        self => has(self.getDirection.getValue)
       },
-  )
+
+      "There should be no EventListeners for the same event on the top level"
+        ->
+          inv[RoboProse] {
+            self => uniqueEvent(self.getListeners.toList)
+          },
+
+      "There should be no EventListeners for the same event on the same level"
+        ->
+          inv[EventListener] {
+          self => uniqueEvent(self.getSublisteners.toList)
+        }
+      )
 }
