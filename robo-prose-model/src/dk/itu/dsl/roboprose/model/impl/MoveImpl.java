@@ -4,9 +4,11 @@ package dk.itu.dsl.roboprose.model.impl;
 
 import dk.itu.dsl.roboprose.model.MOVE_DIRECTION;
 import dk.itu.dsl.roboprose.model.Move;
+import dk.itu.dsl.roboprose.model.RANDOM;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
 import dk.itu.dsl.roboprose.model.hasDuration;
 
+import dk.itu.dsl.roboprose.model.randomizable;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -22,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.MoveImpl#getDuration <em>Duration</em>}</li>
+ *   <li>{@link dk.itu.dsl.roboprose.model.impl.MoveImpl#getIsRandom <em>Is Random</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.MoveImpl#getDirection <em>Direction</em>}</li>
  * </ul>
  *
@@ -47,6 +50,26 @@ public class MoveImpl extends RotorActionImpl implements Move {
 	 * @ordered
 	 */
 	protected float duration = DURATION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsRandom() <em>Is Random</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsRandom()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final RANDOM IS_RANDOM_EDEFAULT = RANDOM.NOT_RANDOM;
+
+	/**
+	 * The cached value of the '{@link #getIsRandom() <em>Is Random</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsRandom()
+	 * @generated
+	 * @ordered
+	 */
+	protected RANDOM isRandom = IS_RANDOM_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
@@ -113,6 +136,27 @@ public class MoveImpl extends RotorActionImpl implements Move {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public RANDOM getIsRandom() {
+		return isRandom;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsRandom(RANDOM newIsRandom) {
+		RANDOM oldIsRandom = isRandom;
+		isRandom = newIsRandom == null ? IS_RANDOM_EDEFAULT : newIsRandom;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoboprosePackage.MOVE__IS_RANDOM, oldIsRandom, isRandom));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public MOVE_DIRECTION getDirection() {
 		return direction;
 	}
@@ -139,6 +183,8 @@ public class MoveImpl extends RotorActionImpl implements Move {
 		switch (featureID) {
 			case RoboprosePackage.MOVE__DURATION:
 				return getDuration();
+			case RoboprosePackage.MOVE__IS_RANDOM:
+				return getIsRandom();
 			case RoboprosePackage.MOVE__DIRECTION:
 				return getDirection();
 		}
@@ -155,6 +201,9 @@ public class MoveImpl extends RotorActionImpl implements Move {
 		switch (featureID) {
 			case RoboprosePackage.MOVE__DURATION:
 				setDuration((Float)newValue);
+				return;
+			case RoboprosePackage.MOVE__IS_RANDOM:
+				setIsRandom((RANDOM)newValue);
 				return;
 			case RoboprosePackage.MOVE__DIRECTION:
 				setDirection((MOVE_DIRECTION)newValue);
@@ -174,6 +223,9 @@ public class MoveImpl extends RotorActionImpl implements Move {
 			case RoboprosePackage.MOVE__DURATION:
 				setDuration(DURATION_EDEFAULT);
 				return;
+			case RoboprosePackage.MOVE__IS_RANDOM:
+				setIsRandom(IS_RANDOM_EDEFAULT);
+				return;
 			case RoboprosePackage.MOVE__DIRECTION:
 				setDirection(DIRECTION_EDEFAULT);
 				return;
@@ -191,6 +243,8 @@ public class MoveImpl extends RotorActionImpl implements Move {
 		switch (featureID) {
 			case RoboprosePackage.MOVE__DURATION:
 				return duration != DURATION_EDEFAULT;
+			case RoboprosePackage.MOVE__IS_RANDOM:
+				return isRandom != IS_RANDOM_EDEFAULT;
 			case RoboprosePackage.MOVE__DIRECTION:
 				return direction != DIRECTION_EDEFAULT;
 		}
@@ -210,6 +264,12 @@ public class MoveImpl extends RotorActionImpl implements Move {
 				default: return -1;
 			}
 		}
+		if (baseClass == randomizable.class) {
+			switch (derivedFeatureID) {
+				case RoboprosePackage.MOVE__IS_RANDOM: return RoboprosePackage.RANDOMIZABLE__IS_RANDOM;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -223,6 +283,12 @@ public class MoveImpl extends RotorActionImpl implements Move {
 		if (baseClass == hasDuration.class) {
 			switch (baseFeatureID) {
 				case RoboprosePackage.HAS_DURATION__DURATION: return RoboprosePackage.MOVE__DURATION;
+				default: return -1;
+			}
+		}
+		if (baseClass == randomizable.class) {
+			switch (baseFeatureID) {
+				case RoboprosePackage.RANDOMIZABLE__IS_RANDOM: return RoboprosePackage.MOVE__IS_RANDOM;
 				default: return -1;
 			}
 		}
@@ -241,6 +307,8 @@ public class MoveImpl extends RotorActionImpl implements Move {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (duration: ");
 		result.append(duration);
+		result.append(", isRandom: ");
+		result.append(isRandom);
 		result.append(", direction: ");
 		result.append(direction);
 		result.append(')');

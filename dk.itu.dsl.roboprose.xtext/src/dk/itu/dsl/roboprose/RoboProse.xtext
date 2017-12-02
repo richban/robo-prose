@@ -51,12 +51,12 @@ Event returns Event:
 
 Move returns Move:
 	{Move}
-	'move' (direction=MOVE_DIRECTION)? ('for' duration=EFloat 'seconds')?
+	'move' (direction=MOVE_DIRECTION)? (('for' duration=EFloat 'seconds') | (isRandom=RANDOM))?
 	;
 
 Turn returns Turn:
 	{Turn}
-	'turn' (direction=TURN_DIRECTION)? (('for' duration=EFloat 'seconds') | (degrees=EFloat 'degrees'))?
+	'turn' (direction=TURN_DIRECTION)? (('for' duration=EFloat 'seconds') | (degrees=EFloat 'degrees') | (isRandom=RANDOM))?
 	;
 
 Stop returns Stop:
@@ -89,4 +89,8 @@ enum MOVE_DIRECTION:
 
 enum TURN_DIRECTION:
 	LEFT='left' | RIGHT='right'
+;
+
+enum RANDOM:
+	RANDOM='randomly' | RANDOM='random'
 ;

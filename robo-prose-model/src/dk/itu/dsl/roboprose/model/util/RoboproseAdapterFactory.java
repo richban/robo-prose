@@ -100,10 +100,6 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 				return createTurnAdapter();
 			}
 			@Override
-			public Adapter casehasDuration(hasDuration object) {
-				return createhasDurationAdapter();
-			}
-			@Override
 			public Adapter caseStop(Stop object) {
 				return createStopAdapter();
 			}
@@ -118,6 +114,14 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTapped(Tapped object) {
 				return createTappedAdapter();
+			}
+			@Override
+			public Adapter casehasDuration(hasDuration object) {
+				return createhasDurationAdapter();
+			}
+			@Override
+			public Adapter caserandomizable(randomizable object) {
+				return createrandomizableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -262,6 +266,20 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createhasDurationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.randomizable <em>randomizable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.randomizable
+	 * @generated
+	 */
+	public Adapter createrandomizableAdapter() {
 		return null;
 	}
 
