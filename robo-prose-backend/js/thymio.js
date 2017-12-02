@@ -84,7 +84,25 @@ class ThymioDBus {
     }
 
     set(variable, value) {
-        return this.networkCall('SetVariable', variable, value)
+        return this.networkCall('SetVariable', variable, value);
+    }
+
+    setLeftWheel(value) {
+        value = Array.isArray(value) ? value : [value];
+        return this.set('motor.left.target', value);
+    }
+
+    setRightWheel(value) {
+        value = Array.isArray(value) ? value : [value];
+        return this.set('motor.right.target', value);
+    }
+
+    setWheels(valueLeft, valueRight) {
+        valueRight = valueRight || valueLeft;
+
+        return this.setLeftWheel(valueLeft)
+            .concat(this.setRightWheel(valueRight));
+
     }
 
     startListening(eventFilter) {
@@ -97,9 +115,10 @@ class ThymioDBus {
 
 
 class Thymio extends ThymioDBus {
-    static makeAction(method, ...args) {
+    static makeAction(method, duration, ...args) {
         return {
             method,
+            duration,
             args
         };
     }
@@ -121,13 +140,15 @@ class Thymio extends ThymioDBus {
     }
 
     executeAction(action) {
-        return this[action.method].apply(this, action.args);
+        const actionObs = this[action.method].apply(this, action.args);
+        return !action.duration
+                ? actionObs
+                : actionObs.concat(Observable.timer(
+                        action.duration * 1000));
     }
 
     move(speed) {
-        const arg = [speed];
-        return this.set('motor.left.target', arg)
-            .concat(this.set('motor.right.target', arg))
+        return this.setWheels(speed);
     }
 
     moveBackward() {
@@ -148,13 +169,34 @@ class Thymio extends ThymioDBus {
 
             this.loadScript(asebaScript)
                 .concat(this.main)
-                .concat(this.listenTo(eventNames))
+                .merge(this.listenTo(eventNames))
                 .subscribe();
         }
     }
 
     stop() {
         return this.move(0);
+    }
+
+    turn(direction, degrees) {
+        if (direction === 'left') {
+            var speedLeft = -100;
+            var speedRight = 100;
+        }
+        else {
+            var speedLeft = 100;
+            var speedRight = -100;
+        }
+
+        return this.setWheels(speedLeft, speedRight);
+    }
+
+    turnLeft(degrees) {
+        return this.turn('left', degrees);
+    }
+
+    turnRight(degrees) {
+        return this.turn('right', degrees);
     }
 }
 

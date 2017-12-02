@@ -9,7 +9,15 @@
     <main>
       <actions
           xsi:type="roboprose:Move"
-          direction="backwards"/>
+          duration="2.0"/>
+      <actions
+          xsi:type="roboprose:Stop"
+          duration="2.0"/>
+      <actions
+          xsi:type="roboprose:Turn"
+          duration="2.0"/>
+      <actions
+          xsi:type="roboprose:Stop"/>
     </main>
     <listeners>
       <event

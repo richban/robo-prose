@@ -46,15 +46,26 @@ const makeThymio = contents => {
 const model2ThymioAction = action => {
     switch (action.eClass.values.name.toLowerCase()) {
         case 'move':
-            const directionClass = action.get('direction');
-            const direction = !directionClass
+            var directionClass = action.get('direction');
+            var direction = !directionClass
                         || directionClass.toLowerCase() !== 'backwards'
                     ? 'Forward'
                     : 'Backward';
-            return Thymio.makeAction(`move${ direction }`);
+            return Thymio.makeAction(`move${ direction }`,
+                action.get('duration'));
 
         case 'stop':
-            return Thymio.makeAction('stop');
+            return Thymio.makeAction('stop',
+                action.get('duration'));
+
+        case 'turn':
+            var directionClass = action.get('direction');
+            var direction = !directionClass
+                        || directionClass.toLowerCase() !== 'right'
+                            ? 'Left'
+                            : 'Right';
+            return Thymio.makeAction(`turn${ direction }`,
+                action.get('duration'));
     }
 };
 
