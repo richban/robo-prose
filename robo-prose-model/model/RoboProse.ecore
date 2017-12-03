@@ -2,8 +2,8 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://www.itu.dk/dsl/roboprose" nsPrefix="roboprose">
   <eClassifiers xsi:type="ecore:EClass" name="Root">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="robots" lowerBound="1"
-        upperBound="-1" eType="#//RoboProse" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="robot" lowerBound="1" eType="#//RoboProse"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
         eType="#//Event" containment="true"/>
   </eClassifiers>
@@ -12,12 +12,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="listeners" upperBound="-1"
         eType="#//EventListener" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Main">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
-        upperBound="-1" eType="#//Action" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ending" eType="#//Ending"
-        containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="#//ActionsList"/>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="RotorAction" abstract="true" eSuperTypes="#//Action"/>
   <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction #//hasDuration #//randomizable">
@@ -31,19 +26,14 @@
         eType="#//TURN_DIRECTION" defaultValueLiteral="left"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Stop" eSuperTypes="#//Action #//hasDuration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Ending"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ending" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="#//Ending"/>
   <eClassifiers xsi:type="ecore:EClass" name="StartOver" eSuperTypes="#//Ending"/>
   <eClassifiers xsi:type="ecore:EClass" name="Wait" eSuperTypes="#//Ending"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EventListener">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
-        eType="#//Action" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ending" eType="#//Ending"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventListener" eSuperTypes="#//ActionsList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sublisteners" upperBound="-1"
         eType="#//EventListener" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Obstacle" eSuperTypes="#//Event"/>
@@ -63,5 +53,11 @@
   <eClassifiers xsi:type="ecore:EEnum" name="TURN_DIRECTION">
     <eLiterals name="LEFT" value="1" literal="left"/>
     <eLiterals name="RIGHT" literal="right"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionsList" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
+        upperBound="-1" eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ending" lowerBound="1"
+        eType="#//Ending" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
