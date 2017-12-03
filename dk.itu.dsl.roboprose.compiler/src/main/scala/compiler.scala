@@ -36,10 +36,10 @@ object Compiler extends App {
   } else {
     instanceFileName = args(0)
   }
-  
+
 
   //Strip the extension and add .xmi
-  val preExtension = instanceFileName.lastIndexOf(".") 
+  val preExtension = instanceFileName.lastIndexOf(".")
   val outputFileName = instanceFileName.substring(0,preExtension)+".xmi"
 
 
@@ -62,10 +62,24 @@ object Compiler extends App {
 
   EcoreUtil.resolveAll(resource)
 
-  val xmiResource = new ResourceSetImpl().createResource(URI.createURI(outputFileName))
+  // Get Java Object Robot Instance
+  val robot = resource.getContents().get(0)
+  val constraintsPassed = Main.checkInstances(List((instanceFileName, robot)))
 
-  xmiResource.getContents().add(rb)
+  if (constraintsPassed) {
 
-  xmiResource.save(null)
+    val xmiResource = new ResourceSetImpl().createResource(URI.createURI(outputFileName))
+    
+    xmiResource.getContents().add(resource.getContents().get(0))
 
+    xmiResource.save(null)
+  }
+
+  // The call to get(0) below gives you the first model root.
+  // If you open a directory instead of a file,
+  // you can iterate over all models in it,
+  // by changing 0 to a suitable index
+  //val m: Root = resource.getContents.asInstanceOf[Root]
+
+  //println(m)
 }
