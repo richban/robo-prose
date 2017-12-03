@@ -80,16 +80,12 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 				return createMainAdapter();
 			}
 			@Override
-			public Adapter caseEventListener(EventListener object) {
-				return createEventListenerAdapter();
-			}
-			@Override
-			public Adapter caseEvent(Event object) {
-				return createEventAdapter();
-			}
-			@Override
 			public Adapter caseAction(Action object) {
 				return createActionAdapter();
+			}
+			@Override
+			public Adapter caseRotorAction(RotorAction object) {
+				return createRotorActionAdapter();
 			}
 			@Override
 			public Adapter caseMove(Move object) {
@@ -104,8 +100,28 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 				return createStopAdapter();
 			}
 			@Override
-			public Adapter caseRotorAction(RotorAction object) {
-				return createRotorActionAdapter();
+			public Adapter caseEnding(Ending object) {
+				return createEndingAdapter();
+			}
+			@Override
+			public Adapter caseRepeat(Repeat object) {
+				return createRepeatAdapter();
+			}
+			@Override
+			public Adapter caseStartOver(StartOver object) {
+				return createStartOverAdapter();
+			}
+			@Override
+			public Adapter caseWait(Wait object) {
+				return createWaitAdapter();
+			}
+			@Override
+			public Adapter caseEventListener(EventListener object) {
+				return createEventListenerAdapter();
+			}
+			@Override
+			public Adapter caseEvent(Event object) {
+				return createEventAdapter();
 			}
 			@Override
 			public Adapter caseObstacle(Obstacle object) {
@@ -256,6 +272,48 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.Repeat <em>Repeat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.Repeat
+	 * @generated
+	 */
+	public Adapter createRepeatAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.StartOver <em>Start Over</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.StartOver
+	 * @generated
+	 */
+	public Adapter createStartOverAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.Wait <em>Wait</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.Wait
+	 * @generated
+	 */
+	public Adapter createWaitAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.hasDuration <em>has Duration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -294,6 +352,20 @@ public class RoboproseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStopAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link dk.itu.dsl.roboprose.model.Ending <em>Ending</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see dk.itu.dsl.roboprose.model.Ending
+	 * @generated
+	 */
+	public Adapter createEndingAdapter() {
 		return null;
 	}
 

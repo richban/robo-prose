@@ -3,6 +3,7 @@
 package dk.itu.dsl.roboprose.model.impl;
 
 import dk.itu.dsl.roboprose.model.Action;
+import dk.itu.dsl.roboprose.model.Ending;
 import dk.itu.dsl.roboprose.model.Event;
 import dk.itu.dsl.roboprose.model.EventListener;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.EventListenerImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.EventListenerImpl#getActions <em>Actions</em>}</li>
+ *   <li>{@link dk.itu.dsl.roboprose.model.impl.EventListenerImpl#getEnding <em>Ending</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.EventListenerImpl#getSublisteners <em>Sublisteners</em>}</li>
  * </ul>
  *
@@ -58,6 +60,16 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 	 * @ordered
 	 */
 	protected EList<Action> actions;
+
+	/**
+	 * The cached value of the '{@link #getEnding() <em>Ending</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnding()
+	 * @generated
+	 * @ordered
+	 */
+	protected Ending ending;
 
 	/**
 	 * The cached value of the '{@link #getSublisteners() <em>Sublisteners</em>}' containment reference list.
@@ -148,6 +160,49 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Ending getEnding() {
+		return ending;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEnding(Ending newEnding, NotificationChain msgs) {
+		Ending oldEnding = ending;
+		ending = newEnding;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoboprosePackage.EVENT_LISTENER__ENDING, oldEnding, newEnding);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEnding(Ending newEnding) {
+		if (newEnding != ending) {
+			NotificationChain msgs = null;
+			if (ending != null)
+				msgs = ((InternalEObject)ending).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoboprosePackage.EVENT_LISTENER__ENDING, null, msgs);
+			if (newEnding != null)
+				msgs = ((InternalEObject)newEnding).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoboprosePackage.EVENT_LISTENER__ENDING, null, msgs);
+			msgs = basicSetEnding(newEnding, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoboprosePackage.EVENT_LISTENER__ENDING, newEnding, newEnding));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<EventListener> getSublisteners() {
 		if (sublisteners == null) {
 			sublisteners = new EObjectContainmentEList<EventListener>(EventListener.class, this, RoboprosePackage.EVENT_LISTENER__SUBLISTENERS);
@@ -167,6 +222,8 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 				return basicSetEvent(null, msgs);
 			case RoboprosePackage.EVENT_LISTENER__ACTIONS:
 				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
+			case RoboprosePackage.EVENT_LISTENER__ENDING:
+				return basicSetEnding(null, msgs);
 			case RoboprosePackage.EVENT_LISTENER__SUBLISTENERS:
 				return ((InternalEList<?>)getSublisteners()).basicRemove(otherEnd, msgs);
 		}
@@ -185,6 +242,8 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 				return getEvent();
 			case RoboprosePackage.EVENT_LISTENER__ACTIONS:
 				return getActions();
+			case RoboprosePackage.EVENT_LISTENER__ENDING:
+				return getEnding();
 			case RoboprosePackage.EVENT_LISTENER__SUBLISTENERS:
 				return getSublisteners();
 		}
@@ -206,6 +265,9 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 			case RoboprosePackage.EVENT_LISTENER__ACTIONS:
 				getActions().clear();
 				getActions().addAll((Collection<? extends Action>)newValue);
+				return;
+			case RoboprosePackage.EVENT_LISTENER__ENDING:
+				setEnding((Ending)newValue);
 				return;
 			case RoboprosePackage.EVENT_LISTENER__SUBLISTENERS:
 				getSublisteners().clear();
@@ -229,6 +291,9 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 			case RoboprosePackage.EVENT_LISTENER__ACTIONS:
 				getActions().clear();
 				return;
+			case RoboprosePackage.EVENT_LISTENER__ENDING:
+				setEnding((Ending)null);
+				return;
 			case RoboprosePackage.EVENT_LISTENER__SUBLISTENERS:
 				getSublisteners().clear();
 				return;
@@ -248,6 +313,8 @@ public class EventListenerImpl extends MinimalEObjectImpl.Container implements E
 				return event != null;
 			case RoboprosePackage.EVENT_LISTENER__ACTIONS:
 				return actions != null && !actions.isEmpty();
+			case RoboprosePackage.EVENT_LISTENER__ENDING:
+				return ending != null;
 			case RoboprosePackage.EVENT_LISTENER__SUBLISTENERS:
 				return sublisteners != null && !sublisteners.isEmpty();
 		}

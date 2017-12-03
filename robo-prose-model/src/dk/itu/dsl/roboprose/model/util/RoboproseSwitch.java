@@ -84,21 +84,16 @@ public class RoboproseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RoboprosePackage.EVENT_LISTENER: {
-				EventListener eventListener = (EventListener)theEObject;
-				T result = caseEventListener(eventListener);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case RoboprosePackage.EVENT: {
-				Event event = (Event)theEObject;
-				T result = caseEvent(event);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case RoboprosePackage.ACTION: {
 				Action action = (Action)theEObject;
 				T result = caseAction(action);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.ROTOR_ACTION: {
+				RotorAction rotorAction = (RotorAction)theEObject;
+				T result = caseRotorAction(rotorAction);
+				if (result == null) result = caseAction(rotorAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -130,10 +125,42 @@ public class RoboproseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RoboprosePackage.ROTOR_ACTION: {
-				RotorAction rotorAction = (RotorAction)theEObject;
-				T result = caseRotorAction(rotorAction);
-				if (result == null) result = caseAction(rotorAction);
+			case RoboprosePackage.ENDING: {
+				Ending ending = (Ending)theEObject;
+				T result = caseEnding(ending);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.REPEAT: {
+				Repeat repeat = (Repeat)theEObject;
+				T result = caseRepeat(repeat);
+				if (result == null) result = caseEnding(repeat);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.START_OVER: {
+				StartOver startOver = (StartOver)theEObject;
+				T result = caseStartOver(startOver);
+				if (result == null) result = caseEnding(startOver);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.WAIT: {
+				Wait wait = (Wait)theEObject;
+				T result = caseWait(wait);
+				if (result == null) result = caseEnding(wait);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.EVENT_LISTENER: {
+				EventListener eventListener = (EventListener)theEObject;
+				T result = caseEventListener(eventListener);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RoboprosePackage.EVENT: {
+				Event event = (Event)theEObject;
+				T result = caseEvent(event);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -288,6 +315,51 @@ public class RoboproseSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Repeat</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Repeat</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRepeat(Repeat object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Start Over</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Start Over</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStartOver(StartOver object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Wait</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Wait</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWait(Wait object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>has Duration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -329,6 +401,21 @@ public class RoboproseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStop(Stop object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ending</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ending</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnding(Ending object) {
 		return null;
 	}
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<roboprose:RoboProse xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roboprose="http://www.itu.dk/dsl/roboprose">
+  <main>
+    <actions xsi:type="roboprose:Move" duration="2.0" direction="backwards"/>
+    <actions xsi:type="roboprose:Turn"/>
+    <ending xsi:type="roboprose:Repeat"/>
+  </main>
+</roboprose:RoboProse>

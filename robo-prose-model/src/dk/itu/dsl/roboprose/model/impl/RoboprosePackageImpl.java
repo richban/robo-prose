@@ -3,20 +3,24 @@
 package dk.itu.dsl.roboprose.model.impl;
 
 import dk.itu.dsl.roboprose.model.Action;
+import dk.itu.dsl.roboprose.model.Ending;
 import dk.itu.dsl.roboprose.model.Event;
 import dk.itu.dsl.roboprose.model.EventListener;
 import dk.itu.dsl.roboprose.model.Main;
 import dk.itu.dsl.roboprose.model.Move;
 import dk.itu.dsl.roboprose.model.Obstacle;
+import dk.itu.dsl.roboprose.model.Repeat;
 import dk.itu.dsl.roboprose.model.RoboProse;
 import dk.itu.dsl.roboprose.model.RoboproseFactory;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
 import dk.itu.dsl.roboprose.model.Root;
 
 import dk.itu.dsl.roboprose.model.RotorAction;
+import dk.itu.dsl.roboprose.model.StartOver;
 import dk.itu.dsl.roboprose.model.Stop;
 import dk.itu.dsl.roboprose.model.Tapped;
 import dk.itu.dsl.roboprose.model.Turn;
+import dk.itu.dsl.roboprose.model.Wait;
 import dk.itu.dsl.roboprose.model.hasDuration;
 import dk.itu.dsl.roboprose.model.randomizable;
 import org.eclipse.emf.ecore.EAttribute;
@@ -95,6 +99,27 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass repeatEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass startOverEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass waitEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass hasDurationEClass = null;
 
 	/**
@@ -110,6 +135,13 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * @generated
 	 */
 	private EClass stopEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass endingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -145,13 +177,6 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * @generated
 	 */
 	private EEnum turN_DIRECTIONEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum randomEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -291,6 +316,15 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMain_Ending() {
+		return (EReference)mainEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEventListener() {
 		return eventListenerEClass;
 	}
@@ -318,8 +352,17 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEventListener_Sublisteners() {
+	public EReference getEventListener_Ending() {
 		return (EReference)eventListenerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEventListener_Sublisteners() {
+		return (EReference)eventListenerEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -390,6 +433,60 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRepeat() {
+		return repeatEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRepeat_ShouldRepeat() {
+		return (EAttribute)repeatEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStartOver() {
+		return startOverEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStartOver_ShouldStartOver() {
+		return (EAttribute)startOverEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWait() {
+		return waitEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWait_ShouldWait() {
+		return (EAttribute)waitEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass gethasDuration() {
 		return hasDurationEClass;
 	}
@@ -428,6 +525,15 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 */
 	public EClass getStop() {
 		return stopEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEnding() {
+		return endingEClass;
 	}
 
 	/**
@@ -480,15 +586,6 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getRANDOM() {
-		return randomEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public RoboproseFactory getRoboproseFactory() {
 		return (RoboproseFactory)getEFactoryInstance();
 	}
@@ -522,15 +619,11 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 
 		mainEClass = createEClass(MAIN);
 		createEReference(mainEClass, MAIN__ACTIONS);
-
-		eventListenerEClass = createEClass(EVENT_LISTENER);
-		createEReference(eventListenerEClass, EVENT_LISTENER__EVENT);
-		createEReference(eventListenerEClass, EVENT_LISTENER__ACTIONS);
-		createEReference(eventListenerEClass, EVENT_LISTENER__SUBLISTENERS);
-
-		eventEClass = createEClass(EVENT);
+		createEReference(mainEClass, MAIN__ENDING);
 
 		actionEClass = createEClass(ACTION);
+
+		rotorActionEClass = createEClass(ROTOR_ACTION);
 
 		moveEClass = createEClass(MOVE);
 		createEAttribute(moveEClass, MOVE__DIRECTION);
@@ -541,7 +634,24 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 
 		stopEClass = createEClass(STOP);
 
-		rotorActionEClass = createEClass(ROTOR_ACTION);
+		endingEClass = createEClass(ENDING);
+
+		repeatEClass = createEClass(REPEAT);
+		createEAttribute(repeatEClass, REPEAT__SHOULD_REPEAT);
+
+		startOverEClass = createEClass(START_OVER);
+		createEAttribute(startOverEClass, START_OVER__SHOULD_START_OVER);
+
+		waitEClass = createEClass(WAIT);
+		createEAttribute(waitEClass, WAIT__SHOULD_WAIT);
+
+		eventListenerEClass = createEClass(EVENT_LISTENER);
+		createEReference(eventListenerEClass, EVENT_LISTENER__EVENT);
+		createEReference(eventListenerEClass, EVENT_LISTENER__ACTIONS);
+		createEReference(eventListenerEClass, EVENT_LISTENER__ENDING);
+		createEReference(eventListenerEClass, EVENT_LISTENER__SUBLISTENERS);
+
+		eventEClass = createEClass(EVENT);
 
 		obstacleEClass = createEClass(OBSTACLE);
 
@@ -556,7 +666,6 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		// Create enums
 		movE_DIRECTIONEEnum = createEEnum(MOVE_DIRECTION);
 		turN_DIRECTIONEEnum = createEEnum(TURN_DIRECTION);
-		randomEEnum = createEEnum(RANDOM);
 	}
 
 	/**
@@ -587,6 +696,7 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		rotorActionEClass.getESuperTypes().add(this.getAction());
 		moveEClass.getESuperTypes().add(this.getRotorAction());
 		moveEClass.getESuperTypes().add(this.gethasDuration());
 		moveEClass.getESuperTypes().add(this.getrandomizable());
@@ -595,7 +705,9 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		turnEClass.getESuperTypes().add(this.getrandomizable());
 		stopEClass.getESuperTypes().add(this.getAction());
 		stopEClass.getESuperTypes().add(this.gethasDuration());
-		rotorActionEClass.getESuperTypes().add(this.getAction());
+		repeatEClass.getESuperTypes().add(this.getEnding());
+		startOverEClass.getESuperTypes().add(this.getEnding());
+		waitEClass.getESuperTypes().add(this.getEnding());
 		obstacleEClass.getESuperTypes().add(this.getEvent());
 		tappedEClass.getESuperTypes().add(this.getEvent());
 
@@ -610,15 +722,11 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 
 		initEClass(mainEClass, Main.class, "Main", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMain_Actions(), this.getAction(), null, "actions", null, 1, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eventListenerEClass, EventListener.class, "EventListener", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventListener_Event(), this.getEvent(), null, "event", null, 1, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEventListener_Actions(), this.getAction(), null, "actions", null, 0, -1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEventListener_Sublisteners(), this.getEventListener(), null, "sublisteners", null, 0, -1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMain_Ending(), this.getEnding(), null, "ending", null, 0, 1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actionEClass, Action.class, "Action", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(rotorActionEClass, RotorAction.class, "RotorAction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(moveEClass, Move.class, "Move", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMove_Direction(), this.getMOVE_DIRECTION(), "direction", "forwards", 1, 1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -629,7 +737,24 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 
 		initEClass(stopEClass, Stop.class, "Stop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(rotorActionEClass, RotorAction.class, "RotorAction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(endingEClass, Ending.class, "Ending", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(repeatEClass, Repeat.class, "Repeat", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRepeat_ShouldRepeat(), ecorePackage.getEBoolean(), "shouldRepeat", "false", 1, 1, Repeat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(startOverEClass, StartOver.class, "StartOver", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStartOver_ShouldStartOver(), ecorePackage.getEBoolean(), "shouldStartOver", "false", 0, 1, StartOver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(waitEClass, Wait.class, "Wait", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getWait_ShouldWait(), ecorePackage.getEBoolean(), "shouldWait", "false", 0, 1, Wait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eventListenerEClass, EventListener.class, "EventListener", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEventListener_Event(), this.getEvent(), null, "event", null, 1, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEventListener_Actions(), this.getAction(), null, "actions", null, 0, -1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEventListener_Ending(), this.getEnding(), null, "ending", null, 0, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEventListener_Sublisteners(), this.getEventListener(), null, "sublisteners", null, 0, -1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(obstacleEClass, Obstacle.class, "Obstacle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -639,7 +764,7 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		initEAttribute(gethasDuration_Duration(), ecorePackage.getEFloat(), "duration", "1.0", 0, 1, hasDuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(randomizableEClass, randomizable.class, "randomizable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getrandomizable_IsRandom(), this.getRANDOM(), "isRandom", "notRandom", 0, 1, randomizable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getrandomizable_IsRandom(), ecorePackage.getEBoolean(), "isRandom", "false", 0, 1, randomizable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(movE_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.MOVE_DIRECTION.class, "MOVE_DIRECTION");
@@ -649,10 +774,6 @@ public class RoboprosePackageImpl extends EPackageImpl implements RoboprosePacka
 		initEEnum(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.class, "TURN_DIRECTION");
 		addEEnumLiteral(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.LEFT);
 		addEEnumLiteral(turN_DIRECTIONEEnum, dk.itu.dsl.roboprose.model.TURN_DIRECTION.RIGHT);
-
-		initEEnum(randomEEnum, dk.itu.dsl.roboprose.model.RANDOM.class, "RANDOM");
-		addEEnumLiteral(randomEEnum, dk.itu.dsl.roboprose.model.RANDOM.RANDOM);
-		addEEnumLiteral(randomEEnum, dk.itu.dsl.roboprose.model.RANDOM.NOT_RANDOM);
 
 		// Create resource
 		createResource(eNS_URI);

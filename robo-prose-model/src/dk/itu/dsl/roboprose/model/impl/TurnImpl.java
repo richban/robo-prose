@@ -2,7 +2,6 @@
  */
 package dk.itu.dsl.roboprose.model.impl;
 
-import dk.itu.dsl.roboprose.model.RANDOM;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
 import dk.itu.dsl.roboprose.model.TURN_DIRECTION;
 import dk.itu.dsl.roboprose.model.Turn;
@@ -24,7 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#getDuration <em>Duration</em>}</li>
- *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#getIsRandom <em>Is Random</em>}</li>
+ *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#isIsRandom <em>Is Random</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#getDegrees <em>Degrees</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.TurnImpl#getDirection <em>Direction</em>}</li>
  * </ul>
@@ -53,24 +52,24 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 	protected float duration = DURATION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIsRandom() <em>Is Random</em>}' attribute.
+	 * The default value of the '{@link #isIsRandom() <em>Is Random</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsRandom()
+	 * @see #isIsRandom()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final RANDOM IS_RANDOM_EDEFAULT = RANDOM.NOT_RANDOM;
+	protected static final boolean IS_RANDOM_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #getIsRandom() <em>Is Random</em>}' attribute.
+	 * The cached value of the '{@link #isIsRandom() <em>Is Random</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsRandom()
+	 * @see #isIsRandom()
 	 * @generated
 	 * @ordered
 	 */
-	protected RANDOM isRandom = IS_RANDOM_EDEFAULT;
+	protected boolean isRandom = IS_RANDOM_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDegrees() <em>Degrees</em>}' attribute.
@@ -157,7 +156,7 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RANDOM getIsRandom() {
+	public boolean isIsRandom() {
 		return isRandom;
 	}
 
@@ -166,9 +165,9 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsRandom(RANDOM newIsRandom) {
-		RANDOM oldIsRandom = isRandom;
-		isRandom = newIsRandom == null ? IS_RANDOM_EDEFAULT : newIsRandom;
+	public void setIsRandom(boolean newIsRandom) {
+		boolean oldIsRandom = isRandom;
+		isRandom = newIsRandom;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RoboprosePackage.TURN__IS_RANDOM, oldIsRandom, isRandom));
 	}
@@ -226,7 +225,7 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 			case RoboprosePackage.TURN__DURATION:
 				return getDuration();
 			case RoboprosePackage.TURN__IS_RANDOM:
-				return getIsRandom();
+				return isIsRandom();
 			case RoboprosePackage.TURN__DEGREES:
 				return getDegrees();
 			case RoboprosePackage.TURN__DIRECTION:
@@ -247,7 +246,7 @@ public class TurnImpl extends RotorActionImpl implements Turn {
 				setDuration((Float)newValue);
 				return;
 			case RoboprosePackage.TURN__IS_RANDOM:
-				setIsRandom((RANDOM)newValue);
+				setIsRandom((Boolean)newValue);
 				return;
 			case RoboprosePackage.TURN__DEGREES:
 				setDegrees((Float)newValue);

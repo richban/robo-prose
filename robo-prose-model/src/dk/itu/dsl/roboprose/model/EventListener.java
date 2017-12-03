@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link dk.itu.dsl.roboprose.model.EventListener#getEvent <em>Event</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.EventListener#getActions <em>Actions</em>}</li>
+ *   <li>{@link dk.itu.dsl.roboprose.model.EventListener#getEnding <em>Ending</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.EventListener#getSublisteners <em>Sublisteners</em>}</li>
  * </ul>
  *
@@ -66,6 +67,32 @@ public interface EventListener extends EObject {
 	 * @generated
 	 */
 	EList<Action> getActions();
+
+	/**
+	 * Returns the value of the '<em><b>Ending</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ending</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ending</em>' containment reference.
+	 * @see #setEnding(Ending)
+	 * @see dk.itu.dsl.roboprose.model.RoboprosePackage#getEventListener_Ending()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Ending getEnding();
+
+	/**
+	 * Sets the value of the '{@link dk.itu.dsl.roboprose.model.EventListener#getEnding <em>Ending</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ending</em>' containment reference.
+	 * @see #getEnding()
+	 * @generated
+	 */
+	void setEnding(Ending value);
 
 	/**
 	 * Returns the value of the '<em><b>Sublisteners</b></em>' containment reference list.
