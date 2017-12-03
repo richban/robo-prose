@@ -51,14 +51,14 @@ class ThymioDBus {
                        : parseInt(value))
     }
 
-    listenTo(events) {
+    filterEvents(events) {
         return this.eventFilter
-               .concatMap(eventFilter =>
+               .mergeMap(eventFilter =>
                    Observable.from(events)
-                         .concatMap(eventName =>
+                         .mergeMap(eventName =>
                              ThymioDBus.bindMethod(eventFilter,
                                     'ListenEventName', eventName))
-                         .concat(this.startListening(eventFilter))
+                         .concat(Observable.of(eventFilter))
                );
     }
 
@@ -105,9 +105,10 @@ class ThymioDBus {
     }
 
     startListening(eventFilter) {
+        console.log(eventFilter)
         return Observable.fromEvent(eventFilter, 'Event',
                     (eventId, eventName, eventData) => [eventName, eventData])
-             .do(([eventName, eventData]) =>
+             .map(([eventName, eventData]) =>
                  this.dispatchEvent(eventName, eventData));
     }
 }
@@ -135,11 +136,8 @@ class Thymio extends ThymioDBus {
     }
 
     dispatchEvent(eventName, eventData) {
-        this.mainSubscription.unsubscribe();
-        this.mainSubscription = this.listeners[eventName]
-            .concat(this.main)
-//            .do(res => console.log(`${ res } from ${ eventName }`))
-            .subscribe();
+        console.log(eventName);
+        return this.listeners[eventName];
     }
 
     executeAction(action) {
@@ -171,15 +169,14 @@ class Thymio extends ThymioDBus {
             const asebaScript = broadcastEvents(this.name, eventNames);
 
             this.loadScript(asebaScript)
-                .merge(this.listenTo(eventNames))
+                .concat(this.filterEvents(eventNames))
+                .last()
+                .concatMap(eventFilter =>
+                    this.startListening(eventFilter)
+                        .startWith(this.main)
+                        .switch()
+                )
                 .subscribe();
-
-            this.mainSubscription = Observable.timer(50)
-                .concat(this.main)
-//                .do(res => console.log(`${ res } from main`))
-                .subscribe({
-                    complete: () => {this.main = Observable.empty()}
-                });
         }
     }
 
