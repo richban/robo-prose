@@ -17,7 +17,7 @@ Main returns Main:
 	;
 
 EventListener returns EventListener:
-	('When' | 'when') 'it' event=Event 'it' 'should' 
+	('When' | 'when') 'it' event=[Event] 'it' 'should' 
 	actions+=Action ( ActionDelimiter actions+=Action)*
 	( ActionDelimiter ending = Ending)?
 	( '(' 'but' sublisteners+=EventListener ( SublistenerDelimiter sublisteners+=EventListener)* ')')?

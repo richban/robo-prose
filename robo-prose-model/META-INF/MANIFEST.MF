@@ -7,16 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: dk.itu.dsl.roboprose.roboprose,
- dk.itu.dsl.roboprose.roboprose.impl,
- dk.itu.dsl.roboprose.roboprose.util,
- dk.itu.dsl.roboprose.model.roboprose,
- dk.itu.dsl.roboprose.model.roboprose.impl,
- dk.itu.dsl.roboprose.model.roboprose.util,
- dk.itu.dsl.roboprose.model.model,
- dk.itu.dsl.roboprose.model.model.impl,
- dk.itu.dsl.roboprose.model.model.util,
- dk.itu.dsl.roboprose.model,
+Export-Package: dk.itu.dsl.roboprose.model,
  dk.itu.dsl.roboprose.model.impl,
  dk.itu.dsl.roboprose.model.util
 Require-Bundle: org.eclipse.core.runtime,

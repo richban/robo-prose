@@ -18,7 +18,7 @@ object Constraints {
   val invariants: Map[String, Constraint] = Map (
 
       "Root must have at least one robot." -> inv[Root] {
-          self => self.getRobots != null },
+          self => self.getRobot != null },
 
       "RoboProse requires a main" -> inv[RoboProse] {
         self => self.getMain != null },
