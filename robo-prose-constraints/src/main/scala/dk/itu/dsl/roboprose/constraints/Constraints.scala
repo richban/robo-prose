@@ -7,10 +7,7 @@ import mdsebook.scala.EMFScala._
 import dk.itu.dsl.roboprose.model._
 
 object Constraints {
-<<<<<<< HEAD
-=======
 
->>>>>>> contraints
   def has[A] (a : => A) = Option(a).nonEmpty
 
   def uniqueEvent (listeners: List[EventListener]): Boolean = {
@@ -57,7 +54,7 @@ object Constraints {
           inv[RoboProse] {
             self => uniqueEvent(self.getListeners.toList)
           },
-
+ 
       "There should be no EventListeners for the same event on the same level"
         ->
           inv[EventListener] {
