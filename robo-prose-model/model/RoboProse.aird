@@ -779,9 +779,9 @@
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_eH4JQMPMEeePVPUTQJw95g" name="hasDuration" tooltipText="" incomingEdges="_ss1ngMPMEeePVPUTQJw95g _wK7fAMPMEeePVPUTQJw95g _3N6SMMPPEeePVPUTQJw95g" width="12" height="10">
-      <target xmi:type="ecore:EClass" href="RoboProse.ecore#//hasDuration"/>
-      <semanticElements xmi:type="ecore:EClass" href="RoboProse.ecore#//hasDuration"/>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_eH4JQMPMEeePVPUTQJw95g" name="ContinuosAction" tooltipText="" incomingEdges="_ss1ngMPMEeePVPUTQJw95g _wK7fAMPMEeePVPUTQJw95g _3N6SMMPPEeePVPUTQJw95g" width="12" height="10">
+      <target xmi:type="ecore:EClass" href="RoboProse.ecore#//ContinuosAction"/>
+      <semanticElements xmi:type="ecore:EClass" href="RoboProse.ecore#//ContinuosAction"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -791,8 +791,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_lqEIUMPMEeePVPUTQJw95g" name="duration : EFloat = 1.0" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="RoboProse.ecore#//hasDuration/duration"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="RoboProse.ecore#//hasDuration/duration"/>
+        <target xmi:type="ecore:EAttribute" href="RoboProse.ecore#//ContinuosAction/duration"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="RoboProse.ecore#//ContinuosAction/duration"/>
         <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_oZlpocPMEeePVPUTQJw95g" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
         </ownedStyle>
