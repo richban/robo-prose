@@ -54,8 +54,8 @@ object Constraints {
           inv[RoboProse] {
             self => uniqueEvent(self.getListeners.toList)
           },
- 
-      "There should be no EventListeners for the same event on the same level"
+
+      "There should be no SubListeners for the same event on the same level"
         ->
           inv[EventListener] {
           self => uniqueEvent(self.getSublisteners.toList)
