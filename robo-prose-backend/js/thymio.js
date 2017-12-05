@@ -105,7 +105,6 @@ class ThymioDBus {
     }
 
     startListening(eventFilter) {
-        console.log(eventFilter)
         return Observable.fromEvent(eventFilter, 'Event',
                     (eventId, eventName, eventData) => [eventName, eventData])
              .map(([eventName, eventData]) =>
@@ -113,7 +112,8 @@ class ThymioDBus {
     }
 }
 
-
+const BASE_SPEED = 500;
+const TURN_RADIUS = 4.5; // half wheel distance
 class Thymio extends ThymioDBus {
     static makeAction(method, duration, ...args) {
         return {
@@ -153,11 +153,11 @@ class Thymio extends ThymioDBus {
     }
 
     moveBackward() {
-        return this.move(-200);
+        return this.move(-BASE_SPEED);
     }
 
     moveForward() {
-        return this.move(200);
+        return this.move(BASE_SPEED);
     }
 
     run() {
@@ -185,16 +185,23 @@ class Thymio extends ThymioDBus {
     }
 
     turn(direction, degrees) {
-        if (direction === 'left') {
-            var speedLeft = -100;
-            var speedRight = 100;
-        }
-        else {
-            var speedLeft = 100;
-            var speedRight = -100;
+        const [speedLeft, speedRight] = direction === 'left'
+                ? [-BASE_SPEED, BASE_SPEED]
+                : [BASE_SPEED, -BASE_SPEED];
+
+        const actionObs = this.setWheels(speedLeft, speedRight);
+
+        if (!degrees) {
+            return actionObs;
         }
 
-        return this.setWheels(speedLeft, speedRight);
+        const radians = Math.PI * degrees / 180;
+        const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
+        const timeStop = TURN_RADIUS * radians / cmsSpeed;
+
+        return actionObs
+            .concat(Observable.timer(timeStop * 1000))
+            .concat(this.stop());
     }
 
     turnLeft(degrees) {

@@ -10,26 +10,18 @@
       <actions
           xsi:type="roboprose:Move"
           duration="2.0"/>
-      <actions
-          xsi:type="roboprose:Stop"
-          duration="2.0"/>
-      <actions
-          xsi:type="roboprose:Turn"
-          duration="2.0"/>
-      <actions
-          xsi:type="roboprose:Stop"/>
     </main>
     <listeners>
       <event
           xsi:type="roboprose:Tapped"/>
-      <actions
-          xsi:type="roboprose:Move"/>
     </listeners>
     <listeners>
       <event
           xsi:type="roboprose:Obstacle"/>
       <actions
-          xsi:type="roboprose:Stop"/>
+          xsi:type="roboprose:Turn"
+          duration="0.0"
+          degrees="180.0"/>
     </listeners>
   </robots>
 </roboprose:Root>

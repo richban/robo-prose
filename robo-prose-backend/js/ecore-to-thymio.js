@@ -65,7 +65,7 @@ const model2ThymioAction = action => {
                             ? 'Left'
                             : 'Right';
             return Thymio.makeAction(`turn${ direction }`,
-                action.get('duration'));
+                action.get('duration'), action.get('degrees'));
     }
 };
 
