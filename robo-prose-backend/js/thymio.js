@@ -10,6 +10,8 @@ const path = require('path');
 const broadcastEvents = require('./aseba-broadcaster.js');
 const lodash = require('lodash');
 
+const runFor = (observable, time) =>
+    observable.concat(Observable.timer(time));
 
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
 class ThymioDBus {
@@ -116,6 +118,11 @@ const BASE_SPEED = 500;
 const TURN_RADIUS = 4.5; // half wheel distance
 class Thymio extends ThymioDBus {
     static makeAction(method, duration, ...args) {
+        console.log({
+            method,
+            duration,
+            args
+        });
         return {
             method,
             duration,
@@ -152,11 +159,11 @@ class Thymio extends ThymioDBus {
         return this.setWheels(speed);
     }
 
-    moveBackward() {
+    moveBackwards() {
         return this.move(-BASE_SPEED);
     }
 
-    moveForward() {
+    moveForwards() {
         return this.move(BASE_SPEED);
     }
 
@@ -199,8 +206,7 @@ class Thymio extends ThymioDBus {
         const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
         const timeStop = TURN_RADIUS * radians / cmsSpeed;
 
-        return actionObs
-            .concat(Observable.timer(timeStop * 1000))
+        return runFor(actionObs, timeStop * 1000)
             .concat(this.stop());
     }
 

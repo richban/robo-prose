@@ -13,18 +13,48 @@ const Option = require('./option-wrapper');
 const Thymio = require('./thymio.js');
 
 
-//String.prototype.firstUppercase = function() {
-//    return this[0].toUpperCase() + this.slice(1);
-//};
-
 const resourceSet = Ecore.ResourceSet.create();
 
 
-const makeThymio = contents => {
+String.prototype.toFirstUppercase = function() {
+    return this[0].toUpperCase() + this.substring(1);
+};
+
+
+// Just a passthrough by now, will need some recursion
+const applyDefaults = lodash.identity;
+
+
+const makeMetaModelDefaults = (ePackage) =>
+    lodash.fromPairs(ePackage.values.eClassifiers._internal
+        .filter(eClass => eClass.values.eAllAttributes)
+        .map(eClass =>
+            [
+                eClass.values.name.toLowerCase(),
+                eClass.values.eAttributes.call(eClass)
+            ]
+        )
+        .filter(pair => pair[1].length > 0)
+        .map(pair =>
+            [
+                pair[0],
+                lodash.fromPairs(pair[1]
+                    .map(attribute =>
+                        [
+                            attribute.values.name,
+                            attribute.values.defaultValueLiteral
+                        ]
+                    )
+                )
+            ]
+        )
+    );
+
+const makeThymio = ([defaults, contents]) => {
     const robot = contents.first().get('robots').first();
 
     const main = robot.get('main').get('actions')
-                      .map(model2ThymioAction);
+                      .map(model2ThymioAction.bind(null, defaults));
 
     const listeners = Option(robot.get('listeners'), l => l.size() > 0)
         .map(listeners => {
@@ -34,7 +64,7 @@ const makeThymio = contents => {
                 const actions = listener.get('actions');
                 return [
                     eventName,
-                    actions.map(model2ThymioAction)
+                    actions.map(model2ThymioAction.bind(null, defaults))
                 ];
             });
         })
@@ -43,33 +73,30 @@ const makeThymio = contents => {
     return new Thymio(main, listeners.unwrapOr(null));
 };
 
-const model2ThymioAction = action => {
+const model2ThymioAction = (defaults, action) => {
     switch (action.eClass.values.name.toLowerCase()) {
         case 'move':
-            var directionClass = action.get('direction');
-            var direction = !directionClass
-                        || directionClass.toLowerCase() !== 'backwards'
-                    ? 'Forward'
-                    : 'Backward';
-            return Thymio.makeAction(`move${ direction }`,
-                action.get('duration'));
+            var direction = action.get('direction') || defaults.move.direction;
+            var duration = action.get('duration') || defaults.move.duration;
+
+            return Thymio.makeAction(`move${ direction.toFirstUppercase() }`,
+                parseFloat(duration));
 
         case 'stop':
             return Thymio.makeAction('stop',
                 action.get('duration'));
 
         case 'turn':
-            var directionClass = action.get('direction');
-            var direction = !directionClass
-                        || directionClass.toLowerCase() !== 'right'
-                            ? 'Left'
-                            : 'Right';
-            return Thymio.makeAction(`turn${ direction }`,
-                action.get('duration'), action.get('degrees'));
+            var direction = action.get('direction') || defaults.turn.direction;
+            var duration = action.get('duration') || defaults.turn.duration;
+            var degrees = action.get('degrees') || defaults.turn.degrees;
+
+            return Thymio.makeAction(`turn${ direction.toFirstUppercase() }`,
+                parseFloat(duration), parseFloat(degrees));
     }
 };
 
-const readEcoreFile = (filePath) => {
+const readEcoreFile = filePath => {
     filePath = path.resolve(filePath);
     const resource = resourceSet.create({
         uri: filePath
@@ -102,6 +129,10 @@ const registerEcoreModel = contents => {
 module.exports = (ecoreModelPath, instancePath) => {
     return readEcoreFile(ecoreModelPath)
         .map(registerEcoreModel)
-        .concatMap(readEcoreFile.bind(null, instancePath))
+        .map(makeMetaModelDefaults)
+        .concat(readEcoreFile(instancePath))
+        .pairwise()
+        .last()
+        .map(applyDefaults)
         .map(makeThymio);
 };
