@@ -23,6 +23,14 @@ String.prototype.toFirstUppercase = function() {
 
 // Just a passthrough by now, will need some recursion
 const applyDefaults = lodash.identity;
+//const applyDefaults = ([defaults, contents]) => {
+//    lodash.forEach(contents.values, (value) => {
+//        if (value instanceof EList) {
+//            console.log('aaa');
+//        }
+//    });
+//    return [defaults, contents];
+//};
 
 
 const makeMetaModelDefaults = (ePackage) =>
@@ -50,6 +58,7 @@ const makeMetaModelDefaults = (ePackage) =>
         )
     );
 
+
 const makeThymio = ([defaults, contents]) => {
     const robot = contents.first().get('robots').first();
 
@@ -72,6 +81,7 @@ const makeThymio = ([defaults, contents]) => {
 
     return new Thymio(main, listeners.unwrapOr(null));
 };
+
 
 const model2ThymioAction = (defaults, action) => {
     switch (action.eClass.values.name.toLowerCase()) {
@@ -96,6 +106,7 @@ const model2ThymioAction = (defaults, action) => {
     }
 };
 
+
 const readEcoreFile = filePath => {
     filePath = path.resolve(filePath);
     const resource = resourceSet.create({
@@ -114,6 +125,7 @@ const readEcoreFile = filePath => {
         });
 };
 
+
 const registerEcoreModel = contents => {
     const first = contents.first();
 
@@ -125,6 +137,7 @@ const registerEcoreModel = contents => {
     Ecore.EPackage.Registry.register(first);
     return first;
 };
+
 
 module.exports = (ecoreModelPath, instancePath) => {
     return readEcoreFile(ecoreModelPath)

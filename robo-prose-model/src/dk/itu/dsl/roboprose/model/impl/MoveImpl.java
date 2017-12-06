@@ -4,7 +4,6 @@ package dk.itu.dsl.roboprose.model.impl;
 
 import dk.itu.dsl.roboprose.model.MOVE_DIRECTION;
 import dk.itu.dsl.roboprose.model.Move;
-import dk.itu.dsl.roboprose.model.RANDOM;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
 import dk.itu.dsl.roboprose.model.hasDuration;
 
@@ -24,7 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.MoveImpl#getDuration <em>Duration</em>}</li>
- *   <li>{@link dk.itu.dsl.roboprose.model.impl.MoveImpl#getIsRandom <em>Is Random</em>}</li>
+ *   <li>{@link dk.itu.dsl.roboprose.model.impl.MoveImpl#isIsRandom <em>Is Random</em>}</li>
  *   <li>{@link dk.itu.dsl.roboprose.model.impl.MoveImpl#getDirection <em>Direction</em>}</li>
  * </ul>
  *
@@ -52,24 +51,24 @@ public class MoveImpl extends RotorActionImpl implements Move {
 	protected float duration = DURATION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIsRandom() <em>Is Random</em>}' attribute.
+	 * The default value of the '{@link #isIsRandom() <em>Is Random</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsRandom()
+	 * @see #isIsRandom()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final RANDOM IS_RANDOM_EDEFAULT = RANDOM.NOT_RANDOM;
+	protected static final boolean IS_RANDOM_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #getIsRandom() <em>Is Random</em>}' attribute.
+	 * The cached value of the '{@link #isIsRandom() <em>Is Random</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsRandom()
+	 * @see #isIsRandom()
 	 * @generated
 	 * @ordered
 	 */
-	protected RANDOM isRandom = IS_RANDOM_EDEFAULT;
+	protected boolean isRandom = IS_RANDOM_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
@@ -136,7 +135,7 @@ public class MoveImpl extends RotorActionImpl implements Move {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RANDOM getIsRandom() {
+	public boolean isIsRandom() {
 		return isRandom;
 	}
 
@@ -145,9 +144,9 @@ public class MoveImpl extends RotorActionImpl implements Move {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsRandom(RANDOM newIsRandom) {
-		RANDOM oldIsRandom = isRandom;
-		isRandom = newIsRandom == null ? IS_RANDOM_EDEFAULT : newIsRandom;
+	public void setIsRandom(boolean newIsRandom) {
+		boolean oldIsRandom = isRandom;
+		isRandom = newIsRandom;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RoboprosePackage.MOVE__IS_RANDOM, oldIsRandom, isRandom));
 	}
@@ -184,7 +183,7 @@ public class MoveImpl extends RotorActionImpl implements Move {
 			case RoboprosePackage.MOVE__DURATION:
 				return getDuration();
 			case RoboprosePackage.MOVE__IS_RANDOM:
-				return getIsRandom();
+				return isIsRandom();
 			case RoboprosePackage.MOVE__DIRECTION:
 				return getDirection();
 		}
@@ -203,7 +202,7 @@ public class MoveImpl extends RotorActionImpl implements Move {
 				setDuration((Float)newValue);
 				return;
 			case RoboprosePackage.MOVE__IS_RANDOM:
-				setIsRandom((RANDOM)newValue);
+				setIsRandom((Boolean)newValue);
 				return;
 			case RoboprosePackage.MOVE__DIRECTION:
 				setDirection((MOVE_DIRECTION)newValue);

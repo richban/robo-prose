@@ -22,5 +22,6 @@ Export-Package: dk.itu.dsl.roboprose.scoping,
  dk.itu.dsl.roboprose.services,
  dk.itu.dsl.roboprose.formatting2,
  dk.itu.dsl.roboprose.parser.antlr.internal,
- dk.itu.dsl.roboprose.parser.antlr
+ dk.itu.dsl.roboprose.parser.antlr,
+ dk.itu.dsl.roboprose.parser.antlr.lexer
 Import-Package: org.apache.log4j

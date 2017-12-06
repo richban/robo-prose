@@ -8,11 +8,14 @@ import dk.itu.dsl.roboprose.model.EventListener;
 import dk.itu.dsl.roboprose.model.Main;
 import dk.itu.dsl.roboprose.model.Move;
 import dk.itu.dsl.roboprose.model.Obstacle;
+import dk.itu.dsl.roboprose.model.Repeat;
 import dk.itu.dsl.roboprose.model.RoboProse;
 import dk.itu.dsl.roboprose.model.RoboprosePackage;
+import dk.itu.dsl.roboprose.model.StartOver;
 import dk.itu.dsl.roboprose.model.Stop;
 import dk.itu.dsl.roboprose.model.Tapped;
 import dk.itu.dsl.roboprose.model.Turn;
+import dk.itu.dsl.roboprose.model.Wait;
 import dk.itu.dsl.roboprose.services.RoboProseGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -49,8 +52,14 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 			case RoboprosePackage.OBSTACLE:
 				sequence_Obstacle(context, (Obstacle) semanticObject); 
 				return; 
+			case RoboprosePackage.REPEAT:
+				sequence_Repeat(context, (Repeat) semanticObject); 
+				return; 
 			case RoboprosePackage.ROBO_PROSE:
 				sequence_RoboProse(context, (RoboProse) semanticObject); 
+				return; 
+			case RoboprosePackage.START_OVER:
+				sequence_StartOver(context, (StartOver) semanticObject); 
 				return; 
 			case RoboprosePackage.STOP:
 				sequence_Stop(context, (Stop) semanticObject); 
@@ -60,6 +69,9 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 				return; 
 			case RoboprosePackage.TURN:
 				sequence_Turn(context, (Turn) semanticObject); 
+				return; 
+			case RoboprosePackage.WAIT:
+				sequence_Wait(context, (Wait) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -71,7 +83,7 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     EventListener returns EventListener
 	 *
 	 * Constraint:
-	 *     (event=Event actions+=Action actions+=Action* (sublisteners+=EventListener sublisteners+=EventListener*)?)
+	 *     (event=Event actions+=Action actions+=Action* ending=Ending? (sublisteners+=EventListener sublisteners+=EventListener*)?)
 	 */
 	protected void sequence_EventListener(ISerializationContext context, EventListener semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -83,7 +95,7 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     Main returns Main
 	 *
 	 * Constraint:
-	 *     (actions+=Action actions+=Action*)
+	 *     (actions+=Action actions+=Action* ending=Ending?)
 	 */
 	protected void sequence_Main(ISerializationContext context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -96,7 +108,7 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     Move returns Move
 	 *
 	 * Constraint:
-	 *     (direction=MOVE_DIRECTION? (duration=EFloat | isRandom=RANDOM)?)
+	 *     (direction=MOVE_DIRECTION? (duration=EFloat | isRandom?=RANDOM)?)
 	 */
 	protected void sequence_Move(ISerializationContext context, Move semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -118,12 +130,38 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
+	 *     Ending returns Repeat
+	 *     Repeat returns Repeat
+	 *
+	 * Constraint:
+	 *     {Repeat}
+	 */
+	protected void sequence_Repeat(ISerializationContext context, Repeat semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     RoboProse returns RoboProse
 	 *
 	 * Constraint:
-	 *     (main=Main? (listeners+=EventListener listeners+=EventListener*)?)
+	 *     (main=Main listeners+=EventListener*)
 	 */
 	protected void sequence_RoboProse(ISerializationContext context, RoboProse semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Ending returns StartOver
+	 *     StartOver returns StartOver
+	 *
+	 * Constraint:
+	 *     {StartOver}
+	 */
+	protected void sequence_StartOver(ISerializationContext context, StartOver semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -160,9 +198,22 @@ public class RoboProseSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     Turn returns Turn
 	 *
 	 * Constraint:
-	 *     (direction=TURN_DIRECTION? (duration=EFloat | degrees=EFloat | isRandom=RANDOM)?)
+	 *     (direction=TURN_DIRECTION? (duration=EFloat | degrees=EFloat | isRandom?=RANDOM)?)
 	 */
 	protected void sequence_Turn(ISerializationContext context, Turn semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Ending returns Wait
+	 *     Wait returns Wait
+	 *
+	 * Constraint:
+	 *     {Wait}
+	 */
+	protected void sequence_Wait(ISerializationContext context, Wait semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

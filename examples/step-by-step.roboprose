@@ -1,0 +1,6 @@
+My robot should stop and wait.
+
+When it is tapped it should move forward for 2 seconds and wait
+	(but when it is tapped it should turn left 90 degrees and wait
+		(but when it is tapped it should move forward for 2 seconds and wait
+			(but when it is tapped it should turn right 90 degrees and start over)))

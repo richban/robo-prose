@@ -76,6 +76,33 @@ public interface RoboproseFactory extends EFactory {
 	Turn createTurn();
 
 	/**
+	 * Returns a new object of class '<em>Repeat</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Repeat</em>'.
+	 * @generated
+	 */
+	Repeat createRepeat();
+
+	/**
+	 * Returns a new object of class '<em>Start Over</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Start Over</em>'.
+	 * @generated
+	 */
+	StartOver createStartOver();
+
+	/**
+	 * Returns a new object of class '<em>Wait</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Wait</em>'.
+	 * @generated
+	 */
+	Wait createWait();
+
+	/**
 	 * Returns a new object of class '<em>Stop</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +110,15 @@ public interface RoboproseFactory extends EFactory {
 	 * @generated
 	 */
 	Stop createStop();
+
+	/**
+	 * Returns a new object of class '<em>Ending</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ending</em>'.
+	 * @generated
+	 */
+	Ending createEnding();
 
 	/**
 	 * Returns a new object of class '<em>Obstacle</em>'.

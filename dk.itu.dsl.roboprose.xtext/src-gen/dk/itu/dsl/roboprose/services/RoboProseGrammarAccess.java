@@ -30,78 +30,57 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.RoboProse");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRoboProseAction_0 = (Action)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cMyKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Keyword cRobotKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Keyword cShouldKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
-		private final Assignment cMainAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
-		private final RuleCall cMainMainParserRuleCall_1_3_0 = (RuleCall)cMainAssignment_1_3.eContents().get(0);
-		private final RuleCall cParagraphDelimiterParserRuleCall_1_4 = (RuleCall)cGroup_1.eContents().get(4);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Assignment cListenersAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cListenersEventListenerParserRuleCall_2_0_0 = (RuleCall)cListenersAssignment_2_0.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
-		private final RuleCall cParagraphDelimiterParserRuleCall_2_1_0 = (RuleCall)cGroup_2_1.eContents().get(0);
-		private final Assignment cListenersAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cListenersEventListenerParserRuleCall_2_1_1_0 = (RuleCall)cListenersAssignment_2_1_1.eContents().get(0);
-		private final Keyword cFullStopKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Keyword cMyKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cRobotKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cShouldKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cMainAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cMainMainParserRuleCall_4_0 = (RuleCall)cMainAssignment_4.eContents().get(0);
+		private final Keyword cFullStopKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Assignment cListenersAssignment_6_0 = (Assignment)cGroup_6.eContents().get(0);
+		private final RuleCall cListenersEventListenerParserRuleCall_6_0_0 = (RuleCall)cListenersAssignment_6_0.eContents().get(0);
+		private final Keyword cFullStopKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
 		
 		//RoboProse:
-		//	{RoboProse} ('My' 'robot' 'should' main=Main ParagraphDelimiter)? (listeners+=EventListener (ParagraphDelimiter
-		//	listeners+=EventListener)* '.')?;
+		//	{RoboProse}
+		//	'My' 'robot' 'should' main=Main '.' (listeners+=EventListener '.')*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{RoboProse} ('My' 'robot' 'should' main=Main ParagraphDelimiter)? (listeners+=EventListener (ParagraphDelimiter
-		//listeners+=EventListener)* '.')?
+		//{RoboProse} 'My' 'robot' 'should' main=Main '.' (listeners+=EventListener '.')*
 		public Group getGroup() { return cGroup; }
 		
 		//{RoboProse}
 		public Action getRoboProseAction_0() { return cRoboProseAction_0; }
 		
-		//('My' 'robot' 'should' main=Main ParagraphDelimiter)?
-		public Group getGroup_1() { return cGroup_1; }
-		
 		//'My'
-		public Keyword getMyKeyword_1_0() { return cMyKeyword_1_0; }
+		public Keyword getMyKeyword_1() { return cMyKeyword_1; }
 		
 		//'robot'
-		public Keyword getRobotKeyword_1_1() { return cRobotKeyword_1_1; }
+		public Keyword getRobotKeyword_2() { return cRobotKeyword_2; }
 		
 		//'should'
-		public Keyword getShouldKeyword_1_2() { return cShouldKeyword_1_2; }
+		public Keyword getShouldKeyword_3() { return cShouldKeyword_3; }
 		
 		//main=Main
-		public Assignment getMainAssignment_1_3() { return cMainAssignment_1_3; }
+		public Assignment getMainAssignment_4() { return cMainAssignment_4; }
 		
 		//Main
-		public RuleCall getMainMainParserRuleCall_1_3_0() { return cMainMainParserRuleCall_1_3_0; }
-		
-		//ParagraphDelimiter
-		public RuleCall getParagraphDelimiterParserRuleCall_1_4() { return cParagraphDelimiterParserRuleCall_1_4; }
-		
-		//(listeners+=EventListener (ParagraphDelimiter listeners+=EventListener)* '.')?
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//listeners+=EventListener
-		public Assignment getListenersAssignment_2_0() { return cListenersAssignment_2_0; }
-		
-		//EventListener
-		public RuleCall getListenersEventListenerParserRuleCall_2_0_0() { return cListenersEventListenerParserRuleCall_2_0_0; }
-		
-		//(ParagraphDelimiter listeners+=EventListener)*
-		public Group getGroup_2_1() { return cGroup_2_1; }
-		
-		//ParagraphDelimiter
-		public RuleCall getParagraphDelimiterParserRuleCall_2_1_0() { return cParagraphDelimiterParserRuleCall_2_1_0; }
-		
-		//listeners+=EventListener
-		public Assignment getListenersAssignment_2_1_1() { return cListenersAssignment_2_1_1; }
-		
-		//EventListener
-		public RuleCall getListenersEventListenerParserRuleCall_2_1_1_0() { return cListenersEventListenerParserRuleCall_2_1_1_0; }
+		public RuleCall getMainMainParserRuleCall_4_0() { return cMainMainParserRuleCall_4_0; }
 		
 		//'.'
-		public Keyword getFullStopKeyword_2_2() { return cFullStopKeyword_2_2; }
+		public Keyword getFullStopKeyword_5() { return cFullStopKeyword_5; }
+		
+		//(listeners+=EventListener '.')*
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//listeners+=EventListener
+		public Assignment getListenersAssignment_6_0() { return cListenersAssignment_6_0; }
+		
+		//EventListener
+		public RuleCall getListenersEventListenerParserRuleCall_6_0_0() { return cListenersEventListenerParserRuleCall_6_0_0; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_6_1() { return cFullStopKeyword_6_1; }
 	}
 	public class MainElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Main");
@@ -112,12 +91,16 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cActionDelimiterParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
 		private final Assignment cActionsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cActionsActionParserRuleCall_1_1_0 = (RuleCall)cActionsAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final RuleCall cActionDelimiterParserRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
+		private final Assignment cEndingAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cEndingEndingParserRuleCall_2_1_0 = (RuleCall)cEndingAssignment_2_1.eContents().get(0);
 		
 		//Main:
-		//	actions+=Action (ActionDelimiter actions+=Action)*;
+		//	actions+=Action (ActionDelimiter actions+=Action)* (ActionDelimiter ending=Ending)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//actions+=Action (ActionDelimiter actions+=Action)*
+		//actions+=Action (ActionDelimiter actions+=Action)* (ActionDelimiter ending=Ending)?
 		public Group getGroup() { return cGroup; }
 		
 		//actions+=Action
@@ -137,6 +120,18 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Action
 		public RuleCall getActionsActionParserRuleCall_1_1_0() { return cActionsActionParserRuleCall_1_1_0; }
+		
+		//(ActionDelimiter ending=Ending)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//ActionDelimiter
+		public RuleCall getActionDelimiterParserRuleCall_2_0() { return cActionDelimiterParserRuleCall_2_0; }
+		
+		//ending=Ending
+		public Assignment getEndingAssignment_2_1() { return cEndingAssignment_2_1; }
+		
+		//Ending
+		public RuleCall getEndingEndingParserRuleCall_2_1_0() { return cEndingEndingParserRuleCall_2_1_0; }
 	}
 	public class EventListenerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.EventListener");
@@ -156,24 +151,28 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cActionsAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
 		private final RuleCall cActionsActionParserRuleCall_6_1_0 = (RuleCall)cActionsAssignment_6_1.eContents().get(0);
 		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cLeftParenthesisKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Keyword cButKeyword_7_1 = (Keyword)cGroup_7.eContents().get(1);
-		private final Assignment cSublistenersAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
-		private final RuleCall cSublistenersEventListenerParserRuleCall_7_2_0 = (RuleCall)cSublistenersAssignment_7_2.eContents().get(0);
-		private final Group cGroup_7_3 = (Group)cGroup_7.eContents().get(3);
-		private final RuleCall cSublistenerDelimiterParserRuleCall_7_3_0 = (RuleCall)cGroup_7_3.eContents().get(0);
-		private final Assignment cSublistenersAssignment_7_3_1 = (Assignment)cGroup_7_3.eContents().get(1);
-		private final RuleCall cSublistenersEventListenerParserRuleCall_7_3_1_0 = (RuleCall)cSublistenersAssignment_7_3_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_7_4 = (Keyword)cGroup_7.eContents().get(4);
+		private final RuleCall cActionDelimiterParserRuleCall_7_0 = (RuleCall)cGroup_7.eContents().get(0);
+		private final Assignment cEndingAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cEndingEndingParserRuleCall_7_1_0 = (RuleCall)cEndingAssignment_7_1.eContents().get(0);
+		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
+		private final Keyword cLeftParenthesisKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Keyword cButKeyword_8_1 = (Keyword)cGroup_8.eContents().get(1);
+		private final Assignment cSublistenersAssignment_8_2 = (Assignment)cGroup_8.eContents().get(2);
+		private final RuleCall cSublistenersEventListenerParserRuleCall_8_2_0 = (RuleCall)cSublistenersAssignment_8_2.eContents().get(0);
+		private final Group cGroup_8_3 = (Group)cGroup_8.eContents().get(3);
+		private final RuleCall cSublistenerDelimiterParserRuleCall_8_3_0 = (RuleCall)cGroup_8_3.eContents().get(0);
+		private final Assignment cSublistenersAssignment_8_3_1 = (Assignment)cGroup_8_3.eContents().get(1);
+		private final RuleCall cSublistenersEventListenerParserRuleCall_8_3_1_0 = (RuleCall)cSublistenersAssignment_8_3_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_8_4 = (Keyword)cGroup_8.eContents().get(4);
 		
 		//EventListener:
 		//	('When' | 'when') 'it' event=Event 'it' 'should'
-		//	actions+=Action (ActionDelimiter actions+=Action)* ('(' 'but' sublisteners+=EventListener (SublistenerDelimiter
-		//	sublisteners+=EventListener)* ')')?;
+		//	actions+=Action (ActionDelimiter actions+=Action)* (ActionDelimiter ending=Ending)? ('(' 'but'
+		//	sublisteners+=EventListener (SublistenerDelimiter sublisteners+=EventListener)* ')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('When' | 'when') 'it' event=Event 'it' 'should' actions+=Action (ActionDelimiter actions+=Action)* ('(' 'but'
-		//sublisteners+=EventListener (SublistenerDelimiter sublisteners+=EventListener)* ')')?
+		//('When' | 'when') 'it' event=Event 'it' 'should' actions+=Action (ActionDelimiter actions+=Action)* (ActionDelimiter
+		//ending=Ending)? ('(' 'but' sublisteners+=EventListener (SublistenerDelimiter sublisteners+=EventListener)* ')')?
 		public Group getGroup() { return cGroup; }
 		
 		//'When' | 'when'
@@ -218,46 +217,66 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//Action
 		public RuleCall getActionsActionParserRuleCall_6_1_0() { return cActionsActionParserRuleCall_6_1_0; }
 		
-		//('(' 'but' sublisteners+=EventListener (SublistenerDelimiter sublisteners+=EventListener)* ')')?
+		//(ActionDelimiter ending=Ending)?
 		public Group getGroup_7() { return cGroup_7; }
 		
+		//ActionDelimiter
+		public RuleCall getActionDelimiterParserRuleCall_7_0() { return cActionDelimiterParserRuleCall_7_0; }
+		
+		//ending=Ending
+		public Assignment getEndingAssignment_7_1() { return cEndingAssignment_7_1; }
+		
+		//Ending
+		public RuleCall getEndingEndingParserRuleCall_7_1_0() { return cEndingEndingParserRuleCall_7_1_0; }
+		
+		//('(' 'but' sublisteners+=EventListener (SublistenerDelimiter sublisteners+=EventListener)* ')')?
+		public Group getGroup_8() { return cGroup_8; }
+		
 		//'('
-		public Keyword getLeftParenthesisKeyword_7_0() { return cLeftParenthesisKeyword_7_0; }
+		public Keyword getLeftParenthesisKeyword_8_0() { return cLeftParenthesisKeyword_8_0; }
 		
 		//'but'
-		public Keyword getButKeyword_7_1() { return cButKeyword_7_1; }
+		public Keyword getButKeyword_8_1() { return cButKeyword_8_1; }
 		
 		//sublisteners+=EventListener
-		public Assignment getSublistenersAssignment_7_2() { return cSublistenersAssignment_7_2; }
+		public Assignment getSublistenersAssignment_8_2() { return cSublistenersAssignment_8_2; }
 		
 		//EventListener
-		public RuleCall getSublistenersEventListenerParserRuleCall_7_2_0() { return cSublistenersEventListenerParserRuleCall_7_2_0; }
+		public RuleCall getSublistenersEventListenerParserRuleCall_8_2_0() { return cSublistenersEventListenerParserRuleCall_8_2_0; }
 		
 		//(SublistenerDelimiter sublisteners+=EventListener)*
-		public Group getGroup_7_3() { return cGroup_7_3; }
+		public Group getGroup_8_3() { return cGroup_8_3; }
 		
 		//SublistenerDelimiter
-		public RuleCall getSublistenerDelimiterParserRuleCall_7_3_0() { return cSublistenerDelimiterParserRuleCall_7_3_0; }
+		public RuleCall getSublistenerDelimiterParserRuleCall_8_3_0() { return cSublistenerDelimiterParserRuleCall_8_3_0; }
 		
 		//sublisteners+=EventListener
-		public Assignment getSublistenersAssignment_7_3_1() { return cSublistenersAssignment_7_3_1; }
+		public Assignment getSublistenersAssignment_8_3_1() { return cSublistenersAssignment_8_3_1; }
 		
 		//EventListener
-		public RuleCall getSublistenersEventListenerParserRuleCall_7_3_1_0() { return cSublistenersEventListenerParserRuleCall_7_3_1_0; }
+		public RuleCall getSublistenersEventListenerParserRuleCall_8_3_1_0() { return cSublistenersEventListenerParserRuleCall_8_3_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_7_4() { return cRightParenthesisKeyword_7_4; }
+		public Keyword getRightParenthesisKeyword_8_4() { return cRightParenthesisKeyword_8_4; }
 	}
 	public class SublistenerDelimiterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.SublistenerDelimiter");
-		private final Keyword cFullStopKeyword = (Keyword)rule.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cFullStopKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cAndKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//SublistenerDelimiter:
-		//	'.';
+		//	'.' 'And';
 		@Override public ParserRule getRule() { return rule; }
 		
+		//'.' 'And'
+		public Group getGroup() { return cGroup; }
+		
 		//'.'
-		public Keyword getFullStopKeyword() { return cFullStopKeyword; }
+		public Keyword getFullStopKeyword_0() { return cFullStopKeyword_0; }
+		
+		//'And'
+		public Keyword getAndKeyword_1() { return cAndKeyword_1; }
 	}
 	public class ActionDelimiterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.ActionDelimiter");
@@ -268,7 +287,8 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cThenKeyword_0_0_1 = (Keyword)cGroup_0_0.eContents().get(1);
 		private final Group cGroup_0_1 = (Group)cAlternatives_0.eContents().get(1);
 		private final Keyword cCommaKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
-		private final Keyword cThenKeyword_0_1_1 = (Keyword)cGroup_0_1.eContents().get(1);
+		private final Keyword cAndKeyword_0_1_1 = (Keyword)cGroup_0_1.eContents().get(1);
+		private final Keyword cThenKeyword_0_1_2 = (Keyword)cGroup_0_1.eContents().get(2);
 		private final Group cGroup_0_2 = (Group)cAlternatives_0.eContents().get(2);
 		private final Keyword cFullStopKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
 		private final Keyword cThenKeyword_0_2_1 = (Keyword)cGroup_0_2.eContents().get(1);
@@ -277,73 +297,53 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cShouldKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//ActionDelimiter:
-		//	("and" "then" | "," "then" | "." "Then") ("it" "should")?;
+		//	('and' 'then'? | ',' 'and'? 'then'? | '.' 'Then') ('it' 'should')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//("and" "then" | "," "then" | "." "Then") ("it" "should")?
+		//('and' 'then'? | ',' 'and'? 'then'? | '.' 'Then') ('it' 'should')?
 		public Group getGroup() { return cGroup; }
 		
-		//"and" "then" | "," "then" | "." "Then"
+		//'and' 'then'? | ',' 'and'? 'then'? | '.' 'Then'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
-		//"and" "then"
+		//'and' 'then'?
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
-		//"and"
+		//'and'
 		public Keyword getAndKeyword_0_0_0() { return cAndKeyword_0_0_0; }
 		
-		//"then"
+		//'then'?
 		public Keyword getThenKeyword_0_0_1() { return cThenKeyword_0_0_1; }
 		
-		//"," "then"
+		//',' 'and'? 'then'?
 		public Group getGroup_0_1() { return cGroup_0_1; }
 		
-		//","
+		//','
 		public Keyword getCommaKeyword_0_1_0() { return cCommaKeyword_0_1_0; }
 		
-		//"then"
-		public Keyword getThenKeyword_0_1_1() { return cThenKeyword_0_1_1; }
+		//'and'?
+		public Keyword getAndKeyword_0_1_1() { return cAndKeyword_0_1_1; }
 		
-		//"." "Then"
+		//'then'?
+		public Keyword getThenKeyword_0_1_2() { return cThenKeyword_0_1_2; }
+		
+		//'.' 'Then'
 		public Group getGroup_0_2() { return cGroup_0_2; }
 		
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_0_2_0() { return cFullStopKeyword_0_2_0; }
 		
-		//"Then"
+		//'Then'
 		public Keyword getThenKeyword_0_2_1() { return cThenKeyword_0_2_1; }
 		
-		//("it" "should")?
+		//('it' 'should')?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//"it"
+		//'it'
 		public Keyword getItKeyword_1_0() { return cItKeyword_1_0; }
 		
-		//"should"
+		//'should'
 		public Keyword getShouldKeyword_1_1() { return cShouldKeyword_1_1; }
-	}
-	public class ParagraphDelimiterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.ParagraphDelimiter");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cFullStopKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cNEWLINETerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final RuleCall cNEWLINETerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
-		
-		//ParagraphDelimiter:
-		//	'.' NEWLINE NEWLINE+;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'.' NEWLINE NEWLINE+
-		public Group getGroup() { return cGroup; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_0() { return cFullStopKeyword_0; }
-		
-		//NEWLINE
-		public RuleCall getNEWLINETerminalRuleCall_1() { return cNEWLINETerminalRuleCall_1; }
-		
-		//NEWLINE+
-		public RuleCall getNEWLINETerminalRuleCall_2() { return cNEWLINETerminalRuleCall_2; }
 	}
 	public class ActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Action");
@@ -367,6 +367,29 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Stop
 		public RuleCall getStopParserRuleCall_2() { return cStopParserRuleCall_2; }
+	}
+	public class EndingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Ending");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cRepeatParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cStartOverParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cWaitParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//Ending:
+		//	Repeat | StartOver | Wait;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Repeat | StartOver | Wait
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Repeat
+		public RuleCall getRepeatParserRuleCall_0() { return cRepeatParserRuleCall_0; }
+		
+		//StartOver
+		public RuleCall getStartOverParserRuleCall_1() { return cStartOverParserRuleCall_1; }
+		
+		//Wait
+		public RuleCall getWaitParserRuleCall_2() { return cWaitParserRuleCall_2; }
 	}
 	public class EventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Event");
@@ -399,16 +422,18 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cForKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
 		private final Assignment cDurationAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
 		private final RuleCall cDurationEFloatParserRuleCall_3_0_1_0 = (RuleCall)cDurationAssignment_3_0_1.eContents().get(0);
-		private final Keyword cSecondsKeyword_3_0_2 = (Keyword)cGroup_3_0.eContents().get(2);
+		private final Alternatives cAlternatives_3_0_2 = (Alternatives)cGroup_3_0.eContents().get(2);
+		private final Keyword cSecondKeyword_3_0_2_0 = (Keyword)cAlternatives_3_0_2.eContents().get(0);
+		private final Keyword cSecondsKeyword_3_0_2_1 = (Keyword)cAlternatives_3_0_2.eContents().get(1);
 		private final Assignment cIsRandomAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
-		private final RuleCall cIsRandomRANDOMEnumRuleCall_3_1_0 = (RuleCall)cIsRandomAssignment_3_1.eContents().get(0);
+		private final RuleCall cIsRandomRANDOMParserRuleCall_3_1_0 = (RuleCall)cIsRandomAssignment_3_1.eContents().get(0);
 		
 		//Move:
 		//	{Move}
-		//	'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds' | isRandom=RANDOM)?;
+		//	'move' direction=MOVE_DIRECTION? ('for' duration=EFloat ('second' | 'seconds') | isRandom?=RANDOM)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Move} 'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds' | isRandom=RANDOM)?
+		//{Move} 'move' direction=MOVE_DIRECTION? ('for' duration=EFloat ('second' | 'seconds') | isRandom?=RANDOM)?
 		public Group getGroup() { return cGroup; }
 		
 		//{Move}
@@ -423,10 +448,10 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//MOVE_DIRECTION
 		public RuleCall getDirectionMOVE_DIRECTIONEnumRuleCall_2_0() { return cDirectionMOVE_DIRECTIONEnumRuleCall_2_0; }
 		
-		//('for' duration=EFloat 'seconds' | isRandom=RANDOM)?
+		//('for' duration=EFloat ('second' | 'seconds') | isRandom?=RANDOM)?
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
-		//'for' duration=EFloat 'seconds'
+		//'for' duration=EFloat ('second' | 'seconds')
 		public Group getGroup_3_0() { return cGroup_3_0; }
 		
 		//'for'
@@ -438,14 +463,20 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//EFloat
 		public RuleCall getDurationEFloatParserRuleCall_3_0_1_0() { return cDurationEFloatParserRuleCall_3_0_1_0; }
 		
-		//'seconds'
-		public Keyword getSecondsKeyword_3_0_2() { return cSecondsKeyword_3_0_2; }
+		//'second' | 'seconds'
+		public Alternatives getAlternatives_3_0_2() { return cAlternatives_3_0_2; }
 		
-		//isRandom=RANDOM
+		//'second'
+		public Keyword getSecondKeyword_3_0_2_0() { return cSecondKeyword_3_0_2_0; }
+		
+		//'seconds'
+		public Keyword getSecondsKeyword_3_0_2_1() { return cSecondsKeyword_3_0_2_1; }
+		
+		//isRandom?=RANDOM
 		public Assignment getIsRandomAssignment_3_1() { return cIsRandomAssignment_3_1; }
 		
 		//RANDOM
-		public RuleCall getIsRandomRANDOMEnumRuleCall_3_1_0() { return cIsRandomRANDOMEnumRuleCall_3_1_0; }
+		public RuleCall getIsRandomRANDOMParserRuleCall_3_1_0() { return cIsRandomRANDOMParserRuleCall_3_1_0; }
 	}
 	public class TurnElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Turn");
@@ -459,20 +490,24 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cForKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
 		private final Assignment cDurationAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
 		private final RuleCall cDurationEFloatParserRuleCall_3_0_1_0 = (RuleCall)cDurationAssignment_3_0_1.eContents().get(0);
-		private final Keyword cSecondsKeyword_3_0_2 = (Keyword)cGroup_3_0.eContents().get(2);
+		private final Alternatives cAlternatives_3_0_2 = (Alternatives)cGroup_3_0.eContents().get(2);
+		private final Keyword cSecondKeyword_3_0_2_0 = (Keyword)cAlternatives_3_0_2.eContents().get(0);
+		private final Keyword cSecondsKeyword_3_0_2_1 = (Keyword)cAlternatives_3_0_2.eContents().get(1);
 		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
 		private final Assignment cDegreesAssignment_3_1_0 = (Assignment)cGroup_3_1.eContents().get(0);
 		private final RuleCall cDegreesEFloatParserRuleCall_3_1_0_0 = (RuleCall)cDegreesAssignment_3_1_0.eContents().get(0);
 		private final Keyword cDegreesKeyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
 		private final Assignment cIsRandomAssignment_3_2 = (Assignment)cAlternatives_3.eContents().get(2);
-		private final RuleCall cIsRandomRANDOMEnumRuleCall_3_2_0 = (RuleCall)cIsRandomAssignment_3_2.eContents().get(0);
+		private final RuleCall cIsRandomRANDOMParserRuleCall_3_2_0 = (RuleCall)cIsRandomAssignment_3_2.eContents().get(0);
 		
 		//Turn:
 		//	{Turn}
-		//	'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees' | isRandom=RANDOM)?;
+		//	'turn' direction=TURN_DIRECTION? ('for' duration=EFloat ('second' | 'seconds') | degrees=EFloat 'degrees' |
+		//	isRandom?=RANDOM)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Turn} 'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees' | isRandom=RANDOM)?
+		//{Turn} 'turn' direction=TURN_DIRECTION? ('for' duration=EFloat ('second' | 'seconds') | degrees=EFloat 'degrees' |
+		//isRandom?=RANDOM)?
 		public Group getGroup() { return cGroup; }
 		
 		//{Turn}
@@ -487,10 +522,10 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//TURN_DIRECTION
 		public RuleCall getDirectionTURN_DIRECTIONEnumRuleCall_2_0() { return cDirectionTURN_DIRECTIONEnumRuleCall_2_0; }
 		
-		//('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees' | isRandom=RANDOM)?
+		//('for' duration=EFloat ('second' | 'seconds') | degrees=EFloat 'degrees' | isRandom?=RANDOM)?
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
-		//'for' duration=EFloat 'seconds'
+		//'for' duration=EFloat ('second' | 'seconds')
 		public Group getGroup_3_0() { return cGroup_3_0; }
 		
 		//'for'
@@ -502,8 +537,14 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//EFloat
 		public RuleCall getDurationEFloatParserRuleCall_3_0_1_0() { return cDurationEFloatParserRuleCall_3_0_1_0; }
 		
+		//'second' | 'seconds'
+		public Alternatives getAlternatives_3_0_2() { return cAlternatives_3_0_2; }
+		
+		//'second'
+		public Keyword getSecondKeyword_3_0_2_0() { return cSecondKeyword_3_0_2_0; }
+		
 		//'seconds'
-		public Keyword getSecondsKeyword_3_0_2() { return cSecondsKeyword_3_0_2; }
+		public Keyword getSecondsKeyword_3_0_2_1() { return cSecondsKeyword_3_0_2_1; }
 		
 		//degrees=EFloat 'degrees'
 		public Group getGroup_3_1() { return cGroup_3_1; }
@@ -517,11 +558,11 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//'degrees'
 		public Keyword getDegreesKeyword_3_1_1() { return cDegreesKeyword_3_1_1; }
 		
-		//isRandom=RANDOM
+		//isRandom?=RANDOM
 		public Assignment getIsRandomAssignment_3_2() { return cIsRandomAssignment_3_2; }
 		
 		//RANDOM
-		public RuleCall getIsRandomRANDOMEnumRuleCall_3_2_0() { return cIsRandomRANDOMEnumRuleCall_3_2_0; }
+		public RuleCall getIsRandomRANDOMParserRuleCall_3_2_0() { return cIsRandomRANDOMParserRuleCall_3_2_0; }
 	}
 	public class StopElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Stop");
@@ -562,6 +603,89 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'seconds'
 		public Keyword getSecondsKeyword_2_2() { return cSecondsKeyword_2_2; }
+	}
+	public class RANDOMElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.RANDOM");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cRandomlyKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cRandomKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		
+		//RANDOM:
+		//	'randomly' | 'random';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'randomly' | 'random'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//'randomly'
+		public Keyword getRandomlyKeyword_0() { return cRandomlyKeyword_0; }
+		
+		//'random'
+		public Keyword getRandomKeyword_1() { return cRandomKeyword_1; }
+	}
+	public class RepeatElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Repeat");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cRepeatAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cRepeatKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//Repeat:
+		//	{Repeat}
+		//	'repeat';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Repeat} 'repeat'
+		public Group getGroup() { return cGroup; }
+		
+		//{Repeat}
+		public Action getRepeatAction_0() { return cRepeatAction_0; }
+		
+		//'repeat'
+		public Keyword getRepeatKeyword_1() { return cRepeatKeyword_1; }
+	}
+	public class StartOverElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.StartOver");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cStartOverAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cStartKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cOverKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//StartOver:
+		//	{StartOver}
+		//	'start' 'over';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{StartOver} 'start' 'over'
+		public Group getGroup() { return cGroup; }
+		
+		//{StartOver}
+		public Action getStartOverAction_0() { return cStartOverAction_0; }
+		
+		//'start'
+		public Keyword getStartKeyword_1() { return cStartKeyword_1; }
+		
+		//'over'
+		public Keyword getOverKeyword_2() { return cOverKeyword_2; }
+	}
+	public class WaitElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.Wait");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cWaitAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cWaitKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//Wait:
+		//	{Wait}
+		//	'wait';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Wait} 'wait'
+		public Group getGroup() { return cGroup; }
+		
+		//{Wait}
+		public Action getWaitAction_0() { return cWaitAction_0; }
+		
+		//'wait'
+		public Keyword getWaitKeyword_1() { return cWaitKeyword_1; }
 	}
 	public class EFloatElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.EFloat");
@@ -775,47 +899,22 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		//'right'
 		public Keyword getRIGHTRightKeyword_1_0() { return cRIGHTRightKeyword_1_0; }
 	}
-	public class RANDOMElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.RANDOM");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cRANDOMEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cRANDOMRandomlyKeyword_0_0 = (Keyword)cRANDOMEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cRANDOMEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cRANDOMRandomKeyword_1_0 = (Keyword)cRANDOMEnumLiteralDeclaration_1.eContents().get(0);
-		
-		//enum RANDOM:
-		//	RANDOM='randomly' | RANDOM='random';
-		public EnumRule getRule() { return rule; }
-		
-		//RANDOM='randomly' | RANDOM='random'
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//RANDOM='randomly'
-		public EnumLiteralDeclaration getRANDOMEnumLiteralDeclaration_0() { return cRANDOMEnumLiteralDeclaration_0; }
-		
-		//'randomly'
-		public Keyword getRANDOMRandomlyKeyword_0_0() { return cRANDOMRandomlyKeyword_0_0; }
-		
-		//RANDOM='random'
-		public EnumLiteralDeclaration getRANDOMEnumLiteralDeclaration_1() { return cRANDOMEnumLiteralDeclaration_1; }
-		
-		//'random'
-		public Keyword getRANDOMRandomKeyword_1_0() { return cRANDOMRandomKeyword_1_0; }
-	}
 	
 	private final RoboProseElements pRoboProse;
 	private final MainElements pMain;
 	private final EventListenerElements pEventListener;
 	private final SublistenerDelimiterElements pSublistenerDelimiter;
-	private final TerminalRule tWS;
-	private final TerminalRule tNEWLINE;
 	private final ActionDelimiterElements pActionDelimiter;
-	private final ParagraphDelimiterElements pParagraphDelimiter;
 	private final ActionElements pAction;
+	private final EndingElements pEnding;
 	private final EventElements pEvent;
 	private final MoveElements pMove;
 	private final TurnElements pTurn;
 	private final StopElements pStop;
+	private final RANDOMElements pRANDOM;
+	private final RepeatElements pRepeat;
+	private final StartOverElements pStartOver;
+	private final WaitElements pWait;
 	private final EFloatElements pEFloat;
 	private final EBooleanElements pEBoolean;
 	private final EStringElements pEString;
@@ -823,7 +922,6 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	private final TappedElements pTapped;
 	private final MOVE_DIRECTIONElements eMOVE_DIRECTION;
 	private final TURN_DIRECTIONElements eTURN_DIRECTION;
-	private final RANDOMElements eRANDOM;
 	
 	private final Grammar grammar;
 	
@@ -838,15 +936,17 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		this.pMain = new MainElements();
 		this.pEventListener = new EventListenerElements();
 		this.pSublistenerDelimiter = new SublistenerDelimiterElements();
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.WS");
-		this.tNEWLINE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "dk.itu.dsl.roboprose.RoboProse.NEWLINE");
 		this.pActionDelimiter = new ActionDelimiterElements();
-		this.pParagraphDelimiter = new ParagraphDelimiterElements();
 		this.pAction = new ActionElements();
+		this.pEnding = new EndingElements();
 		this.pEvent = new EventElements();
 		this.pMove = new MoveElements();
 		this.pTurn = new TurnElements();
 		this.pStop = new StopElements();
+		this.pRANDOM = new RANDOMElements();
+		this.pRepeat = new RepeatElements();
+		this.pStartOver = new StartOverElements();
+		this.pWait = new WaitElements();
 		this.pEFloat = new EFloatElements();
 		this.pEBoolean = new EBooleanElements();
 		this.pEString = new EStringElements();
@@ -854,7 +954,6 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		this.pTapped = new TappedElements();
 		this.eMOVE_DIRECTION = new MOVE_DIRECTIONElements();
 		this.eTURN_DIRECTION = new TURN_DIRECTIONElements();
-		this.eRANDOM = new RANDOMElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -885,8 +984,8 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//RoboProse:
-	//	{RoboProse} ('My' 'robot' 'should' main=Main ParagraphDelimiter)? (listeners+=EventListener (ParagraphDelimiter
-	//	listeners+=EventListener)* '.')?;
+	//	{RoboProse}
+	//	'My' 'robot' 'should' main=Main '.' (listeners+=EventListener '.')*;
 	public RoboProseElements getRoboProseAccess() {
 		return pRoboProse;
 	}
@@ -896,7 +995,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Main:
-	//	actions+=Action (ActionDelimiter actions+=Action)*;
+	//	actions+=Action (ActionDelimiter actions+=Action)* (ActionDelimiter ending=Ending)?;
 	public MainElements getMainAccess() {
 		return pMain;
 	}
@@ -907,8 +1006,8 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//EventListener:
 	//	('When' | 'when') 'it' event=Event 'it' 'should'
-	//	actions+=Action (ActionDelimiter actions+=Action)* ('(' 'but' sublisteners+=EventListener (SublistenerDelimiter
-	//	sublisteners+=EventListener)* ')')?;
+	//	actions+=Action (ActionDelimiter actions+=Action)* (ActionDelimiter ending=Ending)? ('(' 'but'
+	//	sublisteners+=EventListener (SublistenerDelimiter sublisteners+=EventListener)* ')')?;
 	public EventListenerElements getEventListenerAccess() {
 		return pEventListener;
 	}
@@ -918,7 +1017,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SublistenerDelimiter:
-	//	'.';
+	//	'.' 'And';
 	public SublistenerDelimiterElements getSublistenerDelimiterAccess() {
 		return pSublistenerDelimiter;
 	}
@@ -927,36 +1026,14 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		return getSublistenerDelimiterAccess().getRule();
 	}
 	
-	//@ Override terminal WS:
-	//	(' ' | '\t')+ NEWLINE?;
-	public TerminalRule getWSRule() {
-		return tWS;
-	}
-	
-	//terminal NEWLINE:
-	//	'\r'? '\n';
-	public TerminalRule getNEWLINERule() {
-		return tNEWLINE;
-	}
-	
 	//ActionDelimiter:
-	//	("and" "then" | "," "then" | "." "Then") ("it" "should")?;
+	//	('and' 'then'? | ',' 'and'? 'then'? | '.' 'Then') ('it' 'should')?;
 	public ActionDelimiterElements getActionDelimiterAccess() {
 		return pActionDelimiter;
 	}
 	
 	public ParserRule getActionDelimiterRule() {
 		return getActionDelimiterAccess().getRule();
-	}
-	
-	//ParagraphDelimiter:
-	//	'.' NEWLINE NEWLINE+;
-	public ParagraphDelimiterElements getParagraphDelimiterAccess() {
-		return pParagraphDelimiter;
-	}
-	
-	public ParserRule getParagraphDelimiterRule() {
-		return getParagraphDelimiterAccess().getRule();
 	}
 	
 	//Action:
@@ -967,6 +1044,16 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getActionRule() {
 		return getActionAccess().getRule();
+	}
+	
+	//Ending:
+	//	Repeat | StartOver | Wait;
+	public EndingElements getEndingAccess() {
+		return pEnding;
+	}
+	
+	public ParserRule getEndingRule() {
+		return getEndingAccess().getRule();
 	}
 	
 	//Event:
@@ -981,7 +1068,7 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Move:
 	//	{Move}
-	//	'move' direction=MOVE_DIRECTION? ('for' duration=EFloat 'seconds' | isRandom=RANDOM)?;
+	//	'move' direction=MOVE_DIRECTION? ('for' duration=EFloat ('second' | 'seconds') | isRandom?=RANDOM)?;
 	public MoveElements getMoveAccess() {
 		return pMove;
 	}
@@ -992,7 +1079,8 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Turn:
 	//	{Turn}
-	//	'turn' direction=TURN_DIRECTION? ('for' duration=EFloat 'seconds' | degrees=EFloat 'degrees' | isRandom=RANDOM)?;
+	//	'turn' direction=TURN_DIRECTION? ('for' duration=EFloat ('second' | 'seconds') | degrees=EFloat 'degrees' |
+	//	isRandom?=RANDOM)?;
 	public TurnElements getTurnAccess() {
 		return pTurn;
 	}
@@ -1010,6 +1098,49 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getStopRule() {
 		return getStopAccess().getRule();
+	}
+	
+	//RANDOM:
+	//	'randomly' | 'random';
+	public RANDOMElements getRANDOMAccess() {
+		return pRANDOM;
+	}
+	
+	public ParserRule getRANDOMRule() {
+		return getRANDOMAccess().getRule();
+	}
+	
+	//Repeat:
+	//	{Repeat}
+	//	'repeat';
+	public RepeatElements getRepeatAccess() {
+		return pRepeat;
+	}
+	
+	public ParserRule getRepeatRule() {
+		return getRepeatAccess().getRule();
+	}
+	
+	//StartOver:
+	//	{StartOver}
+	//	'start' 'over';
+	public StartOverElements getStartOverAccess() {
+		return pStartOver;
+	}
+	
+	public ParserRule getStartOverRule() {
+		return getStartOverAccess().getRule();
+	}
+	
+	//Wait:
+	//	{Wait}
+	//	'wait';
+	public WaitElements getWaitAccess() {
+		return pWait;
+	}
+	
+	public ParserRule getWaitRule() {
+		return getWaitAccess().getRule();
 	}
 	
 	//EFloat ecore::EFloat:
@@ -1084,16 +1215,6 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 		return getTURN_DIRECTIONAccess().getRule();
 	}
 	
-	//enum RANDOM:
-	//	RANDOM='randomly' | RANDOM='random';
-	public RANDOMElements getRANDOMAccess() {
-		return eRANDOM;
-	}
-	
-	public EnumRule getRANDOMRule() {
-		return getRANDOMAccess().getRule();
-	}
-	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
@@ -1122,6 +1243,12 @@ public class RoboProseGrammarAccess extends AbstractGrammarElementFinder {
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
+	}
+	
+	//terminal WS:
+	//	' ' | '\t' | '\r' | '\n'+;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	}
 	
 	//terminal ANY_OTHER:
