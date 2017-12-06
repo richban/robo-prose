@@ -31,7 +31,7 @@ object Main extends App {
             isSatisfied
         })
 
-    def checkInstances (instances: List[(String, Iterator[EObject])]) = {
+    def checkInstances (instances: Stream[(String, Iterator[EObject])]) = {
       val isValidInstanceLambda = isValidInstance _
       val checker = isValidInstanceLambda(Constraints.invariants)
 

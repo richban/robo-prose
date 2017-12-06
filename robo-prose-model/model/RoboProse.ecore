@@ -33,7 +33,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="EventListener" eSuperTypes="#//ActionsList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sublisteners" upperBound="-1"
         eType="#//EventListener" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Obstacle" eSuperTypes="#//Event"/>
