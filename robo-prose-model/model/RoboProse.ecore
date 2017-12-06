@@ -60,4 +60,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ending" lowerBound="1"
         eType="#//Ending" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NewEClass20"/>
 </ecore:EPackage>
