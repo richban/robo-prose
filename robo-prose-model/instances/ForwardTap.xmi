@@ -8,16 +8,23 @@
   <robot>
     <main>
       <actions
-          xsi:type="roboprose:Move"/>
+          xsi:type="roboprose:Move"
+          duration="2.0"/>
+      <actions
+          xsi:type="roboprose:Turn"
+          duration="0.0"
+          degrees="75.0"
+          direction="right"/>
+      <ending
+          xsi:type="roboprose:Repeat"/>
     </main>
     <listeners>
       <actions
           xsi:type="roboprose:Turn"
           duration="0.0"
           degrees="180.0"/>
-      <actions
-          xsi:type="roboprose:Move"
-          duration="0.0"/>
+      <ending
+          xsi:type="roboprose:StartOver"/>
       <event
           xsi:type="roboprose:Obstacle"/>
     </listeners>

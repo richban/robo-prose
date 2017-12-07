@@ -110,7 +110,7 @@ class ThymioDBus {
     startListening(eventFilter) {
         return Observable.fromEvent(eventFilter, 'Event',
                     (eventId, eventName, eventData) => [eventName, eventData])
-             .throttleTime(THROTTLE_TIME)
+             .auditTime(THROTTLE_TIME)
              .map(([eventName, eventData]) =>
                  this.dispatchEvent(eventName, eventData));
     }
@@ -134,7 +134,7 @@ class Thymio extends ThymioDBus {
         switch (ending) {
             case 'repeat':
                 return Observable.interval(0)
-                    .map(index => actionsObs.elementAt(index % actions.length));
+                    .concatMapTo(actionsObs);
 
             case 'wait':
                 return actionsObs.concat(this.stop());
@@ -155,7 +155,6 @@ class Thymio extends ThymioDBus {
     }
 
     dispatchEvent(eventName, eventData) {
-        console.log(eventName);
         return this.listeners[eventName];
     }
 
@@ -167,6 +166,7 @@ class Thymio extends ThymioDBus {
     }
 
     move(speed) {
+        console.log('move');
         return this.setWheels(speed);
     }
 
@@ -203,6 +203,7 @@ class Thymio extends ThymioDBus {
     }
 
     turn(direction, degrees) {
+        console.log('turn');
         const [speedLeft, speedRight] = direction === 'left'
                 ? [-BASE_SPEED, BASE_SPEED]
                 : [BASE_SPEED, -BASE_SPEED];

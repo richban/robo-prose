@@ -62,14 +62,14 @@ const makeMetaModelDefaults = ePackage =>
 const makeThymio = ([defaults, contents]) => {
     const robot = contents.first().get('robot');
 
-    const main = mapActionList(robot.get('main'));
+    const main = mapActionList(robot.get('main'), defaults);
 
     const listeners = Option(robot.get('listeners'), l => l.size() > 0)
         .map(listeners => {
             return listeners.map(listener =>
                 [
                     listener.get('event').eClass.get('name').toLowerCase(),
-                    mapActionList(listener)
+                    mapActionList(listener, defaults)
                 ]
             )
         })
