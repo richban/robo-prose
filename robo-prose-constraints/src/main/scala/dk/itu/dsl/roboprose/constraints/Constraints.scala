@@ -24,6 +24,8 @@ object Constraints {
         self => self.getMain != null },
 
       "Main requires actions" -> inv[RoboProse] {
+        self => self.getMain != null },
+        inv[RoboProse] {
         self => !self.getMain.getActions.isEmpty },
 
       "RoboProse may have eventListener" -> inv[RoboProse] {
