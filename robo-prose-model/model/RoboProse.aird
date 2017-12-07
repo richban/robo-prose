@@ -53,22 +53,6 @@
             <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
           </endLabelStyleDescription>
         </computedStyleDescriptions>
-        <computedStyleDescriptions xmi:type="style:BundledImageDescription" xmi:id="_ES0JwNoHEeeSCZqKzLtGFg" labelExpression="service:renderAsNode" labelAlignment="LEFT" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
-          <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          <labelFormat>bold</labelFormat>
-          <labelColor xmi:type="description:UserFixedColor" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Inherited']"/>
-          <color xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-        </computedStyleDescriptions>
-        <computedStyleDescriptions xmi:type="style:EdgeStyleDescription" xmi:id="_ETll0NoHEeeSCZqKzLtGFg" routingStyle="manhattan">
-          <strokeColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          <centerLabelStyleDescription xmi:type="style:CenterLabelStyleDescription" xmi:id="_ETll0doHEeeSCZqKzLtGFg" showIcon="false" labelExpression="service:render">
-            <labelFormat>bold</labelFormat>
-            <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          </centerLabelStyleDescription>
-          <endLabelStyleDescription xmi:type="style:EndLabelStyleDescription" xmi:id="_ETll0toHEeeSCZqKzLtGFg" labelSize="6" showIcon="false" labelExpression="service:eKeysLabel">
-            <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
-          </endLabelStyleDescription>
-        </computedStyleDescriptions>
       </data>
     </ownedAnnotationEntries>
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_ggw3wMPCEeeAi7PedjoFLg" source="GMF_DIAGRAMS">
@@ -395,7 +379,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_iNp3YMPCEeeAi7PedjoFLg" name="Root" tooltipText="" outgoingEdges="_eXdekNnfEeeSCZqKzLtGFg _ETwk8NoHEeeSCZqKzLtGFg" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_iNp3YMPCEeeAi7PedjoFLg" name="Root" tooltipText="" outgoingEdges="_iOaFUMPCEeeAi7PedjoFLg" width="12" height="10">
       <target xmi:type="ecore:EClass" href="RoboProse.ecore#//Root"/>
       <semanticElements xmi:type="ecore:EClass" href="RoboProse.ecore#//Root"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
@@ -619,7 +603,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_yCfWNsPPEeePVPUTQJw95g"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_yCfWMcPPEeePVPUTQJw95g" fontName="Segoe UI" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yCfWMsPPEeePVPUTQJw95g" x="708" y="348" width="147" height="87"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yCfWMsPPEeePVPUTQJw95g" x="438" y="276" width="147" height="100"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_0baf8MPQEeePVPUTQJw95g" type="2003" element="_0bRWAMPQEeePVPUTQJw95g">
           <children xmi:type="notation:Node" xmi:id="_0baf88PQEeePVPUTQJw95g" type="5007"/>
