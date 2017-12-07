@@ -140,7 +140,7 @@ class Thymio extends ThymioDBus {
                 return actionsObs.concat(this.stop());
 
             case 'startover':
-                return actionsObs;
+                return actionsObs.concat(this.main);
 
             default:
                 return actionsObs;

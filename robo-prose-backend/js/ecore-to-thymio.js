@@ -33,7 +33,7 @@ const applyDefaults = lodash.identity;
 //};
 
 
-const makeMetaModelDefaults = (ePackage) =>
+const makeMetaModelDefaults = ePackage =>
     lodash.fromPairs(ePackage.values.eClassifiers._internal
         .filter(eClass => eClass.values.eAllAttributes)
         .map(eClass =>
@@ -62,28 +62,31 @@ const makeMetaModelDefaults = (ePackage) =>
 const makeThymio = ([defaults, contents]) => {
     const robot = contents.first().get('robot');
 
-    const main = {actions: robot.get('main').get('actions')
-                      .map(model2ThymioAction.bind(null, defaults)),
-                    ending: 'startover' };
+    const main = mapActionList(robot.get('main'));
 
     const listeners = Option(robot.get('listeners'), l => l.size() > 0)
         .map(listeners => {
-            return listeners.map(listener => {
-                const actions = listener.get('actions')
-                    .map(model2ThymioAction.bind(null, defaults));
-                const ending = Option(listener.get('ending'))
-                    .map(ending => ending.eClass.get('name').toLowerCase())
-                    .unwrapOr(null);
-
-                return [
+            return listeners.map(listener =>
+                [
                     listener.get('event').eClass.get('name').toLowerCase(),
-                    {actions, ending}
-                ];
-            });
+                    mapActionList(listener)
+                ]
+            )
         })
         .map(lodash.fromPairs);
 
     return new Thymio(main, listeners.unwrapOr(null));
+};
+
+
+const mapActionList = (actionList, defaults) => {
+    const actions = actionList.get('actions')
+                              .map(model2ThymioAction.bind(null, defaults));
+    const ending = Option(actionList.get('ending'))
+        .map(ending => ending.eClass.get('name').toLowerCase())
+        .unwrapOr(null);
+
+    return {actions, ending};
 };
 
 
