@@ -24,12 +24,12 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RotorAction" abstract="true" eSuperTypes="#//RandomAction #//ContinuosAction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
-        eType="#//MOVE_DIRECTION" defaultValueLiteral="forwards"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RotorAction" abstract="true" eSuperTypes="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction #//ContinuosAction #//RandomAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//MOVE_DIRECTION"
+        defaultValueLiteral="forwards"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction">
+  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction #//ContinuosAction #//RandomAction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="degrees" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
         defaultValueLiteral="90.0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//TURN_DIRECTION"
@@ -58,11 +58,5 @@
   <eClassifiers xsi:type="ecore:EEnum" name="TURN_DIRECTION">
     <eLiterals name="LEFT" value="1" literal="left"/>
     <eLiterals name="RIGHT" literal="right"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActionsList" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
-        upperBound="-1" eType="#//Action" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ending" eType="#//Ending"
-        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
