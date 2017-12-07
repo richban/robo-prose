@@ -148,8 +148,7 @@ class Thymio extends ThymioDBus {
         const actionObs = this[action.method].apply(this, action.args);
         return !action.duration
                 ? actionObs
-                : actionObs.concat(Observable.timer(
-                        action.duration * 1000));
+                : runFor(actionObs, action.duration * 1000);
     }
 
     move(speed) {
@@ -198,7 +197,7 @@ class Thymio extends ThymioDBus {
         if (!degrees) {
             return actionObs;
         }
-        console.log(degrees);
+
         const radians = Math.PI * degrees / 180;
         const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
         const timeStop = TURN_RADIUS * radians / cmsSpeed;

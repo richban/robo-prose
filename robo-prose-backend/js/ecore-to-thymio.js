@@ -38,8 +38,8 @@ const makeMetaModelDefaults = (ePackage) =>
         .filter(eClass => eClass.values.eAllAttributes)
         .map(eClass =>
             [
-                eClass.values.name.toLowerCase(),
-                eClass.values.eAttributes.call(eClass)
+                eClass.get('name').toLowerCase(),
+                eClass.values.eAllAttributes.call(eClass)
             ]
         )
         .filter(pair => pair[1].length > 0)
@@ -49,8 +49,8 @@ const makeMetaModelDefaults = (ePackage) =>
                 lodash.fromPairs(pair[1]
                     .map(attribute =>
                         [
-                            attribute.values.name,
-                            attribute.values.defaultValueLiteral
+                            attribute.get('name'),
+                            attribute.get('defaultValueLiteral')
                         ]
                     )
                 )
@@ -69,7 +69,7 @@ const makeThymio = ([defaults, contents]) => {
         .map(listeners => {
             return listeners.map(listener => {
                 const eventName = listener.get('event')
-                                          .eClass.values.name.toLowerCase();
+                                          .eClass.get('name').toLowerCase();
                 const actions = listener.get('actions');
                 return [
                     eventName,
@@ -84,25 +84,29 @@ const makeThymio = ([defaults, contents]) => {
 
 
 const model2ThymioAction = (defaults, action) => {
-    switch (action.eClass.values.name.toLowerCase()) {
+    const actionName = action.eClass.get('name').toLowerCase();
+    const attrNames = action.eClass.values.eAllAttributes.call(action.eClass)
+        .map(attr => attr.get('name'));
+    const values = lodash.fromPairs(attrNames
+        .map(attrName =>
+            [
+                attrName,
+                action.get(attrName) || defaults[actionName][attrName]
+            ]
+        )
+    );
+    
+    switch (actionName) {
         case 'move':
-            var direction = action.get('direction') || defaults.move.direction;
-            var duration = action.get('duration') || defaults.move.duration;
-
-            return Thymio.makeAction(`move${ direction.toFirstUppercase() }`,
-                parseFloat(duration));
+            return Thymio.makeAction(`move${ values.direction.toFirstUppercase() }`,
+                parseFloat(values.duration));
 
         case 'stop':
-            return Thymio.makeAction('stop',
-                action.get('duration'));
+            return Thymio.makeAction('stop', parseFloat(values.duration));
 
         case 'turn':
-            var direction = action.get('direction') || defaults.turn.direction;
-            var duration = action.get('duration') || defaults.turn.duration;
-            var degrees = action.get('degrees') || defaults.turn.degrees;
-
-            return Thymio.makeAction(`turn${ direction.toFirstUppercase() }`,
-                parseFloat(duration), parseFloat(degrees));
+            return Thymio.makeAction(`turn${ values.direction.toFirstUppercase() }`,
+                parseFloat(values.duration), parseFloat(values.degrees));
     }
 };
 
@@ -129,7 +133,7 @@ const readEcoreFile = filePath => {
 const registerEcoreModel = contents => {
     const first = contents.first();
 
-    if (first.eClass.values.name !== 'EPackage') {
+    if (first.eClass.get('name') !== 'EPackage') {
         throw new Error('Not an Ecore model');
     }
 
