@@ -14,18 +14,18 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="#//ActionsList"/>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RotorAction" abstract="true" eSuperTypes="#//Action"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction #//ContinuosAction #//randomizable">
+  <eClassifiers xsi:type="ecore:EClass" name="RotorAction" abstract="true" eSuperTypes="#//RandomAction #//ContinuosAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
         eType="#//MOVE_DIRECTION" defaultValueLiteral="forwards"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction #//ContinuosAction #//randomizable">
+  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="degrees" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
         defaultValueLiteral="90.0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
         eType="#//TURN_DIRECTION" defaultValueLiteral="left"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Stop" eSuperTypes="#//Action #//ContinuosAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Stop" eSuperTypes="#//ContinuosAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Ending" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="#//Ending"/>
   <eClassifiers xsi:type="ecore:EClass" name="StartOver" eSuperTypes="#//Ending"/>
@@ -39,11 +39,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Obstacle" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Tapped" eSuperTypes="#//Event"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ContinuosAction" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="ContinuosAction" abstract="true" eSuperTypes="#//Action">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
         defaultValueLiteral="1.0"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="randomizable" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="RandomAction" abstract="true" eSuperTypes="#//Action">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRandom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
