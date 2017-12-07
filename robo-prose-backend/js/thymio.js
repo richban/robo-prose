@@ -13,6 +13,7 @@ const lodash = require('lodash');
 const runFor = (observable, time) =>
     observable.concat(Observable.timer(time));
 
+const THROTTLE_TIME = 500;
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
 class ThymioDBus {
     static bindMethod(obj, method, ...args) {
@@ -109,6 +110,7 @@ class ThymioDBus {
     startListening(eventFilter) {
         return Observable.fromEvent(eventFilter, 'Event',
                     (eventId, eventName, eventData) => [eventName, eventData])
+             .throttleTime(THROTTLE_TIME)
              .map(([eventName, eventData]) =>
                  this.dispatchEvent(eventName, eventData));
     }
@@ -118,11 +120,6 @@ const BASE_SPEED = 500;
 const TURN_RADIUS = 4.5; // half wheel distance
 class Thymio extends ThymioDBus {
     static makeAction(method, duration, ...args) {
-        console.log({
-            method,
-            duration,
-            args
-        });
         return {
             method,
             duration,
@@ -201,7 +198,7 @@ class Thymio extends ThymioDBus {
         if (!degrees) {
             return actionObs;
         }
-
+        console.log(degrees);
         const radians = Math.PI * degrees / 180;
         const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
         const timeStop = TURN_RADIUS * radians / cmsSpeed;

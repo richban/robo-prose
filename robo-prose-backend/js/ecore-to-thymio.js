@@ -60,7 +60,7 @@ const makeMetaModelDefaults = (ePackage) =>
 
 
 const makeThymio = ([defaults, contents]) => {
-    const robot = contents.first().get('robots').first();
+    const robot = contents.first().get('robot');
 
     const main = robot.get('main').get('actions')
                       .map(model2ThymioAction.bind(null, defaults));
