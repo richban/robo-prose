@@ -4,8 +4,7 @@
 
 
 <!--list of global events-->
-<event size="0" id="0" name="tapped"/>
-<event size="0" id="1" name="obstacle"/>
+<event size="0" id="0" name="obstacle"/>
 
 <!--list of constants-->
 
@@ -16,13 +15,6 @@
 
 <!--node thymio-II-->
 <node name="thymio-II">
-
-onevent buttons
-if button.backward == 1 or button.center == 1 or button.forward == 1 or button.left == 1 or button.right == 1 then
-    emit tapped
-end
-
-
 
 onevent prox
 if prox.horizontal[0] > 1000 or prox.horizontal[1] > 1000 or prox.horizontal[2] > 1000 or prox.horizontal[3] > 1000 or prox.horizontal[4] > 1000 or prox.horizontal[5] > 1000 or prox.horizontal[6] > 1000 then

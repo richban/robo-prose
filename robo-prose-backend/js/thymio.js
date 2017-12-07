@@ -10,7 +10,10 @@ const path = require('path');
 const broadcastEvents = require('./aseba-broadcaster.js');
 const lodash = require('lodash');
 
+const runFor = (observable, time) =>
+    observable.concat(Observable.timer(time));
 
+const THROTTLE_TIME = 500;
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
 class ThymioDBus {
     static bindMethod(obj, method, ...args) {
@@ -51,14 +54,14 @@ class ThymioDBus {
                        : parseInt(value))
     }
 
-    listenTo(events) {
+    filterEvents(events) {
         return this.eventFilter
-               .concatMap(eventFilter =>
+               .mergeMap(eventFilter =>
                    Observable.from(events)
-                         .concatMap(eventName =>
+                         .mergeMap(eventName =>
                              ThymioDBus.bindMethod(eventFilter,
                                     'ListenEventName', eventName))
-                         .concat(this.startListening(eventFilter))
+                         .concat(Observable.of(eventFilter))
                );
     }
 
@@ -84,29 +87,64 @@ class ThymioDBus {
     }
 
     set(variable, value) {
-        return this.networkCall('SetVariable', variable, value)
+        return this.networkCall('SetVariable', variable, value);
+    }
+
+    setLeftWheel(value) {
+        value = Array.isArray(value) ? value : [value];
+        return this.set('motor.left.target', value);
+    }
+
+    setRightWheel(value) {
+        value = Array.isArray(value) ? value : [value];
+        return this.set('motor.right.target', value);
+    }
+
+    setWheels(valueLeft, valueRight) {
+        valueRight = valueRight || valueLeft;
+
+        return this.setLeftWheel(valueLeft)
+            .concat(this.setRightWheel(valueRight));
     }
 
     startListening(eventFilter) {
         return Observable.fromEvent(eventFilter, 'Event',
                     (eventId, eventName, eventData) => [eventName, eventData])
-             .do(([eventName, eventData]) =>
+             .throttleTime(THROTTLE_TIME)
+             .map(([eventName, eventData]) =>
                  this.dispatchEvent(eventName, eventData));
     }
 }
 
-
+const BASE_SPEED = 500;
+const TURN_RADIUS = 4.5; // half wheel distance
 class Thymio extends ThymioDBus {
-    static makeAction(method, ...args) {
+    static makeAction(method, duration, ...args) {
         return {
             method,
+            duration,
             args
         };
     }
 
-    actionsToObs(actions) {
-        return Observable.from(actions)
+    actionsToObs({actions, ending}) {
+        const actionsObs = Observable.from(actions)
             .concatMap(this.executeAction.bind(this));
+
+        switch (ending) {
+            case 'repeat':
+                return Observable.interval(0)
+                    .map(index => actionsObs.elementAt(index % actions.length));
+
+            case 'wait':
+                return actionsObs.concat(this.stop());
+
+            case 'startover':
+                return actionsObs;
+
+            default:
+                return actionsObs;
+        }
     }
 
     constructor(main, listeners) {
@@ -117,25 +155,27 @@ class Thymio extends ThymioDBus {
     }
 
     dispatchEvent(eventName, eventData) {
-        this.listeners[eventName].subscribe();
+        console.log(eventName);
+        return this.listeners[eventName];
     }
 
     executeAction(action) {
-        return this[action.method].apply(this, action.args);
+        const actionObs = this[action.method].apply(this, action.args);
+        return !action.duration
+                ? actionObs
+                : runFor(actionObs, action.duration * 1000);
     }
 
     move(speed) {
-        const arg = [speed];
-        return this.set('motor.left.target', arg)
-            .concat(this.set('motor.right.target', arg))
+        return this.setWheels(speed);
     }
 
-    moveBackward() {
-        return this.move(-200);
+    moveBackwards() {
+        return this.move(-BASE_SPEED);
     }
 
-    moveForward() {
-        return this.move(200);
+    moveForwards() {
+        return this.move(BASE_SPEED);
     }
 
     run() {
@@ -147,14 +187,46 @@ class Thymio extends ThymioDBus {
             const asebaScript = broadcastEvents(this.name, eventNames);
 
             this.loadScript(asebaScript)
-                .concat(this.main)
-                .concat(this.listenTo(eventNames))
+                .concat(this.filterEvents(eventNames))
+                .last()
+                .concatMap(eventFilter =>
+                    this.startListening(eventFilter)
+                        .startWith(this.main)
+                        .switch()
+                )
                 .subscribe();
         }
     }
 
     stop() {
         return this.move(0);
+    }
+
+    turn(direction, degrees) {
+        const [speedLeft, speedRight] = direction === 'left'
+                ? [-BASE_SPEED, BASE_SPEED]
+                : [BASE_SPEED, -BASE_SPEED];
+
+        const actionObs = this.setWheels(speedLeft, speedRight);
+
+        if (!degrees) {
+            return actionObs;
+        }
+
+        const radians = Math.PI * degrees / 180;
+        const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
+        const timeStop = TURN_RADIUS * radians / cmsSpeed;
+
+        return runFor(actionObs, timeStop * 1000)
+            .concat(this.stop());
+    }
+
+    turnLeft(degrees) {
+        return this.turn('left', degrees);
+    }
+
+    turnRight(degrees) {
+        return this.turn('right', degrees);
     }
 }
 
