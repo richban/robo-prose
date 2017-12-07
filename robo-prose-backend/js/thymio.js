@@ -127,9 +127,24 @@ class Thymio extends ThymioDBus {
         };
     }
 
-    actionsToObs(actions) {
-        return Observable.from(actions)
+    actionsToObs({actions, ending}) {
+        const actionsObs = Observable.from(actions)
             .concatMap(this.executeAction.bind(this));
+
+        switch (ending) {
+            case 'repeat':
+                return Observable.interval(0)
+                    .map(index => actionsObs.elementAt(index % actions.length));
+
+            case 'wait':
+                return actionsObs.concat(this.stop());
+
+            case 'startover':
+                return actionsObs;
+
+            default:
+                return actionsObs;
+        }
     }
 
     constructor(main, listeners) {

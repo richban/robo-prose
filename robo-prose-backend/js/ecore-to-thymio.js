@@ -62,18 +62,22 @@ const makeMetaModelDefaults = (ePackage) =>
 const makeThymio = ([defaults, contents]) => {
     const robot = contents.first().get('robot');
 
-    const main = robot.get('main').get('actions')
-                      .map(model2ThymioAction.bind(null, defaults));
+    const main = {actions: robot.get('main').get('actions')
+                      .map(model2ThymioAction.bind(null, defaults)),
+                    ending: 'startover' };
 
     const listeners = Option(robot.get('listeners'), l => l.size() > 0)
         .map(listeners => {
             return listeners.map(listener => {
-                const eventName = listener.get('event')
-                                          .eClass.get('name').toLowerCase();
-                const actions = listener.get('actions');
+                const actions = listener.get('actions')
+                    .map(model2ThymioAction.bind(null, defaults));
+                const ending = Option(listener.get('ending'))
+                    .map(ending => ending.eClass.get('name').toLowerCase())
+                    .unwrapOr(null);
+
                 return [
-                    eventName,
-                    actions.map(model2ThymioAction.bind(null, defaults))
+                    listener.get('event').eClass.get('name').toLowerCase(),
+                    {actions, ending}
                 ];
             });
         })
@@ -95,7 +99,7 @@ const model2ThymioAction = (defaults, action) => {
             ]
         )
     );
-    
+
     switch (actionName) {
         case 'move':
             return Thymio.makeAction(`move${ values.direction.toFirstUppercase() }`,
