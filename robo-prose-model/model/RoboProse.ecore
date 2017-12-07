@@ -59,10 +59,4 @@
     <eLiterals name="LEFT" value="1" literal="left"/>
     <eLiterals name="RIGHT" literal="right"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActionsList" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
-        upperBound="-1" eType="#//Action" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ending" eType="#//Ending"
-        containment="true"/>
-  </eClassifiers>
 </ecore:EPackage>
