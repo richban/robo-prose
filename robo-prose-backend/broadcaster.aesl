@@ -17,7 +17,7 @@
 <node name="thymio-II">
 
 onevent prox
-if prox.horizontal[0] > 50 or prox.horizontal[1] > 200 or prox.horizontal[2] > 200 or prox.horizontal[3] > 200 or prox.horizontal[4] > 50 then
+if prox.horizontal[0] > 50 or prox.horizontal[1] > 125 or prox.horizontal[2] > 125 or prox.horizontal[3] > 125 or prox.horizontal[4] > 50 then
     emit obstacle
 end
 
