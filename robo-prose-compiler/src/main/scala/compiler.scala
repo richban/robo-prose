@@ -10,12 +10,11 @@
 // Right now the input file name is hard coded below, but you can easily
 // change this to use command line arguments
 
-package dk.itu.dsl.roboprose.xtext
+package dk.itu.dsl.roboprose.richban.xtext
 
 import scala.collection.JavaConversions._
 
 import dk.itu.dsl.roboprose.model._
-import dk.itu.dsl.roboprose.RoboProseStandaloneSetup
 import mdsebook.scala.EMFScala._
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
