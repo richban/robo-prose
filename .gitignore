@@ -13,6 +13,10 @@ local.properties
 .loadpath
 .recommenders
 
+# Xtext
+**/src-gen/**
+**/xtend-gen/**
+
 # External tool builders
 .externalToolBuilders/
 

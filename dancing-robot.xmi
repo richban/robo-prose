@@ -3,9 +3,10 @@
   <main>
     <actions xsi:type="roboprose:Move"/>
     <actions xsi:type="roboprose:Move" direction="backwards"/>
+    <ending xsi:type="roboprose:Repeat"/>
   </main>
   <listeners>
-    <event xsi:type="roboprose:Tapped"/>
     <actions xsi:type="roboprose:Move" duration="3.0" direction="backwards"/>
+    <event xsi:type="roboprose:Tapped"/>
   </listeners>
 </roboprose:RoboProse>

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="dk.itu.dsl.roboprose.xtext.ide/xtend-gen"/>
+	<classpathentry kind="src" path="dk.itu.dsl.roboprose.xtext.tests/xtend-gen"/>
+	<classpathentry kind="src" path="dk.itu.dsl.roboprose.xtext.ui/xtend-gen"/>
+	<classpathentry kind="src" path="robo-prose-constraints/project"/>
+	<classpathentry kind="src" path="robo-prose-constraints/src/main/scala"/>
+	<classpathentry kind="src" path="robo-prose-constraints/src/test/scala"/>
+	<classpathentry kind="lib" path="dk.itu.dsl.roboprose.compiler/target/scala-2.11/compile2xmi.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
