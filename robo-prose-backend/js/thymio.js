@@ -4,14 +4,12 @@
 
 const dbus = require('dbus-native');
 const fs = require('fs');
+const lodash = require('lodash');
 const { Observable } = require('rxjs');
 const path = require('path');
 
 const broadcastEvents = require('./aseba-broadcaster.js');
-const lodash = require('lodash');
-
-const runFor = (observable, time) =>
-    observable.concat(Observable.timer(time));
+const util = require('./util');
 
 const THROTTLE_TIME = 500;
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
@@ -119,12 +117,55 @@ class ThymioDBus {
 const BASE_SPEED = 500;
 const TURN_RADIUS = 4.5; // half wheel distance
 class Thymio extends ThymioDBus {
-    static makeAction(method, duration, ...args) {
+    static makeAction(values, isRandom, method) {
         return {
-            method,
-            duration,
-            args
+            isRandom,
+            values,
+            method
         };
+    }
+
+    static randomize(values) {
+        return lodash.mapValues(values, ({value, type, literals}) => {
+            if (value) {
+                return value;
+            }
+
+            if (literals) {
+                const index = Math.floor(Math.random() * literals.length);
+                return literals[index];
+            }
+
+            switch (type) {
+                case 'float':
+                    return Math.random() * 100;
+            }
+        });
+    }
+
+    static runFor(observable, time) {
+        return observable.concat(Observable.timer(time));
+    }
+
+    static setDegrees(turnObs, degrees) {
+        degrees = parseFloat(degrees);
+        if (!degrees) {
+            return turnObs;
+        }
+
+        const radians = Math.PI * degrees / 180;
+        const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
+        const timeStop = TURN_RADIUS * radians / cmsSpeed;
+
+        return Thymio.runFor(turnObs, timeStop * 1000);
+    }
+
+    constructor(main, listeners) {
+        super('thymio-II');
+        this.main = this.actionsToObs(main);
+//        this.main.subscribe();
+        this.listeners = lodash.mapValues(listeners,
+            this.actionsToObs.bind(this));
     }
 
     actionsToObs({actions, ending}) {
@@ -147,35 +188,36 @@ class Thymio extends ThymioDBus {
         }
     }
 
-    constructor(main, listeners) {
-        super('thymio-II');
-        this.main = this.actionsToObs(main);
-        this.listeners = lodash.mapValues(listeners,
-            this.actionsToObs.bind(this));
-    }
-
     dispatchEvent(eventName, eventData) {
         return this.listeners[eventName];
     }
 
     executeAction(action) {
-        const actionObs = this[action.method].apply(this, action.args);
-        return !action.duration
-                ? actionObs
-                : runFor(actionObs, action.duration * 1000);
+        return Observable.of(action)
+            .concatMap(action => {
+                const values = action.isRandom
+                    ? Thymio.randomize(action.values)
+                    : action.values;
+
+                const actionObs = this[action.method].call(this, values);
+                
+                return parseFloat(values.duration)
+                        ? Thymio.runFor(actionObs, parseFloat(values.duration) * 1000)
+                        : actionObs;
+            });
     }
 
-    move(speed) {
-        console.log('move');
-        return this.setWheels(speed);
+    move({direction}) {
+        const methodName = `move${ direction.toFirstUppercase() }`;
+        return this[methodName]();
     }
 
     moveBackwards() {
-        return this.move(-BASE_SPEED);
+        return this.setWheels(-BASE_SPEED);
     }
 
     moveForwards() {
-        return this.move(BASE_SPEED);
+        return this.setWheels(BASE_SPEED);
     }
 
     run() {
@@ -199,35 +241,22 @@ class Thymio extends ThymioDBus {
     }
 
     stop() {
-        return this.move(0);
+        return this.setWheels(0);
     }
 
-    turn(direction, degrees) {
-        console.log('turn');
-        const [speedLeft, speedRight] = direction === 'left'
-                ? [-BASE_SPEED, BASE_SPEED]
-                : [BASE_SPEED, -BASE_SPEED];
-
-        const actionObs = this.setWheels(speedLeft, speedRight);
-
-        if (!degrees) {
-            return actionObs;
-        }
-
-        const radians = Math.PI * degrees / 180;
-        const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
-        const timeStop = TURN_RADIUS * radians / cmsSpeed;
-
-        return runFor(actionObs, timeStop * 1000)
-            .concat(this.stop());
+    turn({direction, degrees}) {
+        const methodName = `turn${ direction.toFirstUppercase() }`;
+        return this[methodName]({degrees});
     }
 
-    turnLeft(degrees) {
-        return this.turn('left', degrees);
+    turnLeft({degrees}) {
+        const turnObs = this.setWheels(-BASE_SPEED, BASE_SPEED);
+        return Thymio.setDegrees(turnObs, degrees);
     }
 
-    turnRight(degrees) {
-        return this.turn('right', degrees);
+    turnRight({degrees}) {
+        const turnObs = this.setWheels(BASE_SPEED, -BASE_SPEED);
+        return Thymio.setDegrees(turnObs, degrees);
     }
 }
 

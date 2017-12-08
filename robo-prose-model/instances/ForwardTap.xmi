@@ -9,20 +9,16 @@
     <main>
       <actions
           xsi:type="roboprose:Move"
-          duration="2.0"/>
-      <actions
-          xsi:type="roboprose:Turn"
-          duration="0.0"
-          degrees="75.0"
-          direction="right"/>
-      <ending
-          xsi:type="roboprose:Repeat"/>
+          duration="0.0"/>
     </main>
     <listeners>
       <actions
+          xsi:type="roboprose:Move"
+          direction="backwards"/>
+      <actions
           xsi:type="roboprose:Turn"
           duration="0.0"
-          degrees="180.0"/>
+          isRandom="true"/>
       <ending
           xsi:type="roboprose:StartOver"/>
       <event
