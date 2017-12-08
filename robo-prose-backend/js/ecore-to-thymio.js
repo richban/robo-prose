@@ -59,19 +59,9 @@ const makeThymio = ([defaults, contents]) => {
     const robot = contents.first().get('robot');
 
     const main = mapActionList(robot.get('main'), defaults);
+    const listeners = mapListeners(robot.get('listeners'), defaults);
 
-    const listeners = Option(robot.get('listeners'), l => l.size() > 0)
-        .map(listeners =>
-            listeners.map(listener =>
-                [
-                    listener.get('event').eClass.get('name').toLowerCase(),
-                    mapActionList(listener, defaults)
-                ]
-            )
-        )
-        .map(lodash.fromPairs);
-
-    return new Thymio(main, listeners.unwrapOr(null));
+    return new Thymio(main, listeners);
 };
 
 
@@ -124,6 +114,23 @@ const mapActionList = (actionList, defaults) => {
 
     return {actions, ending};
 };
+
+
+const mapListeners = (listeners, defaults) =>
+    Option(listeners, l => l && l.size() > 0)
+        .map(listeners =>
+            listeners.map(listener =>
+                [
+                    listener.get('event').eClass.get('name').toLowerCase(),
+                    {
+                        actions: mapActionList(listener, defaults),
+                        listeners: mapListeners(listener.get('sublisteners'),
+                            defaults)
+                    }
+                ]
+            )
+        )
+        .mapOr(null, lodash.fromPairs);
 
 
 const model2ThymioAction = (defaults, action) => {

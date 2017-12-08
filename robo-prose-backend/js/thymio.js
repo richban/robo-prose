@@ -164,8 +164,8 @@ class Thymio extends ThymioDBus {
     constructor(main, listeners) {
         super('thymio-II');
         this.main = this.actionsToObs(main);
-        this.listeners = lodash.mapValues(listeners,
-            this.actionsToObs.bind(this));
+        this.listeners = lodash.mapValues(this.listenersToObs(listeners),
+            listener => [listener]);
     }
 
     actionsToObs({actions, ending}) {
@@ -189,7 +189,17 @@ class Thymio extends ThymioDBus {
     }
 
     dispatchEvent(eventName, eventData) {
-        return this.listeners[eventName];
+        const currentListener = this.listeners[eventName][0];
+
+        this.listeners = lodash.mapValues(this.listeners,
+            (listener, eventName) => {
+                const sublistener = currentListener.listeners[eventName];
+                return sublistener
+                    ? listener.unshiftAll(sublistener)
+                    : listener;
+            });
+
+        return currentListener.actions;
     }
 
     executeAction(action) {
@@ -211,6 +221,19 @@ class Thymio extends ThymioDBus {
                         ? Thymio.runFor(actionObs, values.duration * 1000)
                         : actionObs;
             });
+    }
+
+    listenersToObs(listeners) {
+        if (!listeners) {
+            return null;
+        }
+
+        return lodash.mapValues(listeners, listener => {
+            return {
+                actions: this.actionsToObs(listener.actions),
+                listeners: this.listenersToObs(listener.listeners)
+            }
+        });
     }
 
     move({direction}) {

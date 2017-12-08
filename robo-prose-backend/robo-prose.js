@@ -12,5 +12,5 @@ const INSTANCE_FILE = argv.instance
         || argv._[1];
 
 parser(MODEL_FILE, INSTANCE_FILE)
-    .do(thymio => thymio.run())
+//    .do(thymio => thymio.run())
     .subscribe();
