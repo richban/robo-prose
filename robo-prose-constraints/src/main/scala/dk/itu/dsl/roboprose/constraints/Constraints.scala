@@ -15,11 +15,24 @@ object Constraints {
       .groupBy(identity).forall( pair => pair._2.length == 1)
   }
 
-  def isIndefinite (action: Action): Boolean = {
-      !((action.isInstanceOf[ContinuosAction] &&
-        action.asInstanceOf[ContinuosAction].eIsSet(RoboprosePackage.CONTINUOS_ACTION__DURATION)) ||
-      (action.isInstanceOf[RandomAction] && action.asInstanceOf[RandomAction].isIsRandom) ||
-      (action.isInstanceOf[Turn] && action.asInstanceOf[Turn].eIsSet(RoboprosePackage.TURN__DEGREES)))
+  // def isIndefiniteInvalid (action: Action): Boolean = {
+  //     !((action.isInstanceOf[ContinuosAction] &&
+  //       action.asInstanceOf[ContinuosAction].eIsSet(RoboprosePackage.CONTINUOS_ACTION__DURATION)) ||
+  //     (action.isInstanceOf[RandomAction] && action.asInstanceOf[RandomAction].isIsRandom) ||
+  //     (action.isInstanceOf[Turn] && action.asInstanceOf[Turn].eIsSet(RoboprosePackage.TURN__DEGREES)))
+  // }
+
+  def isSet(action: Action, feature: Int): Boolean =
+    (action, feature) match {
+    case (action: Turn, RoboprosePackage.TURN__DURATION)  =>
+      action.asInstanceOf[Turn].getDuration != RoboprosePackage.DURATION_EDEFAULT
+    case (action: Turn, RoboprosePackage.TURN__DEGREES) =>
+      action.asInstanceOf[Turn].getDegrees != RoboprosePackage.DEGREES_EDEFAULT
+  }
+  def isIndefinite (action: Action): Boolean = action match {
+    case action: ContinuosAction => has(action.getDuration)
+    case action: RandomAction => action.isIsRandom
+    case action: Turn => action.getDegrees != null
   }
 
   val invariants: Map[String, Constraint] = Map (
@@ -71,6 +84,15 @@ object Constraints {
       "If the last action is not indefinite and ending is required"
         -> inv[ActionsList] { self =>
           !isIndefinite(self.getActions.last) implies has(self.getEnding)
+        },
+
+      "Turn Action can't have degrees and duration set at the same time"
+        -> inv[Turn] { self =>
+          isSet(self, RoboprosePackage.TURN__DURATION) implies
+            !isSet(self, RoboprosePackage.TURN__DEGREES) &&
+              isSet(self, RoboprosePackage.TURN__DEGREES) implies
+                !isSet(self, RoboprosePackage.TURN__DURATION)
+
         }
       )
 }

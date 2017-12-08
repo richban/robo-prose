@@ -54,7 +54,9 @@ object Main extends App {
 
     // Model instances
     val instances = Stream(
-        "../robo-prose-model/instances/RoboProseInstance1.xmi")
+        "../robo-prose-model/instances/RoboProseInstance1.xmi",
+        "../robo-prose-model/instances/RoboProseTurnInvalidIntance.xmi"
+      )
         .map(fileName => (fileName.split("/").last, URI.createURI(fileName)))
         .map(map2nd((new ResourceSetImpl).getResource(_, true)))
         // http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/util/EcoreUtil.html#getAllProperContents%28org.eclipse.emf.ecore.resource.Resource,%20boolean%29
