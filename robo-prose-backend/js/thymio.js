@@ -10,7 +10,7 @@ const path = require('path');
 
 const broadcastEvents = require('./aseba-broadcaster.js');
 
-const THROTTLE_TIME = 500;
+const THROTTLE_TIME = 100;
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
 class ThymioDBus {
     static bindMethod(obj, method, ...args) {

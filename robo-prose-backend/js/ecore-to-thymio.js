@@ -9,7 +9,7 @@ const lodash = require('lodash');
 const { Observable } = require('rxjs');
 const path = require('path');
 
-const { Option, castValue } = require('./util');
+const { Option } = require('./util');
 const Thymio = require('./thymio.js');
 
 
@@ -153,16 +153,18 @@ const model2ThymioAction = (defaults, action) => {
         (value, name) => value.value || actionDefaults[name]);
 
     const makeAction = Thymio.makeAction.bind(null, defaultizedValues, false);
+    const direction = Option(defaultizedValues.direction)
+        .map(dir => dir.toFirstUppercase());
 
     switch (actionName) {
         case 'move':
-            return makeAction(`move${ defaultizedValues.direction.toFirstUppercase() }`);
+            return makeAction(`move${ direction.unwrap() }`);
 
         case 'stop':
             return makeAction('stop');
 
         case 'turn':
-            return makeAction(`turn${ defaultizedValues.direction.toFirstUppercase() }`);
+            return makeAction(`turn${ direction.unwrap() }`);
     }
 };
 

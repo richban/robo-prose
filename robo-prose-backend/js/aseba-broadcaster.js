@@ -2,7 +2,7 @@
 const eventImpl = {
     obstacle: `
 onevent prox
-if prox.horizontal[0] > 1000 or prox.horizontal[1] > 1000 or prox.horizontal[2] > 1000 or prox.horizontal[3] > 1000 or prox.horizontal[4] > 1000 or prox.horizontal[5] > 1000 or prox.horizontal[6] > 1000 then
+if prox.horizontal[0] > 50 or prox.horizontal[1] > 125 or prox.horizontal[2] > 125 or prox.horizontal[3] > 125 or prox.horizontal[4] > 50 then
     emit obstacle
 end
 `,
