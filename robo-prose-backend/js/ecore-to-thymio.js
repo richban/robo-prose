@@ -28,21 +28,6 @@ const applyDefaults = lodash.identity;
 //};
 
 
-const augmentValue = (attribute, value) => {
-    const attrType = attribute.get('eType');
-
-    const type = attrType.get('name')
-        .toLowerCase()
-        .replace(/^e/, '');
-
-    const literals = Option(attrType.get('eLiterals'))
-        .map(lit => lit.map(val => val.get('literal')))
-        .unwrapOr(null);
-
-    return {value, type, literals};
-};
-
-
 const makeMetaModelDefaults = ePackage =>
     lodash.fromPairs(ePackage.values.eClassifiers._internal
         .filter(eClass => eClass.values.eAllAttributes)
@@ -60,10 +45,8 @@ const makeMetaModelDefaults = ePackage =>
                     .map(attribute =>
                         [
                             attribute.get('name'),
-                            castValue(augmentValue(
-                                attribute,
-                                attribute.get('defaultValueLiteral'),
-                            )).value
+                            makeAttrProps(attribute)
+                                .cast(attribute.get('defaultValueLiteral'))
                         ]
                     )
                 )
@@ -92,6 +75,46 @@ const makeThymio = ([defaults, contents]) => {
 };
 
 
+const makeAttrProps = attribute => {
+    const attrType = attribute.get('eType');
+
+    const type = attrType.get('name')
+                         .toLowerCase()
+                         .replace(/^e/, '');
+
+    const literals = Option(attrType.get('eLiterals'))
+        .map(lit => lit.map(val => val.get('literal')))
+        .unwrapOr(null);
+
+    var caster;
+    switch (type) {
+        case 'boolean':
+            caster = value => value.toLowerCase() === 'true';
+            break;
+
+        case 'float':
+            caster = parseFloat;
+            break;
+
+        default:
+            caster = lodash.identity;
+            break;
+    }
+
+    return {
+        cast: value => {
+            if (!value) {
+                return value;
+            }
+
+            return caster(value);
+        },
+        literals,
+        type
+    };
+};
+
+
 const mapActionList = (actionList, defaults) => {
     const actions = actionList.get('actions')
         .map(model2ThymioAction.bind(null, defaults));
@@ -106,25 +129,25 @@ const mapActionList = (actionList, defaults) => {
 const model2ThymioAction = (defaults, action) => {
     const attributes = action.eClass.values.eAllAttributes.call(action.eClass);
     const values = lodash.fromPairs(attributes
-        .map(attribute =>
-            [
-                attribute.get('name'),
-                castValue(augmentValue(
-                    attribute,
-                    action.get(attribute.get('name')),
-                ))
+        .map(attribute => {
+            const attrName = attribute.get('name');
+            const attrProps = makeAttrProps(attribute);
+            return [
+                attrName,
+                {
+                    value: attrProps.cast(action.get(attrName)),
+                    props: attrProps
+                }
             ]
-        )
+        })
     );
 
     const actionName = action.eClass.get('name').toLowerCase();
     const actionDefaults = defaults[actionName];
-    const isRandom = (values.isRandom || actionDefaults.isRandom) === 'true';
 
-    if (isRandom) {
+    if (values.isRandom.value || actionDefaults.isRandom) {
         return Thymio.makeAction(values, true, actionName);
     }
-
 
     const defaultizedValues = lodash.mapValues(values,
         (value, name) => value.value || actionDefaults[name]);

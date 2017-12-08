@@ -9,7 +9,6 @@ const { Observable } = require('rxjs');
 const path = require('path');
 
 const broadcastEvents = require('./aseba-broadcaster.js');
-const { castValue } = require('./util');
 
 const THROTTLE_TIME = 500;
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
@@ -126,7 +125,7 @@ class Thymio extends ThymioDBus {
     }
 
     static randomize(values) {
-        return lodash.mapValues(values, ({value, type, literals}) => {
+        return lodash.mapValues(values, ({value, props: {type, literals}}) => {
             if (value) {
                 return value;
             }
@@ -196,14 +195,17 @@ class Thymio extends ThymioDBus {
     executeAction(action) {
         return Observable.of(action)
             .concatMap(action => {
-                const values = lodash.mapValues(
-                    action.isRandom
+                const values = action.isRandom
                         ? Thymio.randomize(action.values)
-                        : action.values,
-                    castValue
-                );
+                        : action.values;
 
                 const actionObs = this[action.method].call(this, values);
+
+                if (action.method.startsWith('turn')
+                        && values.duration
+                        && values.degrees) {
+                    values.duration = 0;
+                }
 
                 return values.duration
                         ? Thymio.runFor(actionObs, values.duration * 1000)
