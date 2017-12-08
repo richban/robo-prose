@@ -9,7 +9,7 @@ const lodash = require('lodash');
 const { Observable } = require('rxjs');
 const path = require('path');
 
-const { Option } = require('./util');
+const { Option, castValue } = require('./util');
 const Thymio = require('./thymio.js');
 
 
@@ -28,10 +28,8 @@ const applyDefaults = lodash.identity;
 //};
 
 
-const augmentValue = (attributes, value, name) => {
-    const attrType = attributes
-        .find(attr => attr.get('name') === name)
-        .get('eType');
+const augmentValue = (attribute, value) => {
+    const attrType = attribute.get('eType');
 
     const type = attrType.get('name')
         .toLowerCase()
@@ -62,7 +60,10 @@ const makeMetaModelDefaults = ePackage =>
                     .map(attribute =>
                         [
                             attribute.get('name'),
-                            attribute.get('defaultValueLiteral')
+                            castValue(augmentValue(
+                                attribute,
+                                attribute.get('defaultValueLiteral'),
+                            )).value
                         ]
                     )
                 )
@@ -104,12 +105,14 @@ const mapActionList = (actionList, defaults) => {
 
 const model2ThymioAction = (defaults, action) => {
     const attributes = action.eClass.values.eAllAttributes.call(action.eClass);
-    const attrNames = attributes.map(attr => attr.get('name'));
-    const values = lodash.fromPairs(attrNames
-        .map(attrName =>
+    const values = lodash.fromPairs(attributes
+        .map(attribute =>
             [
-                attrName,
-                action.get(attrName)
+                attribute.get('name'),
+                castValue(augmentValue(
+                    attribute,
+                    action.get(attribute.get('name')),
+                ))
             ]
         )
     );
@@ -119,14 +122,12 @@ const model2ThymioAction = (defaults, action) => {
     const isRandom = (values.isRandom || actionDefaults.isRandom) === 'true';
 
     if (isRandom) {
-        const augmentedValues = lodash.mapValues(values,
-            augmentValue.bind(null, attributes));
-        return Thymio.makeAction(augmentedValues, true, actionName);
+        return Thymio.makeAction(values, true, actionName);
     }
 
 
     const defaultizedValues = lodash.mapValues(values,
-        (value, name) => value || actionDefaults[name]);
+        (value, name) => value.value || actionDefaults[name]);
 
     const makeAction = Thymio.makeAction.bind(null, defaultizedValues, false);
 

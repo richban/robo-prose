@@ -9,7 +9,7 @@ const { Observable } = require('rxjs');
 const path = require('path');
 
 const broadcastEvents = require('./aseba-broadcaster.js');
-const util = require('./util');
+const { castValue } = require('./util');
 
 const THROTTLE_TIME = 500;
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
@@ -137,6 +137,9 @@ class Thymio extends ThymioDBus {
             }
 
             switch (type) {
+                case 'boolean':
+                    return Math.random() > 0.5;
+
                 case 'float':
                     return Math.random() * 100;
             }
@@ -148,7 +151,6 @@ class Thymio extends ThymioDBus {
     }
 
     static setDegrees(turnObs, degrees) {
-        degrees = parseFloat(degrees);
         if (!degrees) {
             return turnObs;
         }
@@ -163,7 +165,6 @@ class Thymio extends ThymioDBus {
     constructor(main, listeners) {
         super('thymio-II');
         this.main = this.actionsToObs(main);
-//        this.main.subscribe();
         this.listeners = lodash.mapValues(listeners,
             this.actionsToObs.bind(this));
     }
@@ -195,14 +196,17 @@ class Thymio extends ThymioDBus {
     executeAction(action) {
         return Observable.of(action)
             .concatMap(action => {
-                const values = action.isRandom
-                    ? Thymio.randomize(action.values)
-                    : action.values;
+                const values = lodash.mapValues(
+                    action.isRandom
+                        ? Thymio.randomize(action.values)
+                        : action.values,
+                    castValue
+                );
 
                 const actionObs = this[action.method].call(this, values);
-                
-                return parseFloat(values.duration)
-                        ? Thymio.runFor(actionObs, parseFloat(values.duration) * 1000)
+
+                return values.duration
+                        ? Thymio.runFor(actionObs, values.duration * 1000)
                         : actionObs;
             });
     }
