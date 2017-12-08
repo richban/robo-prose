@@ -15,12 +15,12 @@ object Constraints {
       .groupBy(identity).forall( pair => pair._2.length == 1)
   }
 
-  def isIndefinite (action: Action): Boolean = {
-      !((action.isInstanceOf[ContinuosAction] &&
-        action.asInstanceOf[ContinuosAction].eIsSet(RoboprosePackage.CONTINUOS_ACTION__DURATION)) ||
-      (action.isInstanceOf[RandomAction] && action.asInstanceOf[RandomAction].isIsRandom) ||
-      (action.isInstanceOf[Turn] && action.asInstanceOf[Turn].eIsSet(RoboprosePackage.TURN__DEGREES)))
-  }
+//  def isIndefinite (action: Action): Boolean = {
+//      !((action.isInstanceOf[ContinuosAction] &&
+//        action.asInstanceOf[ContinuosAction].eIsSet(RoboprosePackage.CONTINUOS_ACTION__DURATION)) ||
+//      (action.isInstanceOf[RandomAction] && action.asInstanceOf[RandomAction].isIsRandom) ||
+//      (action.isInstanceOf[Turn] && action.asInstanceOf[Turn].eIsSet(RoboprosePackage.TURN__DEGREES)))
+//  }
 
   val invariants: Map[String, Constraint] = Map (
 
@@ -66,11 +66,11 @@ object Constraints {
         ->
           inv[EventListener] {
           self => uniqueEvent(self.getSublisteners.toList)
-        },
+      }//,
 
-      "If the last action is not indefinite and ending is required"
-        -> inv[ActionsList] { self =>
-          !isIndefinite(self.getActions.last) implies has(self.getEnding)
-        }
+//      "If the last action is not indefinite and ending is required"
+//        -> inv[ActionsList] { self =>
+//          !isIndefinite(self.getActions.last) implies has(self.getEnding)
+//        }
       )
 }
