@@ -16,13 +16,6 @@ object Constraints {
       .groupBy(identity).forall( pair => pair._2.length == 1)
   }
 
-  // def isIndefiniteInvalid (action: Action): Boolean = {
-  //     !((action.isInstanceOf[ContinuosAction] &&
-  //       action.asInstanceOf[ContinuosAction].eIsSet(RoboprosePackage.CONTINUOS_ACTION__DURATION)) ||
-  //     (action.isInstanceOf[RandomAction] && action.asInstanceOf[RandomAction].isIsRandom) ||
-  //     (action.isInstanceOf[Turn] && action.asInstanceOf[Turn].eIsSet(RoboprosePackage.TURN__DEGREES)))
-  // }
-
   def isSet(f: Float): Boolean = f != 0.0
   def isSet(b: Boolean): Boolean = b
 
