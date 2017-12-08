@@ -5,6 +5,7 @@ package dk.itu.dsl.roboprose.constraints
 import scala.collection.JavaConversions._ // for natural access to EList
 import mdsebook.scala.EMFScala._
 import dk.itu.dsl.roboprose.model._
+import scala.util.Try
 
 object Constraints {
 
@@ -22,17 +23,13 @@ object Constraints {
   //     (action.isInstanceOf[Turn] && action.asInstanceOf[Turn].eIsSet(RoboprosePackage.TURN__DEGREES)))
   // }
 
-  def isSet(action: Action, feature: Int): Boolean =
-    (action, feature) match {
-    case (action: Turn, RoboprosePackage.TURN__DURATION)  =>
-      action.asInstanceOf[Turn].getDuration != RoboprosePackage.DURATION_EDEFAULT
-    case (action: Turn, RoboprosePackage.TURN__DEGREES) =>
-      action.asInstanceOf[Turn].getDegrees != RoboprosePackage.DEGREES_EDEFAULT
-  }
-  def isIndefinite (action: Action): Boolean = action match {
-    case action: ContinuosAction => has(action.getDuration)
-    case action: RandomAction => action.isIsRandom
-    case action: Turn => action.getDegrees != null
+  def isSet(f: Float): Boolean = f != 0.0
+  def isSet(b: Boolean): Boolean = b
+
+  def isIndefinite (action: Action): Boolean = {
+    !(Try(isSet(action.asInstanceOf[ContinuosAction].getDuration)).getOrElse(false) ||
+    Try(isSet(action.asInstanceOf[RandomAction].isIsRandom)).getOrElse(false) ||
+    Try(isSet(action.asInstanceOf[Turn].getDegrees)).getOrElse(false))
   }
 
   val invariants: Map[String, Constraint] = Map (
@@ -83,16 +80,14 @@ object Constraints {
 
       "If the last action is not indefinite and ending is required"
         -> inv[ActionsList] { self =>
-          !isIndefinite(self.getActions.last) implies has(self.getEnding)
+        (!isIndefinite(self.getActions.last) implies has(self.getEnding)) &&
+          (isIndefinite(self.getActions.last) implies !has(self.getEnding))
         },
 
       "Turn Action can't have degrees and duration set at the same time"
         -> inv[Turn] { self =>
-          isSet(self, RoboprosePackage.TURN__DURATION) implies
-            !isSet(self, RoboprosePackage.TURN__DEGREES) &&
-              isSet(self, RoboprosePackage.TURN__DEGREES) implies
-                !isSet(self, RoboprosePackage.TURN__DURATION)
-
-        }
+        (isSet(self.getDuration) implies !isSet(self.getDegrees)) &&
+            (isSet(self.getDegrees) implies !isSet(self.getDuration))
+        },
       )
 }
