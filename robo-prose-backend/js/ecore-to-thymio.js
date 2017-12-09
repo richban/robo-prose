@@ -9,7 +9,7 @@ const lodash = require('lodash');
 const { Observable } = require('rxjs');
 const path = require('path');
 
-const { Option } = require('./util');
+const { Option } = require('./shared');
 const Thymio = require('./thymio.js');
 
 
@@ -56,7 +56,7 @@ const makeMetaModelDefaults = ePackage =>
 
 
 const makeThymio = ([defaults, contents]) => {
-    const robot = contents.first().get('robot');
+    const robot = contents.first();
 
     const main = mapActionList(robot.get('main'), defaults);
 

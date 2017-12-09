@@ -3,8 +3,6 @@
  *
  */
 
-const Immutable = require('immutable');
-const lodash = require('lodash');
 const { Some, None } = require('option-t');
 
 
