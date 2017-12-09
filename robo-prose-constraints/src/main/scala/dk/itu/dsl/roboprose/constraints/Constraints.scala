@@ -69,7 +69,7 @@ object Constraints {
         ->
           inv[EventListener] {
           self => uniqueEvent(self.getSublisteners.toList)
-      }//,
+      },
 
       "If the last action is not indefinite and ending is required"
         -> inv[ActionsList] { self =>

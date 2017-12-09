@@ -68,5 +68,5 @@ object Main extends App {
         // http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/util/EcoreUtil.html#getAllProperContents%28org.eclipse.emf.ecore.resource.Resource,%20boolean%29
         .map(map2nd[String, Resource, Iterator[EObject]](EcoreUtil.getAllProperContents[EObject](_, false)))
 
-    sys.exit(if (checkInstances(instances)) 0 else 1)
+    sys.exit(if (checkInstances(instances)) 0 else 42)
 }
