@@ -56,7 +56,9 @@ object Main extends App {
             Stream(args(0))
         else
             Stream(
-                "../robo-prose-model/instances/RoboProseInstance1.xmi"
+                //"../robo-prose-model/instances/RoboProseInstance1.xmi",
+                //"../robo-prose-model/instances/RobotProseTurnInvalidInstance.xmi",
+                "../robo-prose-model/instances/RoboProseIndefinite.xmi"
             )
 
     // Model instances
