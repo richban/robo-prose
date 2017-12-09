@@ -36,7 +36,7 @@ const constraintsChecker = (filePath, cwd) => {
     // when data event will be over
     return Observable.fromEvent(constraintsProcess, 'close')
         .do(exitCode => {
-            if (exitCode === 42) {
+            if (exitCode) {
                 throw new ConstraintsError();
             }
         })
