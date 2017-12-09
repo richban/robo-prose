@@ -6,9 +6,11 @@
     xmlns:roboprose="http://www.itu.dk/dsl/roboprose">
   <main>
     <actions
-        xsi:type="roboprose:Move"/>
+        xsi:type="roboprose:Move"
+        duration="1.0"/>
     <actions
         xsi:type="roboprose:Move"
+        duration="1.0"
         direction="backwards"/>
     <ending
         xsi:type="roboprose:Repeat"/>
