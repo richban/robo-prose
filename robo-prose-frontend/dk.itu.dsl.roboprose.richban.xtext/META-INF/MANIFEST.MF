@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: dk.itu.dsl.roboprose.richban.xtext
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: dk.itu.dsl.roboprose.richban.xtext; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: robo-prose-model,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib,
+ org.antlr.runtime,
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: dk.itu.dsl.roboprose.richban.xtext.parser.antlr.internal,
+ dk.itu.dsl.roboprose.richban.xtext.generator,
+ dk.itu.dsl.roboprose.richban.xtext,
+ dk.itu.dsl.roboprose.richban.xtext.serializer,
+ dk.itu.dsl.roboprose.richban.xtext.formatting2,
+ dk.itu.dsl.roboprose.richban.xtext.validation,
+ dk.itu.dsl.roboprose.richban.xtext.parser.antlr,
+ dk.itu.dsl.roboprose.richban.xtext.scoping,
+ dk.itu.dsl.roboprose.richban.xtext.services
+Import-Package: org.apache.log4j

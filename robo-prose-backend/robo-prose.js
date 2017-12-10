@@ -2,15 +2,24 @@
  * @fileoverview
  */
 
-const argv = require('yargs').argv;
-const parser = require('./js/ecore-to-thymio.js');
+const path = require('path');
 
-const MODEL_FILE = argv.model
-        || argv._[0]
-        || '../robo-prose-model/model/RoboProse.ecore';
-const INSTANCE_FILE = argv.instance
-        || argv._[1];
+const { argv } = require('yargs');
 
-parser(MODEL_FILE, INSTANCE_FILE)
-//    .do(thymio => thymio.run())
-    .subscribe();
+const { constraintsChecker, invalidConstraintsFilter }
+    = require('./js/constraints-checker');
+const parser = require('./js/ecore-to-thymio');
+
+
+const INSTANCE_FILE = path.resolve(argv.instance || argv._[0]);
+const MODEL_FILE = path.resolve(argv.model || argv._[1]
+    || '../robo-prose-model/model/RoboProse.ecore');
+const CONSTRAINTS_CWD = path.resolve(argv.constraints || argv._[2]
+    || '../robo-prose-constraints');
+
+
+constraintsChecker(INSTANCE_FILE, CONSTRAINTS_CWD)
+    .concat(parser(MODEL_FILE, INSTANCE_FILE))
+    .last()
+    .catch(invalidConstraintsFilter)
+    .subscribe(thymio => thymio.run());

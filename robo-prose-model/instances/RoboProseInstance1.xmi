@@ -12,24 +12,28 @@
         direction="backwards"/>
   </main>
   <listeners>
-    <event xsi:type="roboprose:Obstacle"/>
     <actions
         xsi:type="roboprose:Turn"/>
     <actions
         xsi:type="roboprose:Move"
         duration="20.0"/>
     <sublisteners>
+      <actions
+          xsi:type="roboprose:Move"/>
       <event
           xsi:type="roboprose:Obstacle"/>
     </sublisteners>
     <sublisteners>
+      <actions
+          xsi:type="roboprose:Move"/>
       <event
           xsi:type="roboprose:Obstacle"/>
     </sublisteners>
+    <event xsi:type="roboprose:Obstacle"/>
   </listeners>
   <listeners>
-    <event xsi:type="roboprose:Tapped"/>
     <actions
         xsi:type="roboprose:Stop"/>
+    <event xsi:type="roboprose:Tapped"/>
   </listeners>
 </roboprose:RoboProse>
