@@ -1,0 +1,5 @@
+My robot should move forwards.
+
+When it meets an obstacle, it should move backwards for 0.5 seconds,
+    turn left 90 degrees and then it should start over
+    (but when it is tapped, it should stop).
