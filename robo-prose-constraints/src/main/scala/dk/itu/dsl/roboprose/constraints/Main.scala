@@ -52,16 +52,21 @@ object Main extends App {
     // register the package magic (impure)
     RoboprosePackage.eINSTANCE.eClass
 
+    val fileNames = if (args.length != 0)
+            Stream(args(0))
+        else
+            Stream(
+                //"../robo-prose-model/instances/RoboProseInstance1.xmi",
+                //"../robo-prose-model/instances/RobotProseTurnInvalidInstance.xmi",
+                "../robo-prose-model/instances/RoboProseIndefinite.xmi"
+            )
+
     // Model instances
-    val instances = Stream(
-        //"../robo-prose-model/instances/RoboProseInstance1.xmi",
-        //"../robo-prose-model/instances/RobotProseTurnInvalidInstance.xmi",
-        "../robo-prose-model/instances/RoboProseIndefinite.xmi"
-      )
+    val instances = fileNames
         .map(fileName => (fileName.split("/").last, URI.createURI(fileName)))
         .map(map2nd((new ResourceSetImpl).getResource(_, true)))
         // http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/util/EcoreUtil.html#getAllProperContents%28org.eclipse.emf.ecore.resource.Resource,%20boolean%29
         .map(map2nd[String, Resource, Iterator[EObject]](EcoreUtil.getAllProperContents[EObject](_, false)))
 
-    checkInstances(instances)
+    sys.exit(if (checkInstances(instances)) 0 else 1)
 }

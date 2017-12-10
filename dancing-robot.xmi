@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="ASCII"?>
-<roboprose:RoboProse xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roboprose="http://www.itu.dk/dsl/roboprose">
+<roboprose:RoboProse
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:roboprose="http://www.itu.dk/dsl/roboprose">
   <main>
-    <actions xsi:type="roboprose:Move"/>
-    <actions xsi:type="roboprose:Move" direction="backwards"/>
-    <ending xsi:type="roboprose:Repeat"/>
+    <actions
+        xsi:type="roboprose:Move"
+        duration="1.0"/>
+    <actions
+        xsi:type="roboprose:Move"
+        duration="1.0"
+        direction="backwards"/>
+    <ending
+        xsi:type="roboprose:Repeat"/>
   </main>
   <listeners>
-    <actions xsi:type="roboprose:Move" duration="3.0" direction="backwards"/>
+    <actions
+        xsi:type="roboprose:Move"
+        duration="3.0"
+        direction="backwards"/>
+    <ending
+        xsi:type="roboprose:StartOver"/>
     <event xsi:type="roboprose:Tapped"/>
   </listeners>
 </roboprose:RoboProse>

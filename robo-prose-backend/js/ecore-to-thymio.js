@@ -9,16 +9,11 @@ const lodash = require('lodash');
 const { Observable } = require('rxjs');
 const path = require('path');
 
-const Option = require('./option-wrapper');
+const { Option } = require('./shared');
 const Thymio = require('./thymio.js');
 
 
 const resourceSet = Ecore.ResourceSet.create();
-
-
-String.prototype.toFirstUppercase = function() {
-    return this[0].toUpperCase() + this.substring(1);
-};
 
 
 // Just a passthrough by now, will need some recursion
@@ -33,7 +28,7 @@ const applyDefaults = lodash.identity;
 //};
 
 
-const makeMetaModelDefaults = (ePackage) =>
+const makeMetaModelDefaults = ePackage =>
     lodash.fromPairs(ePackage.values.eClassifiers._internal
         .filter(eClass => eClass.values.eAllAttributes)
         .map(eClass =>
@@ -50,7 +45,8 @@ const makeMetaModelDefaults = (ePackage) =>
                     .map(attribute =>
                         [
                             attribute.get('name'),
-                            attribute.get('defaultValueLiteral')
+                            makeAttrProps(attribute)
+                                .cast(attribute.get('defaultValueLiteral'))
                         ]
                     )
                 )
@@ -60,57 +56,115 @@ const makeMetaModelDefaults = (ePackage) =>
 
 
 const makeThymio = ([defaults, contents]) => {
-    const robot = contents.first().get('robot');
+    const robot = contents.first();
 
-    const main = {actions: robot.get('main').get('actions')
-                      .map(model2ThymioAction.bind(null, defaults)),
-                    ending: 'startover' };
+    const main = mapActionList(robot.get('main'), defaults);
 
     const listeners = Option(robot.get('listeners'), l => l.size() > 0)
-        .map(listeners => {
-            return listeners.map(listener => {
-                const actions = listener.get('actions')
-                    .map(model2ThymioAction.bind(null, defaults));
-                const ending = Option(listener.get('ending'))
-                    .map(ending => ending.eClass.get('name').toLowerCase())
-                    .unwrapOr(null);
-
-                return [
+        .map(listeners =>
+            listeners.map(listener =>
+                [
                     listener.get('event').eClass.get('name').toLowerCase(),
-                    {actions, ending}
-                ];
-            });
-        })
+                    mapActionList(listener, defaults)
+                ]
+            )
+        )
         .map(lodash.fromPairs);
 
     return new Thymio(main, listeners.unwrapOr(null));
 };
 
 
+const makeAttrProps = attribute => {
+    const attrType = attribute.get('eType');
+
+    const type = attrType.get('name')
+                         .toLowerCase()
+                         .replace(/^e/, '');
+
+    const literals = Option(attrType.get('eLiterals'))
+        .map(lit => lit.map(val => val.get('literal')))
+        .unwrapOr(null);
+
+    var caster;
+    switch (type) {
+        case 'boolean':
+            caster = value => value.toLowerCase() === 'true';
+            break;
+
+        case 'float':
+            caster = parseFloat;
+            break;
+
+        default:
+            caster = lodash.identity;
+            break;
+    }
+
+    return {
+        cast: value => {
+            if (!value) {
+                return value;
+            }
+
+            return caster(value);
+        },
+        literals,
+        type
+    };
+};
+
+
+const mapActionList = (actionList, defaults) => {
+    const actions = actionList.get('actions')
+        .map(model2ThymioAction.bind(null, defaults));
+    const ending = Option(actionList.get('ending'))
+        .map(ending => ending.eClass.get('name').toLowerCase())
+        .unwrapOr(null);
+
+    return {actions, ending};
+};
+
+
 const model2ThymioAction = (defaults, action) => {
-    const actionName = action.eClass.get('name').toLowerCase();
-    const attrNames = action.eClass.values.eAllAttributes.call(action.eClass)
-        .map(attr => attr.get('name'));
-    const values = lodash.fromPairs(attrNames
-        .map(attrName =>
-            [
+    const attributes = action.eClass.values.eAllAttributes.call(action.eClass);
+    const values = lodash.fromPairs(attributes
+        .map(attribute => {
+            const attrName = attribute.get('name');
+            const attrProps = makeAttrProps(attribute);
+            return [
                 attrName,
-                action.get(attrName) || defaults[actionName][attrName]
+                {
+                    value: attrProps.cast(action.get(attrName)),
+                    props: attrProps
+                }
             ]
-        )
+        })
     );
+
+    const actionName = action.eClass.get('name').toLowerCase();
+    const actionDefaults = defaults[actionName];
+
+    if (values.isRandom.value || actionDefaults.isRandom) {
+        return Thymio.makeAction(values, true, actionName);
+    }
+
+    const defaultizedValues = lodash.mapValues(values,
+        (value, name) => value.value || actionDefaults[name]);
+
+    const makeAction = Thymio.makeAction.bind(null, defaultizedValues, false);
+    const direction = Option(defaultizedValues.direction)
+        .map(dir => dir.toFirstUppercase());
 
     switch (actionName) {
         case 'move':
-            return Thymio.makeAction(`move${ values.direction.toFirstUppercase() }`,
-                parseFloat(values.duration));
+            return makeAction(`move${ direction.unwrap() }`);
 
         case 'stop':
-            return Thymio.makeAction('stop', parseFloat(values.duration));
+            return makeAction('stop');
 
         case 'turn':
-            return Thymio.makeAction(`turn${ values.direction.toFirstUppercase() }`,
-                parseFloat(values.duration), parseFloat(values.degrees));
+            return makeAction(`turn${ direction.unwrap() }`);
     }
 };
 
@@ -132,7 +186,6 @@ const readEcoreFile = filePath => {
             }
         });
 };
-
 
 const registerEcoreModel = contents => {
     const first = contents.first();

@@ -23,6 +23,7 @@
   "dependencies": {
     "dbus-native": "^0.2.3",
     "ecore": "^0.11.0",
+    "immutable": "^3.8.2",
     "lodash": "^4.17.4",
     "option-t": "^11.0.0",
     "q": "^1.5.1",

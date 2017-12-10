@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roboprose:Root
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:roboprose="http://www.itu.dk/dsl/roboprose"
+    xsi:schemaLocation="http://www.itu.dk/dsl/roboprose ../model/RoboProse.ecore">
+  <robot>
+    <main>
+      <actions
+          xsi:type="roboprose:Move"
+          duration="0.0"/>
+    </main>
+    <listeners>
+      <actions
+          xsi:type="roboprose:Move"
+          direction="backwards"/>
+      <actions
+          xsi:type="roboprose:Turn"
+          duration="0.0"
+          isRandom="true"/>
+      <ending
+          xsi:type="roboprose:StartOver"/>
+      <event
+          xsi:type="roboprose:Obstacle"/>
+    </listeners>
+  </robot>
+</roboprose:Root>
