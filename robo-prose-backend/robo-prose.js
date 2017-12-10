@@ -18,7 +18,7 @@ const CONSTRAINTS_CWD = path.resolve(argv.constraints || argv._[2]
     || '../robo-prose-constraints');
 
 
-constraintsChecker(INSTANCE_FILE, CONSTRAINTS_CWD)
+constraintsChecker(INSTANCE_FILE, CONSTRAINTS_CWD).take(0)
     .concat(parser(MODEL_FILE, INSTANCE_FILE))
     .last()
     .catch(invalidConstraintsFilter)

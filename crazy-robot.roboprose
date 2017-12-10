@@ -1,10 +1,8 @@
-My robot should move forward. Then it should turn.
+My robot should move forward for 2 seconds. Then it should turn.
 
-When it is tapped it should turn left, then it should move forward for 3 seconds and then it should stop.
+When it is tapped it should turn left 35 degrees, then it should move forward for 3 seconds and then it should stop.
 
-When it meets an obstacle it should turn randomly 
-(but when it is tapped it should move random. 
-When it meets an obstacle it should move forward 
-(but when it is tapped it should turn left, then turn right, then move backwards)).
-
-When it is tapped it should turn right and then turn left and then move backwards.
+When it meets an obstacle it should turn randomly. Then it should wait.
+    (but when it is tapped it should move randomly. Then it should wait.
+     When it meets an obstacle it should move forward 
+        (but when it is tapped it should turn left 50 degrees, then turn right for 2 seconds, then move backwards)).

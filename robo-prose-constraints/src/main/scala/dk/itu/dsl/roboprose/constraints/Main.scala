@@ -20,31 +20,41 @@ object Main extends App {
     def map2nd[A, B, C] (f : B => C)(pair : (A, B)) : (A, C) =
         (pair._1, f(pair._2))
 
-    def isValidInstance (constraints : Map[String, Constraint])(fileName : String)(entity : EObject) =
-        constraints.filter(_._2 appliesTo entity).forall(pair => {
-            val (name, constraint) = pair
-            val isSatisfied = constraint.check(entity)
-            println(if (isSatisfied)
-                s"Constraint ${name} satisfied by ${fileName}"
-            else s"Constraint ${name} not satisfied by ${fileName}"
-            )
-            isSatisfied
-        })
+    def isValidInstance (constraints : Map[String, Constraint])(entity : EObject) =
+        constraints.filter(_._2 appliesTo entity)
+            .map(map2nd(_ check entity))
 
     def checkInstances (instances: Stream[(String, Iterator[EObject])]) = {
-      val isValidInstanceLambda = isValidInstance _
-      val checker = isValidInstanceLambda(Constraints.invariants)
+        val isValidInstanceLambda = isValidInstance _
+        val checker = isValidInstanceLambda(Constraints.invariants)
 
-      instances.forall(pair => {
-          val (fileName, entities) = pair
-          val isValidInstance = entities.forall(checker(fileName))
+        instances.forall(pair => {
+            val (fileName, entities) = pair
 
-          println(if (isValidInstance)
-              s"All constraints in ${fileName} are satisfied!"
-          else s"Some constraint in ${fileName} is violated!")
-          isValidInstance
-      })
+            val constraintsValidity = entities.map(checker)
+                .filter(_.nonEmpty)
+                .foldLeft(Map.empty[String, Boolean])((acc, entityMap) => {
+                    acc ++ entityMap.filter (entry => {
+                        val (name, isSatisfied) = entry
+                        !isSatisfied || !(acc contains name)
+                    })
+                })
+
+            constraintsValidity.foreach(pair => {
+                val (name, isValid) = pair
+                val negation = if (isValid) "" else " not"
+                println(s"Constraint ${name} is${negation} satisfied by ${fileName}")
+            })
+
+            val isValid = constraintsValidity.forall(_._2)
+            println(if (isValid)
+                    s"All constraints in ${fileName} are satisfied!"
+                else
+                    s"Some constraint in ${fileName} is violated!")
+            isValid
+        })
     }
+
     // register a resource factory for XMI files
     Resource.Factory.Registry.INSTANCE.
         getExtensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl)

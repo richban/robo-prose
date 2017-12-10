@@ -1,3 +1,6 @@
+/**
+ * @fileoverview
+ */
 
 const eventImpl = {
     obstacle: `

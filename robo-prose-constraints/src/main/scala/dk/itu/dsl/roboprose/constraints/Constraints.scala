@@ -42,7 +42,7 @@ object Constraints {
       "Indefinite actions can only be last in their list"
         ->
             inv[ActionsList] {
-                self => !self.getActions.exists (isIndefinite)
+                self => !self.getActions.init.exists (isIndefinite)
             },
 
       "If the last action is not indefinite and ending is required"

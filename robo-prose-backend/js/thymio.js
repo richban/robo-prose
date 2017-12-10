@@ -10,7 +10,7 @@ const path = require('path');
 
 const broadcastEvents = require('./aseba-broadcaster.js');
 
-const THROTTLE_TIME = 100;
+const THROTTLE_TIME = 200;
 const TMP_SCRIPT_NAME = path.resolve('broadcaster.aesl');
 class ThymioDBus {
     static bindMethod(obj, method, ...args) {
@@ -109,13 +109,24 @@ class ThymioDBus {
                     (eventId, eventName, eventData) => [eventName, eventData])
              .auditTime(THROTTLE_TIME)
              .map(([eventName, eventData]) =>
-                 this.dispatchEvent(eventName, eventData));
+                 this.dispatchEvent(eventName, eventData))
+             .filter(val => val instanceof Observable);
     }
 }
 
 const BASE_SPEED = 500;
 const TURN_RADIUS = 4.5; // half wheel distance
 class Thymio extends ThymioDBus {
+    static allEventNames(listeners) {
+        if (!listeners) {
+            return [];
+        }
+
+        const sublisteners = lodash.map(lodash.values(listeners), 'listeners');
+        return Object.keys(listeners)
+            .concat(lodash.flatMap(sublisteners, Thymio.allEventNames));
+    }
+
     static makeAction(values, isRandom, method) {
         return {
             isRandom,
@@ -156,16 +167,18 @@ class Thymio extends ThymioDBus {
 
         const radians = Math.PI * degrees / 180;
         const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
-        const timeStop = TURN_RADIUS * radians / cmsSpeed;
+        const turnTime = TURN_RADIUS * radians / cmsSpeed;
 
-        return Thymio.runFor(turnObs, timeStop * 1000);
+        return Thymio.runFor(turnObs, turnTime * 1000);
     }
 
     constructor(main, listeners) {
         super('thymio-II');
-        this.main = this.actionsToObs(main);
-        this.listeners = lodash.mapValues(listeners,
-            this.actionsToObs.bind(this));
+        this.main = Observable.of(0)
+            .do(this.resetCurrentListeners.bind(this))
+            .concat(this.actionsToObs(main));
+        this.allListeners = this.listenersToObs(listeners);
+        this.currentListeners = this.allListeners;
     }
 
     actionsToObs({actions, ending}) {
@@ -189,7 +202,15 @@ class Thymio extends ThymioDBus {
     }
 
     dispatchEvent(eventName, eventData) {
-        return this.listeners[eventName];
+        const listenerForEvent = this.currentListeners[eventName];
+
+        if (!listenerForEvent) {
+            return false;
+        }
+
+        this.currentListeners = listenerForEvent.listeners
+            || this.currentListeners;
+        return listenerForEvent.actions;
     }
 
     executeAction(action) {
@@ -213,6 +234,19 @@ class Thymio extends ThymioDBus {
             });
     }
 
+    listenersToObs(listeners) {
+        if (!listeners) {
+            return null;
+        }
+
+        return lodash.mapValues(listeners, listener => {
+            return {
+                actions: this.actionsToObs(listener.actions),
+                listeners: this.listenersToObs(listener.listeners)
+            }
+        });
+    }
+
     move({direction}) {
         const methodName = `move${ direction.toFirstUppercase() }`;
         return this[methodName]();
@@ -226,12 +260,17 @@ class Thymio extends ThymioDBus {
         return this.setWheels(BASE_SPEED);
     }
 
+    resetCurrentListeners() {
+        this.currentListeners = this.allListeners;
+        return this;
+    }
+
     run() {
-        if (!this.listeners) {
+        if (!this.allListeners) {
             this.main.subscribe();
         }
         else {
-            const eventNames = Object.keys(this.listeners);
+            const eventNames = Thymio.allEventNames(this.allListeners);
             const asebaScript = broadcastEvents(this.name, eventNames);
 
             this.loadScript(asebaScript)

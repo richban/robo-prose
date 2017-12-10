@@ -7,7 +7,6 @@ const Ecore = require('ecore/dist/ecore.xmi');
 const fs = require('fs');
 const lodash = require('lodash');
 const { Observable } = require('rxjs');
-const path = require('path');
 
 const { Option } = require('./shared');
 const Thymio = require('./thymio.js');
@@ -59,19 +58,9 @@ const makeThymio = ([defaults, contents]) => {
     const robot = contents.first();
 
     const main = mapActionList(robot.get('main'), defaults);
+    const listeners = mapListeners(robot.get('listeners'), defaults);
 
-    const listeners = Option(robot.get('listeners'), l => l.size() > 0)
-        .map(listeners =>
-            listeners.map(listener =>
-                [
-                    listener.get('event').eClass.get('name').toLowerCase(),
-                    mapActionList(listener, defaults)
-                ]
-            )
-        )
-        .map(lodash.fromPairs);
-
-    return new Thymio(main, listeners.unwrapOr(null));
+    return new Thymio(main, listeners);
 };
 
 
@@ -126,6 +115,23 @@ const mapActionList = (actionList, defaults) => {
 };
 
 
+const mapListeners = (listeners, defaults) =>
+    Option(listeners, l => l && l.size() > 0)
+        .map(listeners =>
+            listeners.map(listener =>
+                [
+                    listener.get('event').eClass.get('name').toLowerCase(),
+                    {
+                        actions: mapActionList(listener, defaults),
+                        listeners: mapListeners(listener.get('sublisteners'),
+                            defaults)
+                    }
+                ]
+            )
+        )
+        .mapOr(null, lodash.fromPairs);
+
+
 const model2ThymioAction = (defaults, action) => {
     const attributes = action.eClass.values.eAllAttributes.call(action.eClass);
     const values = lodash.fromPairs(attributes
@@ -145,7 +151,8 @@ const model2ThymioAction = (defaults, action) => {
     const actionName = action.eClass.get('name').toLowerCase();
     const actionDefaults = defaults[actionName];
 
-    if (values.isRandom.value || actionDefaults.isRandom) {
+    if (values.isRandom &&
+            (values.isRandom.value || actionDefaults.isRandom)) {
         return Thymio.makeAction(values, true, actionName);
     }
 
@@ -170,7 +177,6 @@ const model2ThymioAction = (defaults, action) => {
 
 
 const readEcoreFile = filePath => {
-    filePath = path.resolve(filePath);
     const resource = resourceSet.create({
         uri: filePath
     });
