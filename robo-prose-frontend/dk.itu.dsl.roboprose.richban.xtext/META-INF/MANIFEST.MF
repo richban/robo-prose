@@ -22,5 +22,14 @@ Export-Package: dk.itu.dsl.roboprose.richban.xtext.parser.antlr.internal,
  dk.itu.dsl.roboprose.richban.xtext.validation,
  dk.itu.dsl.roboprose.richban.xtext.parser.antlr,
  dk.itu.dsl.roboprose.richban.xtext.scoping,
- dk.itu.dsl.roboprose.richban.xtext.services
+ dk.itu.dsl.roboprose.richban.xtext.services,
+ dk.itu.dsl.roboprose.frontend.xtext.validation,
+ dk.itu.dsl.roboprose.frontend.xtext.scoping,
+ dk.itu.dsl.roboprose.frontend.xtext,
+ dk.itu.dsl.roboprose.frontend.xtext.generator,
+ dk.itu.dsl.roboprose.frontend.xtext.formatting2,
+ dk.itu.dsl.roboprose.frontend.xtext.services,
+ dk.itu.dsl.roboprose.frontend.xtext.parser.antlr.internal,
+ dk.itu.dsl.roboprose.frontend.xtext.parser.antlr,
+ dk.itu.dsl.roboprose.frontend.xtext.serializer
 Import-Package: org.apache.log4j

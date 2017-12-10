@@ -12,5 +12,7 @@ Require-Bundle: dk.itu.dsl.roboprose.richban.xtext,
  org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: dk.itu.dsl.roboprose.richban.xtext.ide.contentassist.antlr.internal,
- dk.itu.dsl.roboprose.richban.xtext.ide.contentassist.antlr
+ dk.itu.dsl.roboprose.richban.xtext.ide.contentassist.antlr,
+ dk.itu.dsl.roboprose.frontend.xtext.ide.contentassist.antlr.internal,
+ dk.itu.dsl.roboprose.frontend.xtext.ide.contentassist.antlr
 

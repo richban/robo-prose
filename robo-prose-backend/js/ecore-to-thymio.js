@@ -151,7 +151,8 @@ const model2ThymioAction = (defaults, action) => {
     const actionName = action.eClass.get('name').toLowerCase();
     const actionDefaults = defaults[actionName];
 
-    if (values.isRandom.value || actionDefaults.isRandom) {
+    if (values.isRandom &&
+            (values.isRandom.value || actionDefaults.isRandom)) {
         return Thymio.makeAction(values, true, actionName);
     }
 

@@ -22,5 +22,7 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: dk.itu.dsl.roboprose.richban.xtext.ui.quickfix,
  dk.itu.dsl.roboprose.richban.xtext.ui.contentassist,
- dk.itu.dsl.roboprose.richban.xtext.ui.internal
+ dk.itu.dsl.roboprose.richban.xtext.ui.internal,
+ dk.itu.dsl.roboprose.frontend.xtext.ui.contentassist,
+ dk.itu.dsl.roboprose.frontend.xtext.ui.quickfix
 Bundle-Activator: dk.itu.dsl.roboprose.richban.xtext.ui.internal.XtextActivator
