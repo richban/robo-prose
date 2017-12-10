@@ -77,13 +77,4 @@ object Compiler extends App {
     xmiResource.save(null)
   }
 
-  // The call to get(0) below gives you the first model root.
-  // If you open a directory instead of a file,
-  // you can iterate over all models in it,
-  // by changing 0 to a suitable index
-  //val m: Root = resource.getContents.asInstanceOf[Root]
-
-  //println(m)
-
-
 }

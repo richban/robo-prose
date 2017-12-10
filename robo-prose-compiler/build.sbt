@@ -8,6 +8,9 @@ lazy val mdsebookLocalBase = SettingKey[File]("mdsebookLocalBase",
     "local base direcotry for mdsebook")
 mdsebookLocalBase := loadedBuild.value.units(mdsebook.build).localBase
 
+// set the main class for 'sbt run'
+mainClass in (Compile, run) := Some("dk.itu.dsl.roboprose.richban.xtext.Compiler")
+
 lazy val root = (project in file("."))
 .settings (
   inThisBuild(List(
