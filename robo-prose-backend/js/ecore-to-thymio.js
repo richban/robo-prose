@@ -7,7 +7,6 @@ const Ecore = require('ecore/dist/ecore.xmi');
 const fs = require('fs');
 const lodash = require('lodash');
 const { Observable } = require('rxjs');
-const path = require('path');
 
 const { Option } = require('./util');
 const Thymio = require('./thymio.js');
@@ -177,7 +176,6 @@ const model2ThymioAction = (defaults, action) => {
 
 
 const readEcoreFile = filePath => {
-    filePath = path.resolve(filePath);
     const resource = resourceSet.create({
         uri: filePath
     });

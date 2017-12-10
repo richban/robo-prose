@@ -156,16 +156,17 @@ class Thymio extends ThymioDBus {
 
         const radians = Math.PI * degrees / 180;
         const cmsSpeed = BASE_SPEED * 20 / 500 * 0.72;
-        const timeStop = TURN_RADIUS * radians / cmsSpeed;
+        const turnTime = TURN_RADIUS * radians / cmsSpeed;
 
-        return Thymio.runFor(turnObs, timeStop * 1000);
+        return Thymio.runFor(turnObs, turnTime * 1000);
     }
 
     constructor(main, listeners) {
         super('thymio-II');
-        this.main = this.actionsToObs(main);
-        this.listeners = lodash.mapValues(this.listenersToObs(listeners),
-            listener => [listener]);
+        this.main = this.actionsToObs(main)
+            .startWith(Observable.empty().do(() => this.currentListeners = this.allListeners));
+        this.allListeners = this.listenersToObs(listeners);
+        this.currentListeners = this.allListeners;
     }
 
     actionsToObs({actions, ending}) {
@@ -189,17 +190,11 @@ class Thymio extends ThymioDBus {
     }
 
     dispatchEvent(eventName, eventData) {
-        const currentListener = this.listeners[eventName][0];
+        const listenerForEvent = this.currentListeners[eventName];
+        this.currentListeners = listenerForEvent.listeners
+                || this.currentListeners;
 
-        this.listeners = lodash.mapValues(this.listeners,
-            (listener, eventName) => {
-                const sublistener = currentListener.listeners[eventName];
-                return sublistener
-                    ? listener.unshiftAll(sublistener)
-                    : listener;
-            });
-
-        return currentListener.actions;
+        return listenerForEvent.actions;
     }
 
     executeAction(action) {
