@@ -270,7 +270,8 @@ class Thymio extends ThymioDBus {
             this.main.subscribe();
         }
         else {
-            const eventNames = Thymio.allEventNames(this.allListeners);
+            const eventNames = lodash.uniq(Thymio.allEventNames(
+                this.allListeners));
             const asebaScript = broadcastEvents(this.name, eventNames);
 
             this.loadScript(asebaScript)

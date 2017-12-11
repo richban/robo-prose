@@ -17,7 +17,7 @@ class ConstraintsError extends Error {
 }
 
 
-const constraintsChecker = (filePath, cwd) => {
+const checkConstraints = (filePath, cwd) => {
     const decoder = new StringDecoder('utf-8');
     const fileName = path.basename(filePath);
 
@@ -51,6 +51,6 @@ const invalidConstraintsFilter = err =>
 
 
 module.exports = {
-    constraintsChecker,
+    checkConstraints,
     invalidConstraintsFilter
 };
