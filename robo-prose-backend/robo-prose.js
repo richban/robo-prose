@@ -6,7 +6,7 @@ const path = require('path');
 
 const { argv } = require('yargs');
 
-const { constraintsChecker, invalidConstraintsFilter }
+const { checkConstraints, invalidConstraintsFilter }
     = require('./js/constraints-checker');
 const parser = require('./js/ecore-to-thymio');
 
@@ -18,7 +18,7 @@ const CONSTRAINTS_CWD = path.resolve(argv.constraints || argv._[2]
     || '../robo-prose-constraints');
 
 
-constraintsChecker(INSTANCE_FILE, CONSTRAINTS_CWD).take(0)
+checkConstraints(INSTANCE_FILE, CONSTRAINTS_CWD)
     .concat(parser(MODEL_FILE, INSTANCE_FILE))
     .last()
     .catch(invalidConstraintsFilter)
